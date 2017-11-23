@@ -41,5 +41,5 @@ install:
 script:
   - echo this is an example
   - ls
-#  - mvn -Dtest=* test
-#  - echo $TRAVIS_JDK_VERSION
+  - mvn -Dtest=* test
+  - echo $TRAVIS_JDK_VERSION
