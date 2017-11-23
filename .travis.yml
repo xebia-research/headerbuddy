@@ -34,6 +34,9 @@ notifications:
 #    on_success: change
 #    on_failure: always
 
+install:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
 #any console commands can be executed here
 script:
   - echo this is an example
