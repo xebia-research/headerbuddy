@@ -2,13 +2,13 @@ language: java
 #sudo: required only required when using docker or when you are using sudo commands
 sudo: false
 
-cache:
-  directories:
-    - $HOME/.m2
+#cache:
+#  directories:
+#    - $HOME/.m2
 
 jdk:
   - oraclejdk8
-  - oraclejdk9
+#  - oraclejdk9
 
 #services:
 #  - docker
@@ -38,5 +38,5 @@ notifications:
 script:
   - echo this is an example
   - ls
-  - mvn -Dtest=* test
-  - echo $TRAVIS_JDK_VERSION
+#  - mvn -Dtest=* test
+#  - echo $TRAVIS_JDK_VERSION
