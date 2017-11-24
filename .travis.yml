@@ -2,23 +2,16 @@ language: java
 #sudo: required only required when using docker or when you are using sudo commands
 sudo: false
 
-#cache:
-#  directories:
-#    - $HOME/.m2
+cache:
+  directories:
+    - $HOME/.m2
 
 jdk:
   - oraclejdk8
-#  - oraclejdk9
 
 #services:
 #  - docker
 
-
-#branches:
-#  only:
-#    - master
-#  except:
-#    - Nick
 
 notifications:
   email: false
@@ -34,12 +27,13 @@ notifications:
 #    on_success: change
 #    on_failure: always
 
-install:
+install: #forcing a maven install instead of the default maven wrapper install
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 #any console commands can be executed here
 script:
   - echo this is an example
   - ls
+  - ls target
   - mvn -Dtest=* test
   - echo $TRAVIS_JDK_VERSION
