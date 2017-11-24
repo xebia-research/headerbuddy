@@ -1,4 +1,4 @@
-package com.xebia.headerbuddy;
+package com.xebia.headerbuddy.unit;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
