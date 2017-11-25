@@ -47,11 +47,11 @@ script:
   - docker run -it -d --name headerbuddy-container -p 8080:8080 xebia/headerbuddy
 
   # List all docker containers
-  docker ps
+  - docker ps
 
   # Run integration tests
-    - cd /home/travis/build/anthony0tran/travisCIDockerTest/
-    - mvn verify
+  - cd /home/travis/build/anthony0tran/travisCIDockerTest/
+  - mvn verify
 
   # curl to check if dockerized API is running
   - curl -v http://localhost:8080/helloworld
