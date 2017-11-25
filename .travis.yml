@@ -38,7 +38,7 @@ script:
   - echo $TRAVIS_JDK_VERSION
 
   # Go to docker directory for the dockerfile
-  cd ./target/docker
+  - cd ./target/docker
 
   # Creating image from dockerfile
   - docker build -t xebia/headerbuddy .
