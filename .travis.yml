@@ -53,7 +53,7 @@ script:
   - docker ps
 
   # Run integration tests
-  - cd /home/travis/build/xebia-research/
+  - cd /home/travis/build/xebia-research/headerbuddy/
   - mvn verify
 
   # curl to check if dockerized API is running
