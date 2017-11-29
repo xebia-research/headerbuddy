@@ -44,8 +44,8 @@ script:
   - docker build -t xebia/headerbuddy .
 
   # Create the container
-  - docker run -it -d --name headerbuddy-container -p 8080:8080 xebia/headerbuddy
-
+#  - docker run -it -d --name headerbuddy-container -p 8080:8080 xebia/headerbuddy
+  - docker run -it --name headerbuddy-container -p 8080:8080 xebia/headerbuddy
   # List all docker containers
   - docker ps
 
