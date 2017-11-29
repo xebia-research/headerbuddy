@@ -153,10 +153,13 @@
 						["java", "-jar", "target/${project.build.finalName}.jar"]
 					</entryPoint>
 					<cmd>
+						sleep 15
+					</cmd>
+					<cmd>
 						mvn verify
 					</cmd>
 					<cmd>
-						healthcheck cmd curl -v http://localhost:8080/helloworld
+						echo curl -v http://localhost:8080/helloworld
 					</cmd>
 					<resources>
 						<resource>
