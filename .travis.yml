@@ -33,7 +33,7 @@ install: #forcing a maven install instead of the default maven wrapper install
 script:
 
   # Go to docker directory for the dockerfile
-  - cd /home/travis/build/xebia-research/headerbuddy/target/docker
+  - cd target/docker
 
   # Creating image from dockerfile
   - docker build -t xebia/headerbuddy .
@@ -44,9 +44,9 @@ script:
   # List all docker containers
   - docker ps
 
-  # Run integration tests
-  - cd /home/travis/build/xebia-research/headerbuddy/
-  - mvn verify
+  # Return to root map
+  - cd ..
+  - cd ..
 
   # curl to check if dockerized API is running
   - curl -v http://localhost:8080/helloworld
