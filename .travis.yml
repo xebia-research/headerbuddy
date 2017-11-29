@@ -38,7 +38,7 @@ script:
   - echo $TRAVIS_JDK_VERSION
 
   # Go to docker directory for the dockerfile
-  - cd /home/travis/build/xebia-research/headerbuddy/target/docker
+  - cd /target/docker
 
   # Creating image from dockerfile
   - docker build -t xebia/headerbuddy .
@@ -49,8 +49,8 @@ script:
   # List all docker containers
   - docker ps
 
-  # Run integration tests
-  - cd /home/travis/build/xebia-research/headerbuddy/
+  # Wait for API to finish starting
+  - docker wait xebia/${project.artifactId}
 
   # curl to check if dockerized API is running
   - curl -v http://localhost:8080/helloworld
