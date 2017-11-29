@@ -6,14 +6,14 @@ import java.util.List;
 public class Header {
     private String name;
     private List<String> values;
-    private List<String> websites;
+    private List<String> urls;
 
     public Header(String name, List<String> values, String site) {
         this.name = name;
         this.values = values;
 
-        this.websites = new ArrayList<String>();
-        this.addWebsite(site);
+        this.urls = new ArrayList<String>();
+        this.addUrl(site);
     }
 
     public String getName() {
@@ -32,11 +32,11 @@ public class Header {
         this.values.add(value);
     }
 
-    public List<String> getWebsites() {
-        return this.websites;
+    public List<String> getUrls() {
+        return this.urls;
     }
 
-    public void addWebsite(String url) {
-        this.websites.add(url);
+    public void addUrl(String url) {
+        this.urls.add(url);
     }
 }
