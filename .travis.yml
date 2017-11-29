@@ -63,4 +63,4 @@ script:
   - docker pull owasp/zap2docker-stable
 
   #run the container and test the app
-  - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8080/helloworld
+  - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
