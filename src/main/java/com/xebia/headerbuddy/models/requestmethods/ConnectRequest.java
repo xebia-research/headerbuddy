@@ -7,12 +7,7 @@ import java.util.Map;
 
 public class ConnectRequest extends RequestBehaviour {
 
-    public ConnectRequest(String url, String methodName) {
-        super(url, methodName);
-    }
-
-    @Override
-    public Map<String, List<String>> doRequest() throws Exception {
-        return super.doRequest();
+    public ConnectRequest(String url) {
+        super(url, "CONNECT");
     }
 }

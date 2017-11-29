@@ -7,12 +7,7 @@ import java.util.Map;
 
 public class PatchRequest extends RequestBehaviour {
 
-    public PatchRequest(String url, String methodName) {
-        super(url, methodName);
-    }
-
-    @Override
-    public Map<String, List<String>> doRequest() throws Exception {
-        return super.doRequest();
+    public PatchRequest(String url) {
+        super(url, "PATCH");
     }
 }

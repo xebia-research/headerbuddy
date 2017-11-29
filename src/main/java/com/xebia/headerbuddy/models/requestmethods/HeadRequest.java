@@ -7,12 +7,7 @@ import java.util.Map;
 
 public class HeadRequest extends RequestBehaviour {
 
-    public HeadRequest(String url, String methodName) {
-        super(url, methodName);
-    }
-
-    @Override
-    public Map<String, List<String>> doRequest() throws Exception {
-        return super.doRequest();
+    public HeadRequest(String url) {
+        super(url, "HEAD");
     }
 }

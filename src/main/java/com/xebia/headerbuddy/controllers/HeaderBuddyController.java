@@ -1,7 +1,6 @@
 package com.xebia.headerbuddy.controllers;
 
-
-import com.xebia.headerbuddy.models.requestmethods.GetRequest;
+import com.xebia.headerbuddy.models.requestmethods.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +16,7 @@ public class HeaderBuddyController
     public String headerBuddy(@RequestParam(value = "url", required = true) String url)
     {
         try{
-            Map<String, List<String>> t = new GetRequest(url).doRequest();
+            Map<String, List<String>> t = new DeleteRequest(url).doRequest();
             return t.toString();
 
         }catch (Exception e){
