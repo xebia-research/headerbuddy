@@ -27,7 +27,7 @@ notifications:
 #    on_failure: always
 
 install: #forcing a maven install instead of the default maven wrapper install
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+#  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
   # Create the jar file
   - mvn clean install
