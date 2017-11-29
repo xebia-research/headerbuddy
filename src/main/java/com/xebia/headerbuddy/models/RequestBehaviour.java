@@ -1,5 +1,8 @@
 package com.xebia.headerbuddy.models;
 
+import com.xebia.headerbuddy.utilities.HeaderSerializer;
+
+import java.awt.font.FontRenderContext;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
@@ -14,13 +17,15 @@ public abstract class RequestBehaviour {
         this.methodName = methodName;
     }
 
-    public Map<String, List<String>> doRequest() throws Exception {
+    public List<Header> doRequest() throws Exception {
         URL target = new URL(this.url);
 
         HttpURLConnection connection = (HttpURLConnection) target.openConnection();
         connection.setRequestMethod(this.methodName);
         Map<String, List<String>> headers = connection.getHeaderFields();
 
-        return headers;
+
+        List<Header> t = HeaderSerializer.serialize(headers, this.url);
+        return t;
     }
 }

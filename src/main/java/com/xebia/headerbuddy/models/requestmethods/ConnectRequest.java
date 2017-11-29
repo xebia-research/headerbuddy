@@ -1,9 +1,6 @@
 package com.xebia.headerbuddy.models.requestmethods;
-
 import com.xebia.headerbuddy.models.RequestBehaviour;
 
-import java.util.List;
-import java.util.Map;
 
 public class ConnectRequest extends RequestBehaviour {
 
@@ -11,3 +8,4 @@ public class ConnectRequest extends RequestBehaviour {
         super(url, "CONNECT");
     }
 }
+

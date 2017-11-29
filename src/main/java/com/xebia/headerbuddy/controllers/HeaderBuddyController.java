@@ -1,27 +1,30 @@
 package com.xebia.headerbuddy.controllers;
 
+
+import com.xebia.headerbuddy.models.*;
 import com.xebia.headerbuddy.models.requestmethods.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class HeaderBuddyController
 {
 
     @RequestMapping("/headerbuddy/api")
-    public String headerBuddy(@RequestParam(value = "url", required = true) String url)
+    public List<Header> headerBuddy(@RequestParam(value = "url", required = true) String url)
     {
+        List<Header> t;
         try{
-            Map<String, List<String>> t = new DeleteRequest(url).doRequest();
-            return t.toString();
+            t = new GetRequest(url).doRequest();
+            return t;
 
         }catch (Exception e){
             System.out.println("Message:  "  + e.getMessage());
-            return e.getMessage();
+            return t = new ArrayList<>();
         }
     }
 
