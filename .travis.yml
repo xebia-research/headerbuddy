@@ -48,5 +48,8 @@ script:
   - cd ..
   - cd ..
 
+  #sleep 5 seconds to allow the headerbuddy container to start
+  - sleep 5
+  
   # curl to check if dockerized API is running
   - curl -v http://localhost:8080/helloworld
