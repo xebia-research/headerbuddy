@@ -49,8 +49,5 @@ script:
   # List all docker containers
   - docker ps
 
-  # Wait for API to finish starting
-  - docker wait xebia/${project.artifactId}
-
   # curl to check if dockerized API is running
   - curl -v http://localhost:8080/helloworld
