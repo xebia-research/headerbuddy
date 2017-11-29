@@ -1,19 +1,17 @@
 package com.xebia.headerbuddy.controllers;
 
-
-import com.xebia.headerbuddy.models.Hello;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloWorldController
+public class HeaderBuddyController
 {
 
-    @RequestMapping("/helloworld")
-    public Hello helloworld(@RequestParam(value = "name", defaultValue = "World") String name)
+    @RequestMapping("/headerbuddy/api")
+    public String headerBuddy(@RequestParam(value = "url", required = true) String url)
     {
-        return new Hello(1, "Hello " + name);
+        return "Hello World";
     }
 
 }
