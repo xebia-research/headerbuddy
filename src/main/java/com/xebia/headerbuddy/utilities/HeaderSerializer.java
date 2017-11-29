@@ -14,7 +14,6 @@ public class HeaderSerializer {
         for (Map.Entry<String, List<String>> entry : headerMap.entrySet()) {
             headers.add(new Header(entry.getKey(), new HeaderSerializer().serializeValues(entry.getValue()), url));
         }
-
         return headers;
     }
 
@@ -22,7 +21,8 @@ public class HeaderSerializer {
     //serialize the big string to different values on , and ;
     private List<String> serializeValues(List<String> headerValues) {
         //make a big string of all the entries
-        String valueString = headerValues.toString();
+        String valueString = headerValues.toString().trim();
+
         //delete the first and last char those are useless
         valueString = valueString.substring(1, valueString.length()-1);
 
