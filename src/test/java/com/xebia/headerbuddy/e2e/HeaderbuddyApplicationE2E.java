@@ -1,4 +1,4 @@
-package com.xebia.headerbuddy.unit;
+package com.xebia.headerbuddy.e2e;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 //This will make the test run on a random available port
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HeaderbuddyApplicationTests
+public class HeaderbuddyApplicationE2E
 {
 
 	//restTemplate so we can resolve links at the running server
