@@ -27,7 +27,7 @@ notifications:
 #    on_failure: always
 
 install: #forcing a maven install instead of the default maven wrapper install
-#  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
   # Create the jar file
   - mvn clean install
@@ -39,3 +39,22 @@ script:
   - ls target
   - mvn -Dtest=* test
   - echo $TRAVIS_JDK_VERSION
+
+  # Go to docker directory for the dockerfile
+  - cd /home/travis/build/xebia-research/headerbuddy/target/docker
+
+  # Creating image from dockerfile
+  - docker build -t xebia/headerbuddy .
+
+  # Create the container
+  - docker run -it -d --name headerbuddy-container -p 8080:8080 xebia/headerbuddy
+
+  # List all docker containers
+  - docker ps
+
+  # Run integration tests
+  - cd /home/travis/build/xebia-research/headerbuddy/
+  - mvn verify
+
+  # curl to check if dockerized API is running
+  - curl -v http://localhost:8080/helloworld
