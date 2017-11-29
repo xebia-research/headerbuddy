@@ -58,3 +58,9 @@ script:
 
   # curl to check if dockerized API is running
   - curl -v http://localhost:8080/helloworld
+
+  #pull the owasp zap container
+  - docker pull owasp/zap2docker-stable
+
+  #run the container and test the app
+  - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8080
