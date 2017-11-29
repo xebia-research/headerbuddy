@@ -33,13 +33,6 @@ install: #forcing a maven install instead of the default maven wrapper install
 
 #any console commands can be executed here
 script:
-  - echo this is an example
-  #list everything in the home/travis directory
-  - ls /home/travis
-  #list everything in the usr/local directory to see if the maven map is there so that i may cache it.
-  - ls /usr/local/maven-3.5.0
-  - ls target
-  - echo $TRAVIS_JDK_VERSION
 
   # Go to docker directory for the dockerfile
   - cd /home/travis/build/xebia-research/headerbuddy/target/docker
