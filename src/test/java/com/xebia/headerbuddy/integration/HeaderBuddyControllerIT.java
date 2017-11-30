@@ -2,7 +2,7 @@ package com.xebia.headerbuddy.integration;
 
 import org.junit.Test;
 
-public class HelloWorldControllerIT {
+public class HeaderBuddyControllerIT {
 
     @Test
     public void testHelloworldGetCall() {
