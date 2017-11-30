@@ -24,7 +24,7 @@ public class HeaderBuddyController
 
         }catch (Exception e){
             System.out.println("Message:  "  + e.getMessage());
-            return t = new ArrayList<>();
+            return new ArrayList<>();
         }
     }
 
