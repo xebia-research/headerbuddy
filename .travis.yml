@@ -57,7 +57,7 @@ script:
   - mvn verify
 
   # curl to check if dockerized API is running
-  - curl -v http://localhost:8080/HeaderBuddy?url=www.google.com
+  - curl -v http://localhost:8080/HeaderBuddy/api?url=www.google.com
 
   #pull the owasp zap container
   - docker pull owasp/zap2docker-stable
