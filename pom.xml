@@ -94,11 +94,11 @@
 							<!--<configLocation>checkstyle.xml</configLocation>-->
 							<failOnViolation>false</failOnViolation>
 							<encoding>UTF-8</encoding>
-							<consoleOutput>true</consoleOutput>
+							<consoleOutput>false</consoleOutput>
 							<failsOnError>false</failsOnError>
 						</configuration>
 						<goals>
-							<goal>check</goal>
+							<!--<goal>check</goal>-->
 						</goals>
 					</execution>
 				</executions>
@@ -133,6 +133,49 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*IT.java</exclude>
+						<exclude>**/*E2E.java</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<phase>verify</phase>
+						<configuration>
+							<excludes>
+								<exclude>none</exclude>
+							</excludes>
+							<includes>
+								<include>**/*IT.java</include>
+							</includes>
+						</configuration>
+					</execution>
+					<execution>
+						<id>end-to-end-test</id>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<phase>verify</phase>
+						<configuration>
+							<excludes>
+								<exclude>none</exclude>
+							</excludes>
+							<includes>
+								<include>**/*E2E.java</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<!-- create docker image using plugin from Spotify -->
 			<plugin>
 				<groupId>com.spotify</groupId>
@@ -152,12 +195,6 @@
 					<entryPoint>
 						["java", "-jar", "target/${project.build.finalName}.jar"]
 					</entryPoint>
-					<cmd>
-						sleep 15
-					</cmd>
-					<cmd>
-						mvn verify
-					</cmd>
 					<resources>
 						<resource>
 							<targetPath>

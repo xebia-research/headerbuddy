@@ -29,6 +29,9 @@ notifications:
 install: #forcing a maven install instead of the default maven wrapper install
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
+  # Create the jar file
+  - mvn clean install
+
 #any console commands can be executed here
 script:
   - echo this is an example
@@ -44,10 +47,20 @@ script:
   - docker build -t xebia/headerbuddy .
 
   # Create the container
-#  - docker run -it -d --name headerbuddy-container -p 8080:8080 xebia/headerbuddy
-  - docker run -it --name headerbuddy-container -p 8080:8080 xebia/headerbuddy
+  - docker run -it -d --name headerbuddy-container -p 8080:8080 xebia/headerbuddy
+
   # List all docker containers
   - docker ps
 
+  # Run integration tests
+  - cd /home/travis/build/xebia-research/headerbuddy/
+  - mvn verify
+
   # curl to check if dockerized API is running
-  - curl -v http://localhost:8080/helloworld
+  - curl -v http://localhost:8080/HeaderBuddy?url=www.google.com
+
+  #pull the owasp zap container
+  - docker pull owasp/zap2docker-stable
+
+  #run the container and test the app
+  - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
