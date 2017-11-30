@@ -1,0 +1,37 @@
+language: java
+#sudo: required only required when using docker or when you are using sudo commands
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.m2
+
+jdk:
+  - oraclejdk8
+
+
+
+notifications:
+  email: false
+
+# Set up notification options
+#notifications:
+#  email:
+#    recipients:
+#      - one@example.com
+#      - other@example.com
+#
+    # change is when the repo status goes from pass to fail or vice versa
+#    on_success: change
+#    on_failure: always
+
+install: #forcing a maven install instead of the default maven wrapper install
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+#any console commands can be executed here
+script:
+  - echo this is an example
+  - ls
+  - ls target
+  - mvn -Dtest=* test
+  - echo $TRAVIS_JDK_VERSION
