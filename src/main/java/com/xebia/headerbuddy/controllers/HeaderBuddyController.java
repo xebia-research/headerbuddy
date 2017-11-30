@@ -11,19 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class HeaderBuddyController
-{
+public class HeaderBuddyController {
 
     @RequestMapping("/headerbuddy/api")
-    public List<Header> headerBuddy(@RequestParam(value = "url", required = true) String url)
-    {
+    public List<Header> headerBuddy(@RequestParam(value = "url", required = true) String url) {
         List<Header> t;
-        try{
+        try {
             t = new GetRequest(url).doRequest();
             return t;
 
-        }catch (Exception e){
-            System.out.println("Message:  "  + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Message:  " + e.getMessage());
             return new ArrayList<>();
         }
     }
