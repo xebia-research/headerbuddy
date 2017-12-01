@@ -59,10 +59,13 @@ script:
   # curl to check if dockerized API is running
   - curl -v http://localhost:8080/headerbuddy/api?url=https://www.google.com
 
-  # Build database image
+  # Pull database image
+  - docker pull mysql
 
   # Run database image
+  - docker run -it -d --name mysql-database -p 3306/3306 mysql
 
+  - docker ps
 
   #pull the owasp zap container
   - docker pull owasp/zap2docker-stable
