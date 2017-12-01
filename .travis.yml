@@ -60,7 +60,7 @@ script:
   - docker pull mysql
 
   # Run database image
-  - docker run -it -d --name mysql-database -p 3306/3306 mysql
+  - docker run --detach --name=mysql-headerbuddy --env="MYSQL_ROOT_PASSWORD=usbw" --env="MYSQL_DATABASE=headerbuddy" --publish 6603:3306 mysql
 
   - docker ps
 
