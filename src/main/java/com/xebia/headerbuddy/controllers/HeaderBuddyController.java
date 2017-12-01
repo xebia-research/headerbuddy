@@ -14,15 +14,16 @@ import java.util.List;
 public class HeaderBuddyController {
 
     @RequestMapping("/headerbuddy/api")
-    public List<Header> headerBuddy(@RequestParam(value = "url", required = true) String url) {
-        List<Header> t;
+    public Report headerBuddy(@RequestParam(value = "url", required = true) String url) {
+        Report report = new Report(url);
         try {
-            t = new GetRequest(url).doRequest();
-            return t;
+           List<Header> t = new GetRequest(url).doRequest();
+           report.addHeader(t);
+           return report;
 
         } catch (Exception e) {
             System.out.println("Message:  " + e.getMessage());
-            return new ArrayList<>();
+            return report;
         }
     }
 
