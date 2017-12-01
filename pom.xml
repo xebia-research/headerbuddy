@@ -193,18 +193,12 @@
 					<imageName>xebia/${project.artifactId}</imageName>
 					<baseImage>java:8</baseImage>
 					<entryPoint>
-						["java", "-jar", "target/${project.build.finalName}.jar"]
+						["java", "-jar", "/${project.build.finalName}.jar"]
 					</entryPoint>
-					<cmd>
-						sleep 15
-					</cmd>
-					<cmd>
-						mvn verify
-					</cmd>
 					<resources>
 						<resource>
 							<targetPath>
-								/target/
+								/
 							</targetPath>
 							<directory>
 								${project.build.directory}
