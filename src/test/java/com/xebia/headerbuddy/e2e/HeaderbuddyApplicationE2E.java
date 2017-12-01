@@ -19,11 +19,11 @@ public class HeaderbuddyApplicationE2E
 	@Autowired
 	private TestRestTemplate restTemplate;
 
-	@Test
-	public void testHelloWorld()
-	{
-		String body = this.restTemplate.getForObject("/helloworld", String.class);
-		assertThat(body).isEqualTo("{\"id\":1,\"greeting\":\"Hello World\"}");
-	}
+//	@Test
+//	public void testHelloWorld()
+//	{
+//		String body = this.restTemplate.getForObject("/helloworld", String.class);
+//		assertThat(body).isEqualTo("{\"id\":1,\"greeting\":\"Hello World\"}");
+//	}
 
 }
