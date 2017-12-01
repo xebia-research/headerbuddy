@@ -19,8 +19,8 @@ public class User {
 
     @Override
     public String toString(){
-        return String.format(
-                "User[apiKey='%d', email='%s']",
-                apiKey, email);
+        String returnString = null;
+        returnString += apiKey + ", " + email;
+        return  returnString;
     }
 }
