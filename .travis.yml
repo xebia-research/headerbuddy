@@ -46,7 +46,7 @@ script:
   - docker run --detach --name=mysql-headerbuddy --env="MYSQL_ROOT_PASSWORD=usbw" --env="MYSQL_DATABASE=headerbuddy" --publish 6603:3306 mysql
 
   # Create the application container
-  - docker run -it -d --name headerbuddy-container --link mysql-headerbuddy:mysql -p 8080:8080 xebia/headerbuddy
+#  - docker run -it -d --name headerbuddy-container --link mysql-headerbuddy:mysql -p 8080:8080 xebia/headerbuddy
 
   # List all docker containers
   - docker ps
