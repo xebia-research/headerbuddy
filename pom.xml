@@ -195,7 +195,7 @@
 				<version>1.0.0</version>
 				<executions>
 					<execution>
-						<!--<phase>package</phase>-->
+						<phase>clean</phase>
 						<goals>
 							<goal>build</goal>
 						</goals>
