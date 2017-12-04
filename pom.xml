@@ -195,7 +195,7 @@
 				<version>1.0.0</version>
 				<executions>
 					<execution>
-						<phase>clean</phase>
+						<phase>compile</phase>
 						<goals>
 							<goal>build</goal>
 						</goals>
