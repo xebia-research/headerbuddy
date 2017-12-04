@@ -28,7 +28,7 @@ public class Report {
         return this.headers;
     }
 
-    public void addHeader(List<Header> headerList) {
+    public void addHeaders(List<Header> headerList) {
         headers.addAll(headerList);
     }
 

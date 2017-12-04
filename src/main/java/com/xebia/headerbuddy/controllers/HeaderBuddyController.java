@@ -17,8 +17,8 @@ public class HeaderBuddyController {
     public Report headerBuddy(@RequestParam(value = "url", required = true) String url) {
         Report report = new Report(url);
         try {
-           List<Header> t = new GetRequest(url).doRequest();
-           report.addHeader(t);
+           List<Header> headersFromRequest = new GetRequest(url).doRequest();
+           report.addHeaders(headersFromRequest);
            return report;
 
         } catch (Exception e) {

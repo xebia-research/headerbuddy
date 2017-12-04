@@ -14,28 +14,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//so the annotations won't be ignored
+//So the annotations won't be ignored
 @RunWith(SpringRunner.class)
-//auto-configure the Spring MVC infrastructure and limit the scanned beans this is purely for the main controller(s)
+//Auto-configure the Spring MVC infrastructure and limit the scanned beans this is purely for the main controller(s)
 @WebMvcTest(HeaderBuddyController.class)
 public class HeaderBuddyControllerTest {
 
-    //auto injects the class for me
+    //Auto injects the class for me
     @Autowired
     private MockMvc mvc;
 
-    private String testedUrl = "http://andonoz.com";
+    private final String testedUrl = "http://andonoz.com";
 
     //Test for checking if there is a response with the given url (tested url)
-    //in any case if the response type is in json there should be a url field with the given url
+    //In any case if the response type is in json there should be a url field with the given url
     @Test
     public void HeaderBuddyControllerTest() throws Exception {
         this.mvc.perform(get("/headerbuddy/api?url="+testedUrl).accept(MediaType.APPLICATION_JSON))
-                //response is status code 200
+                //Response is status code 200
                 .andExpect(status().isOk())
-                //expected response type is json
+                //Expected response type is json
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                //expected url in the url field is the tested url
+                //Expected url in the url field is the tested url
                 .andExpect(jsonPath("$.url").value(testedUrl));
     }
 }
