@@ -42,7 +42,7 @@ script:
   # Pull database image
   - docker pull mysql
 
-  # Run database image
+  # Create database container
   - docker run --detach --name=mysql-headerbuddy --env="MYSQL_ROOT_PASSWORD=usbw" --env="MYSQL_DATABASE=headerbuddy" --publish 6603:3306 mysql
 
   # Create the application container
@@ -53,7 +53,7 @@ script:
 
   # Run integration tests
   - cd /home/travis/build/xebia-research/headerbuddy/
-#  - mvn verify
+  - mvn verify
 
   # curl to check if dockerized API is running
   - curl -v http://localhost:8080/headerbuddy/api?url=https://www.google.com
