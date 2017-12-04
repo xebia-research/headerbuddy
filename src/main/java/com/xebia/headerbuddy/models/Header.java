@@ -1,11 +1,14 @@
 package com.xebia.headerbuddy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Header {
     private String name;
     private List<String> values;
+    @JsonIgnore
     private List<String> urls;
 
     public Header(String name, List<String> values, String site) {
