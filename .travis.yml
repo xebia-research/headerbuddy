@@ -51,7 +51,7 @@ script:
   # Run integration tests
   - cd /home/travis/build/xebia-research/headerbuddy/
 
-#  - mvn verify
+  - mvn verify
 
   # Return to root map
   - cd ..
