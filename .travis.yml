@@ -43,26 +43,24 @@ script:
   - docker pull mysql
 
   # Create database container
-  - docker run --detach --name=mysql-headerbuddy --env="MYSQL_ROOT_PASSWORD=usbw" --env="MYSQL_DATABASE=headerbuddy" --publish 6603:3306 mysql
+  - docker run --detach --name=mysql-headerbuddy --env="MYSQL_ROOT_PASSWORD=usbw" --env="MYSQL_DATABASE=headerbuddy" --publish 3306:3306 mysql
 
   # Create the application container
   - docker run -it -d --name headerbuddy-container -p 8080:8080 xebia/headerbuddy
-
-  - sleep 15
 
   # Return to root map
   - cd ..
   - cd ..
 
   #pull the owasp zap container
-#  - docker pull owasp/zap2docker-stable
+  - docker pull owasp/zap2docker-stable
 
   #run the container and test the app
-#  - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
+  - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
+
+  - docker ps
 
   # curl to check if dockerized API is running
   - curl -v http://localhost:8080/headerbuddy/api?url=https://www.google.com
 
-  - docker ps
 
-  - docker ps -a
