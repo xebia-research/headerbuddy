@@ -48,10 +48,7 @@ script:
   # Create the application container
   - docker run -it -d --name headerbuddy-container -p 8080:8080 xebia/headerbuddy
 
-  # Run integration tests
-  - cd /home/travis/build/xebia-research/headerbuddy/
-
-  - mvn verify
+  - sleep 15
 
   # Return to root map
   - cd ..
