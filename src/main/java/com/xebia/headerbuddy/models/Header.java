@@ -4,15 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Header {
-    private String name;
+    private Optional<String> name;
     private List<String> values;
     @JsonIgnore
     private List<String> urls;
 
     public Header(String name, List<String> values, String site) {
-        this.name = name;
+        this.name = Optional.ofNullable(name);
         this.values = values;
 
         this.urls = new ArrayList<String>();
@@ -20,11 +21,14 @@ public class Header {
     }
 
     public String getName() {
-        return this.name;
+        if(!this.name.isPresent()) {
+            return "UNSPECIFIED";
+        }
+        return this.name.get();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = Optional.ofNullable(name);
     }
 
     public List<String> getValues() {
@@ -42,4 +46,5 @@ public class Header {
     public void addUrl(String url) {
         this.urls.add(url);
     }
+
 }
