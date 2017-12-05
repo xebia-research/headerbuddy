@@ -53,10 +53,8 @@ script:
 
   # Run integration tests
   - cd /home/travis/build/xebia-research/headerbuddy/
-  - mvn verify
 
-  # curl to check if dockerized API is running
-  - curl -v http://localhost:8080/headerbuddy/api?url=https://www.google.com
+#  - mvn verify
 
   - docker ps
 
@@ -69,3 +67,6 @@ script:
 
   #run the container and test the app
   - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
+
+    # curl to check if dockerized API is running
+    - curl -v http://localhost:8080/headerbuddy/api?url=https://www.google.com
