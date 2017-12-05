@@ -1,13 +1,11 @@
-package com.xebia.headerbuddy.validators;
+package com.xebia.headerbuddy.annotations.validators;
 
-import com.xebia.headerbuddy.models.ValidURL;
+import com.xebia.headerbuddy.annotations.ValidURL;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class ValidURLValidator implements ConstraintValidator<ValidURL, String> {
-
-    //private final String REGEX_URL = "^https?:\\/\\/(www\\.)?((?!www\\.)[a-zA-Z0-9\\.\\-\\_]{1,})(\\.([a-z]{1,})|\\:([0-9]{1,}))\\/?(([a-zA-Z0-9\\/\\.\\-\\_\\:\\?\\=\\&]{1,}))?$";
 
     @Override
     public void initialize(ValidURL constraintAnnotation){

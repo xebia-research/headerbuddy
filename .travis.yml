@@ -27,21 +27,13 @@ notifications:
 #    on_failure: always
 
 install: #forcing a maven install instead of the default maven wrapper install
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-
-  # Create the jar file
-  - mvn clean install
+  - mvn install -Dmaven.javadoc.skip=true -B -V
 
 #any console commands can be executed here
 script:
-  - echo this is an example
-  - ls
-  - ls target
-  - mvn -Dtest=* test
-  - echo $TRAVIS_JDK_VERSION
 
   # Go to docker directory for the dockerfile
-  - cd /home/travis/build/xebia-research/headerbuddy/target/docker
+  - cd target/docker
 
   # Creating image from dockerfile
   - docker build -t xebia/headerbuddy .
@@ -52,9 +44,15 @@ script:
   # List all docker containers
   - docker ps
 
-  # Run integration tests
-  - cd /home/travis/build/xebia-research/headerbuddy/
-  - mvn verify
+  # Return to root map
+  - cd ..
+  - cd ..
+
+  #pull the owasp zap container
+  - docker pull owasp/zap2docker-stable
+
+  #run the container and test the app
+  - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
 
   # curl to check if dockerized API is running
   - curl -v http://localhost:8080/helloworld

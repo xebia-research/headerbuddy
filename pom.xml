@@ -44,6 +44,11 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.11</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.spotify/docker-maven-plugin -->
 		<dependency>
 			<groupId>com.spotify</groupId>
@@ -91,7 +96,6 @@
 						<id>validate</id>
 						<phase>validate</phase>
 						<configuration>
-							<!--<configLocation>checkstyle.xml</configLocation>-->
 							<failOnViolation>false</failOnViolation>
 							<encoding>UTF-8</encoding>
 							<consoleOutput>true</consoleOutput>
@@ -133,6 +137,49 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*IT.java</exclude>
+						<exclude>**/*E2E.java</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<phase>verify</phase>
+						<configuration>
+							<excludes>
+								<exclude>none</exclude>
+							</excludes>
+							<includes>
+								<include>**/*IT.java</include>
+							</includes>
+						</configuration>
+					</execution>
+					<execution>
+						<id>end-to-end-test</id>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<phase>verify</phase>
+						<configuration>
+							<excludes>
+								<exclude>none</exclude>
+							</excludes>
+							<includes>
+								<include>**/*E2E.java</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<!-- create docker image using plugin from Spotify -->
 			<plugin>
 				<groupId>com.spotify</groupId>
@@ -166,6 +213,40 @@
 						</resource>
 					</resources>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<outputDirectory>${basedir}/checkerReport</outputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>1.14</version>
+				<configuration>
+					<licensesOutputDirectory>${basedir}/checkerReport</licensesOutputDirectory>
+					<outputDirectory>${basedir}/checkerReport</outputDirectory>
+					<thirdPartyFilename>Third-Party-Licenses</thirdPartyFilename>
+				</configuration>
+				<executions>
+					<execution>
+						<id>download-licenses</id>
+						<goals>
+							<goal>add-third-party</goal>
+							<goal>third-party-report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

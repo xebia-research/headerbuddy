@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestControllerAdvice
 public class ExceptionHandlingController {
 
+    // Universal Exception handler
     @ExceptionHandler(Exception.class)
     public ResponseEntity handleException(Exception ex, HttpServletResponse response) {
         return new ResponseEntity("ERROR: " + ex.getMessage(), HttpStatus.BAD_REQUEST);
