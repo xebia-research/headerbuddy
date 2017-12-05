@@ -64,3 +64,5 @@ script:
   - curl -v http://localhost:8080/headerbuddy/api?url=https://www.google.com
 
   - docker ps
+
+  - docker ps -a
