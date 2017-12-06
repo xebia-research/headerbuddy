@@ -3,6 +3,7 @@ package com.xebia.headerbuddy.models.entities;
 import com.google.api.client.util.DateTime;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Set;
 
@@ -41,4 +42,7 @@ public class Euser {
     public void setCreationdate(DateTime creationdate) {
         this.creationdate = creationdate;
     }
+
+    @OneToMany(mappedBy="user")
+    public Set<Ereport> reports;
 }

@@ -2,6 +2,7 @@ package com.xebia.headerbuddy.models.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Table(name = "category")
@@ -28,4 +29,6 @@ public class Ecategory {
         this.name = name;
     }
 
+    @OneToMany(mappedBy="value")
+    public Set<Evalue> values;
 }

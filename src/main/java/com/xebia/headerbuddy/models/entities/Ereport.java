@@ -4,6 +4,7 @@ import com.google.api.client.util.DateTime;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.security.Timestamp;
 import java.util.Date;
 
@@ -32,4 +33,8 @@ public class Ereport {
     public void setDate(DateTime date) {
         this.date = date;
     }
+
+    @ManyToOne
+    @JoinColumn(name="user_fk")
+    public Euser user;
 }
