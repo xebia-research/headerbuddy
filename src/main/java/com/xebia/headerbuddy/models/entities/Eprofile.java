@@ -1,27 +1,21 @@
 package com.xebia.headerbuddy.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
-@Table(name = "header")
-public class Eheader
-{
+@Table(name = "profile")
+public class Eprofile {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     @NotNull
     private String name;
 
     public Integer getId() {
-    return id;
-}
+        return id;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -34,6 +28,5 @@ public class Eheader
     public void setName(String name) {
         this.name = name;
     }
-
-
 }
+
