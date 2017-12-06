@@ -39,11 +39,16 @@ public class ValidMethodValidator implements ConstraintValidator<ValidMethod, St
             methods.add(name.toLowerCase());
         }
 
-        // If the given method is supported return true
-        if(methods.contains(value.toLowerCase())){
-            return true;
+        // Put all values in array
+        String[] methodsToPerform = value.split(",");
+
+        for(String method : methodsToPerform){
+            // If array contains a method not supported return false
+            if (!methods.contains(method.toLowerCase())){
+                return false;
+            }
         }
-        // If not, return false
-        return false;
+        // If no unsupported methods are found return true;
+        return true;
     }
 }
