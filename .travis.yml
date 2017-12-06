@@ -2,6 +2,9 @@ language: java
 #sudo: required only required when using docker or when you are using sudo commands
 sudo: false
 
+before_script:
+  - sudo /etc/init.d/mysql stop
+
 cache:
   directories:
     - $HOME/.m2
@@ -43,7 +46,10 @@ script:
   - docker pull mysql
 
   # Create database container
-  - docker run --detach --name=mysql-headerbuddy --env="MYSQL_ROOT_PASSWORD=usbw" --env="MYSQL_DATABASE=headerbuddy" --publish 6603:3306 mysql
+  - docker run --detach --name=mysql-headerbuddy --env="MYSQL_ROOT_PASSWORD=usbw" --env="MYSQL_DATABASE=headerbuddy" --publish 3306:3306 mysql
+
+  # Give the mySQL database time to totally finish starting up
+  - sleep 15
 
   # Create the application container
   - docker run -it -d --name headerbuddy-container -p 8080:8080 xebia/headerbuddy
