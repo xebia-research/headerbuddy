@@ -5,16 +5,13 @@ import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
-@Table(name = "profile")
-public class Eprofile {
+@Table(name = "url")
+public class Eurl {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     @NotNull
-    private String name;
-
-    @ManyToMany
-    public Set<Eheader> headers;
+    private String url;
 
     public Integer getId() {
         return id;
@@ -24,12 +21,11 @@ public class Eprofile {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUrl() {
+        return url;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
-

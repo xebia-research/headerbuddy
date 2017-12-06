@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.security.Timestamp;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "report")
@@ -33,6 +34,9 @@ public class Ereport {
     public void setDate(DateTime date) {
         this.date = date;
     }
+
+    @ManyToMany
+    public Set<Evalue> values;
 
     @ManyToOne
     @JoinColumn(name="user_fk")
