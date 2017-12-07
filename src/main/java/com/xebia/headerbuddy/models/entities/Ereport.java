@@ -19,6 +19,15 @@ public class Ereport {
     @Column(columnDefinition = "DATETIME")
     private DateTime date;
 
+    //Relations
+    @ManyToMany
+    public Set<Evalue> values;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    public Euser user;
+    @OneToMany(mappedBy="report")
+    public Set<Eurl> urls;
+
     public int getId() {
         return id;
     }
@@ -34,11 +43,4 @@ public class Ereport {
     public void setDate(DateTime date) {
         this.date = date;
     }
-
-    @ManyToMany
-    public Set<Evalue> values;
-
-    @ManyToOne
-    @JoinColumn(name="user_fk")
-    public Euser user;
 }

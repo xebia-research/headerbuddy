@@ -12,12 +12,21 @@ public class Evalue {
     private Integer id;
     @NotNull
     private String value;
-
     private String description;
 
-    public String getValue() {
-        return value;
-    }
+    //Relations
+    @ManyToMany(mappedBy = "values")
+    public Set<Ereport> reports;
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    public Ecategory category;
+    @ManyToOne
+    @JoinColumn(name="header_id")
+    public Eheader header;
+    @OneToMany(mappedBy="value")
+    public Set<Eurl> urls;
+
+    public String getValue() { return value; }
 
     public void setValue(String value) {
         this.value = value;
@@ -30,15 +39,4 @@ public class Evalue {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    @ManyToMany(mappedBy = "values")
-    public Set<Ereport> reports;
-
-    @ManyToOne
-    @JoinColumn(name="category_fk")
-    public Ecategory category;
-
-    @ManyToOne
-    @JoinColumn(name="header_fk")
-    public Eheader header;
 }

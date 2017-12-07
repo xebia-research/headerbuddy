@@ -13,8 +13,12 @@ public class Eheader
     private Integer id;
     @NotNull
     private String name;
+
+    //Relations
     @ManyToMany(mappedBy = "headers")
     public Set<Eprofile> profiles;
+    @OneToMany(mappedBy="header")
+    public Set<Evalue> values;
 
     public Integer getId() {
     return id;
@@ -31,7 +35,4 @@ public class Eheader
     public void setName(String name) {
         this.name = name;
     }
-
-    @OneToMany(mappedBy="header")
-    public Set<Evalue> values;
 }

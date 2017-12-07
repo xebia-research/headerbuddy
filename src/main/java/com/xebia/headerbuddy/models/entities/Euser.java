@@ -13,13 +13,15 @@ public class Euser {
 
     @Id
     private String apikey;
-
     @NotNull
     private String email;
 
+    //Relations
     @NotNull
     @Column(columnDefinition = "DATETIME")
     private DateTime creationdate;
+    @OneToMany(mappedBy="user")
+    public Set<Ereport> reports;
 
     public String getApikey() { return apikey;}
 
@@ -42,7 +44,4 @@ public class Euser {
     public void setCreationdate(DateTime creationdate) {
         this.creationdate = creationdate;
     }
-
-    @OneToMany(mappedBy="user")
-    public Set<Ereport> reports;
 }

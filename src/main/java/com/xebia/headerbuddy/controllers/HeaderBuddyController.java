@@ -1,6 +1,5 @@
 package com.xebia.headerbuddy.controllers;
 
-
 import com.xebia.headerbuddy.models.*;
 import com.xebia.headerbuddy.models.entities.*;
 import com.xebia.headerbuddy.models.entities.EheaderRepository;

@@ -13,6 +13,7 @@ public class Eprofile {
     @NotNull
     private String name;
 
+    //Relations
     @ManyToMany
     public Set<Eheader> headers;
 

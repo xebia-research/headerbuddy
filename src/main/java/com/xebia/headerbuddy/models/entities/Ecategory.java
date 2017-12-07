@@ -13,6 +13,10 @@ public class Ecategory {
     @NotNull
     private String name;
 
+    //Relations
+    @OneToMany(mappedBy="value")
+    public Set<Evalue> values;
+
     public Integer getId() {
         return id;
     }
@@ -28,7 +32,4 @@ public class Ecategory {
     public void setName(String name) {
         this.name = name;
     }
-
-    @OneToMany(mappedBy="value")
-    public Set<Evalue> values;
 }
