@@ -36,27 +36,14 @@ install: #forcing a maven install instead of the default maven wrapper install
 #any console commands can be executed here
 script:
 
-  # Go to docker directory for the dockerfile
-  - cd target/docker
-
-  # Creating image from dockerfile
-  - docker build -t xebia/headerbuddy .
-
-  # Pull database image
-  - docker pull mysql
-
-  # Create database container
-  - docker run --detach --name=mysql-headerbuddy --env="MYSQL_ROOT_PASSWORD=usbw" --env="MYSQL_DATABASE=headerbuddy" --publish 3306:3306 mysql
+  # Create docker database container
+  - docker-compose up -d db
 
   # Give the mySQL database time to totally finish starting up
   - sleep 15
 
   # Create the application container
-  - docker run -it -d --name headerbuddy-container -p 8080:8080 xebia/headerbuddy
-
-  # Return to root map
-  - cd ..
-  - cd ..
+  - docker-compose up -d headerbuddy
 
   #pull the owasp zap container
   - docker pull owasp/zap2docker-stable
