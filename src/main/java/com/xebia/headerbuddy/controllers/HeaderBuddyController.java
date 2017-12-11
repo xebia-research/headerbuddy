@@ -1,6 +1,7 @@
 package com.xebia.headerbuddy.controllers;
 
 import com.xebia.headerbuddy.models.Header;
+import com.xebia.headerbuddy.models.Report;
 import com.xebia.headerbuddy.models.entities.Ecategory;
 import com.xebia.headerbuddy.models.entities.repositories.EcategoryRepository;
 import com.xebia.headerbuddy.models.requestmethods.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @RestController
@@ -21,15 +22,16 @@ public class HeaderBuddyController {
 
 
     @RequestMapping("/headerbuddy/api")
-    public List<Header> headerBuddy(@RequestParam(value = "url", required = true) String url) {
-        List<Header> t;
+    public Report headerBuddy(@RequestParam(value = "url", required = true) String url) {
+        Report report = new Report(url);
         try {
-            t = new GetRequest(url).doRequest();
-            return t;
+           List<Header> headersFromRequest = new GetRequest(url).doRequest();
+           report.addHeaders(headersFromRequest);
+           return report;
 
         } catch (Exception e) {
             System.out.println("Message:  " + e.getMessage());
-            return new ArrayList<>();
+            return report;
         }
     }
 
