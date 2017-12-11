@@ -19,7 +19,6 @@ public class ValidMethodValidator implements ConstraintValidator<ValidMethod, St
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context){
-
         // Use reflection to see which classes inherit from RequestBehaviour
         // to find out which request methods are supported
         Reflections reflections = new Reflections("com.xebia.headerbuddy.models");
@@ -43,6 +42,10 @@ public class ValidMethodValidator implements ConstraintValidator<ValidMethod, St
         String[] methodsToPerform = value.split(",");
 
         for(String method : methodsToPerform){
+            //all is a method we support it means all the requests
+            if (method.equals("all")){
+                break;
+            }
             // If array contains a method not supported return false
             if (!methods.contains(method.toLowerCase())){
                 return false;

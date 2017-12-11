@@ -10,8 +10,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-//@Pattern(regexp = "^[a-zA-Z0-9]{24,}$")
-@Pattern(regexp = "^[a-zA-Z0-9]+$")
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Invalid API Key!")
 @Constraint(validatedBy = ValidAPIKeyValidator.class)
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
