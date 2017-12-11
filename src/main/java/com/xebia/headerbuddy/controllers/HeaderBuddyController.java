@@ -33,14 +33,18 @@ public class HeaderBuddyController {
         }
     }
 
+    //Can be deleted later, this shows how to communicatie with the database
     @GetMapping(path="/add")
     public @ResponseBody String addNewEcategory (@RequestParam String name) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
-
         Ecategory n = new Ecategory(name);
         ecategoryRepository.save(n);
         return "Saved";
+    }
+
+    @GetMapping(path="/name")
+    public @ResponseBody Iterable<Ecategory> getAllEcategoryByName(@RequestParam String name) {
+        // This returns a JSON or XML with the users
+        return ecategoryRepository.findCategoryByName(name);
     }
 
     @GetMapping(path="/all")
