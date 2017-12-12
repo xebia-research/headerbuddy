@@ -2,6 +2,8 @@ package com.xebia.headerbuddy.utilities;
 
 import com.xebia.headerbuddy.models.Header;
 import com.xebia.headerbuddy.models.RequestBehaviour;
+import org.apache.commons.lang.WordUtils;
+import org.eclipse.jgit.util.StringUtils;
 import org.reflections.Reflections;
 
 import java.util.*;
@@ -19,7 +21,7 @@ public class MethodHandler {
 
         // Get requested methods to perform from the url
         List<String> methodsToPerform = new ArrayList<>();
-        Collections.addAll(methodsToPerform, method.toLowerCase().split(","));
+        Collections.addAll(methodsToPerform, StringUtils.toLowerCase(method).split(","));
 
         // Get our supported http method classes
         Reflections reflections = new Reflections("com.xebia.headerbuddy.models");
@@ -36,7 +38,7 @@ public class MethodHandler {
 
         for (String methodToPerform : methodsToPerform) {
             // Create string to match the 'simple' name of the class (get becomes 'GetRequest')
-            classNames.add(methodToPerform.substring(0,1).toUpperCase() + methodToPerform.substring(1).toLowerCase() + "Request");
+            classNames.add(WordUtils.capitalize(methodToPerform.substring(0,1)) + StringUtils.toLowerCase(methodToPerform.substring(1)) + "Request");
         }
 
         return classNames;

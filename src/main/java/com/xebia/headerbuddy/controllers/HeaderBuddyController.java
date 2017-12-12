@@ -18,15 +18,14 @@ import java.util.List;
 public class HeaderBuddyController {
 
     // Regex to validate given output type (only accepts "json", "xml" or "html" (capitalization doesn't matter))
-    private final String REGEX_OUTPUT = "(?i)^(json|xml|html)$";
-    private final String outputErrorMessage = "Output is not recognized";
+    static final String REGEX_PARAM_OUTPUT = "(?i)^(json|xml|html)$";
 
     private Report report;
 
     @RequestMapping("/headerbuddy/api")
     public Report headerBuddy(@RequestParam(value = "url", required = true) @ValidURL String url,
                               @RequestParam(value = "key", required = true) @ValidAPIKey String key,
-                              @RequestParam(value = "output", defaultValue = "json", required = false) @Pattern(regexp = REGEX_OUTPUT, message = outputErrorMessage) String output,
+                              @RequestParam(value = "output", defaultValue = "json", required = false) @Pattern(regexp = REGEX_PARAM_OUTPUT, message = "Output is not recognized") String output,
                               @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
                               @RequestParam(value = "spider", defaultValue = "false", required = false) boolean spider) throws Exception {
         // Create Report

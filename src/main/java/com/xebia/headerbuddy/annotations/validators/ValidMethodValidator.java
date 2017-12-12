@@ -2,6 +2,7 @@ package com.xebia.headerbuddy.annotations.validators;
 
 import com.xebia.headerbuddy.annotations.ValidMethod;
 import com.xebia.headerbuddy.models.RequestBehaviour;
+import org.eclipse.jgit.util.StringUtils;
 import org.reflections.Reflections;
 
 import javax.validation.ConstraintValidator;
@@ -35,7 +36,7 @@ public class ValidMethodValidator implements ConstraintValidator<ValidMethod, St
             name = name.substring(0, name.length() - 7);
 
             // Add the name to the list
-            methods.add(name.toLowerCase());
+            methods.add(StringUtils.toLowerCase(name));
         }
 
         // Put all values in array
@@ -47,7 +48,7 @@ public class ValidMethodValidator implements ConstraintValidator<ValidMethod, St
                 break;
             }
             // If array contains a method not supported return false
-            if (!methods.contains(method.toLowerCase())){
+            if (!methods.contains(StringUtils.toLowerCase(method))){
                 return false;
             }
         }
