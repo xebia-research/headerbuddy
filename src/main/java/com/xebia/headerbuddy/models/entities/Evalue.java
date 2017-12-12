@@ -15,8 +15,9 @@ import java.util.Set;
 @Entity
 @Table(name = "value")
 public class Evalue {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @NotNull
     private String value;
@@ -24,21 +25,29 @@ public class Evalue {
 
     //Relations
     @ManyToMany(mappedBy = "values")
-    public Set<Ereport> reports;
+    private Set<Ereport> reports;
     @ManyToOne
-    @JoinColumn(name="category_id")
-    public Ecategory category;
+    @JoinColumn(name = "category_id")
+    private Ecategory category;
+    @NotNull
     @ManyToOne
-    @JoinColumn(name="header_id")
-    public Eheader header;
-    @OneToMany(mappedBy="value")
-    public Set<Eurl> urls;
+    @JoinColumn(name = "header_id")
+    private Eheader header;
+    @OneToMany(mappedBy = "value")
+    private Set<Eurl> urls;
 
-    public Integer getId() { return id; }
+    //Getters and Setters
+    public Integer getId() {
+        return id;
+    }
 
-    public void setId(Integer id) { this.id = id; }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    public String getValue() { return value; }
+    public String getValue() {
+        return value;
+    }
 
     public void setValue(String value) {
         this.value = value;
@@ -51,4 +60,37 @@ public class Evalue {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Set<Ereport> getReports() {
+        return reports;
+    }
+
+    public void setReports(Set<Ereport> reports) {
+        this.reports = reports;
+    }
+
+    public Ecategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(Ecategory category) {
+        this.category = category;
+    }
+
+    public Eheader getHeader() {
+        return header;
+    }
+
+    public void setHeader(Eheader header) {
+        this.header = header;
+    }
+
+    public Set<Eurl> getUrls() {
+        return urls;
+    }
+
+    public void setUrls(Set<Eurl> urls) {
+        this.urls = urls;
+    }
+
 }

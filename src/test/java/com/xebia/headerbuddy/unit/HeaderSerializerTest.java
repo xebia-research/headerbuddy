@@ -1,10 +1,11 @@
 package com.xebia.headerbuddy.unit;
 
-import java.util.ArrayList;
 import com.xebia.headerbuddy.models.Header;
 import com.xebia.headerbuddy.utilities.HeaderSerializer;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class HeaderSerializerTest {
     static final String VALUE3 = "value3=httponly";
 
     @Test
-    public void serializeShouldConvertMapInHeaderList(){
+    public void serializeShouldConvertMapInHeaderList() {
 
         Map<String, List<String>> headerMap = new HashMap<>();
         List<String> stringList = new ArrayList<>();
@@ -59,7 +60,7 @@ public class HeaderSerializerTest {
     }
 
     @Test
-    public void serializeValuesShouldSplitValuesByComma(){
+    public void serializeValuesShouldSplitValuesByComma() {
         Map<String, List<String>> headerMap = new HashMap<>();
         List<String> stringList = new ArrayList<>();
 
@@ -75,7 +76,7 @@ public class HeaderSerializerTest {
     }
 
     @Test
-    public void serializeValuesShouldSplitValuesBySemicolon(){
+    public void serializeValuesShouldSplitValuesBySemicolon() {
         Map<String, List<String>> headerMap = new HashMap<>();
         List<String> stringList = new ArrayList<>();
 

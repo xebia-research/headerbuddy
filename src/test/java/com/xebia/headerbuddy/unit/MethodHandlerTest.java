@@ -13,15 +13,15 @@ public class MethodHandlerTest {
     static final String allMethods = "all";
     static final String allMethodsWithExtra = "all,get,post";
 
-    static final List<String> oneMethodOutput = new ArrayList<String>(){{
+    static final List<String> oneMethodOutput = new ArrayList<String>() {{
         add("GetRequest");
     }};
-    static final List<String> multipleMethodsOutput = new ArrayList<String>(){{
+    static final List<String> multipleMethodsOutput = new ArrayList<String>() {{
         add("GetRequest");
         add("PostRequest");
         add("TraceRequest");
     }};
-    static final List<String> allMethodsOutput = new ArrayList<String>(){{
+    static final List<String> allMethodsOutput = new ArrayList<String>() {{
         add("PutRequest");
         add("HeadRequest");
         add("PostRequest");
@@ -34,9 +34,9 @@ public class MethodHandlerTest {
     }};
 
     /*
-    * Tests the static function "getAllMethodsFromMethodParam"
-    * Should give the correct class names capital letters do not matter
-    * Get -> GetRequest, post -> PostRequest, etc.
+     * Tests the static function "getAllMethodsFromMethodParam"
+     * Should give the correct class names capital letters do not matter
+     * Get -> GetRequest, post -> PostRequest, etc.
      */
     @Test
     public void shouldGiveCorrectClassNames() {

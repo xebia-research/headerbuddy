@@ -8,63 +8,63 @@ import org.junit.Test;
 public class RequestMethodsTest {
 
     @Test
-    public void connectRequestShouldSetRightRequestMethod(){
+    public void connectRequestShouldSetRightRequestMethod() {
         RequestBehaviour rb = new ConnectRequest("http://Andonoz.com");
 
         Assert.assertEquals("CONNECT", rb.methodName);
     }
 
     @Test
-    public void deleteRequestShouldSetRightRequestMethod(){
+    public void deleteRequestShouldSetRightRequestMethod() {
         RequestBehaviour rb = new DeleteRequest("http://Andonoz.com");
 
         Assert.assertEquals("DELETE", rb.methodName);
     }
 
     @Test
-    public void getRequestShouldSetRightRequestMethod(){
+    public void getRequestShouldSetRightRequestMethod() {
         RequestBehaviour rb = new GetRequest("http://Andonoz.com");
 
         Assert.assertEquals("GET", rb.methodName);
     }
 
     @Test
-    public void headRequestShouldSetRightRequestMethod(){
+    public void headRequestShouldSetRightRequestMethod() {
         RequestBehaviour rb = new HeadRequest("http://Andonoz.com");
 
         Assert.assertEquals("HEAD", rb.methodName);
     }
 
     @Test
-    public void optionsRequestShouldSetRightRequestMethod(){
+    public void optionsRequestShouldSetRightRequestMethod() {
         RequestBehaviour rb = new OptionsRequest("http://Andonoz.com");
 
         Assert.assertEquals("OPTIONS", rb.methodName);
     }
 
     @Test
-    public void patchRequestShouldSetRightRequestMethod(){
+    public void patchRequestShouldSetRightRequestMethod() {
         RequestBehaviour rb = new PatchRequest("http://Andonoz.com");
 
         Assert.assertEquals("PATCH", rb.methodName);
     }
 
     @Test
-    public void postRequestShouldSetRightRequestMethod(){
+    public void postRequestShouldSetRightRequestMethod() {
         RequestBehaviour rb = new PostRequest("http://Andonoz.com");
 
         Assert.assertEquals("POST", rb.methodName);
     }
 
     @Test
-    public void putRequestShouldSetRightRequestMethod(){
+    public void putRequestShouldSetRightRequestMethod() {
         RequestBehaviour rb = new PutRequest("http://Andonoz.com");
 
         Assert.assertEquals("PUT", rb.methodName);
     }
 
     @Test
-    public void traceRequestShouldSetRightRequestMethod(){
+    public void traceRequestShouldSetRightRequestMethod() {
         RequestBehaviour rb = new TraceRequest("http://Andonoz.com");
 
         Assert.assertEquals("TRACE", rb.methodName);

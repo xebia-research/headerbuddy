@@ -46,4 +46,5 @@ public class Report {
     public void addMethod(String method) {
         methods.add(method);
     }
+
 }
