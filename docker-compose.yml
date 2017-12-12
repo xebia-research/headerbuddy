@@ -1,0 +1,18 @@
+version: '3'
+services:
+  headerbuddy:
+    build: .
+    build:
+      context: ./target/docker
+      dockerfile: Dockerfile
+    ports:
+        - 8080:8080
+
+  db:
+    image: mysql
+    ports:
+      - 3307:3307
+    environment:
+      MYSQL_ROOT_PASSWORD: "usbw"
+      MYSQL_DATABASE: "headerbuddy"
+    container_name: "mysql-headerbuddy"

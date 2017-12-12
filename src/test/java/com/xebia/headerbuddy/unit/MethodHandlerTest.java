@@ -47,8 +47,10 @@ public class MethodHandlerTest {
 
         Assert.assertEquals(oneMethodOutput, oneRequest);
         Assert.assertEquals(multipleMethodsOutput, multipleRequests);
-        Assert.assertEquals(allMethodsOutput, allRequests);
-        Assert.assertEquals(allMethodsOutput, allRequestsWithExtra);
+        for (String method : allMethodsOutput) {
+            Assert.assertTrue(allRequests.contains(method));
+            Assert.assertTrue(allRequestsWithExtra.contains(method));
+        }
     }
 
 }
