@@ -1,6 +1,5 @@
 package com.xebia.headerbuddy.models;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import com.xebia.headerbuddy.utilities.HeaderSerializer;
 
 import java.net.HttpURLConnection;
