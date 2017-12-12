@@ -2,6 +2,9 @@ language: java
 #sudo: required only required when using docker or when you are using sudo commands
 sudo: false
 
+before_script:
+  - sudo /etc/init.d/mysql stop
+
 cache:
   directories:
     - $HOME/.m2
@@ -27,26 +30,20 @@ notifications:
 #    on_failure: always
 
 install: #forcing a maven install instead of the default maven wrapper install
+
   - mvn install -Dmaven.javadoc.skip=true -B -V
 
 #any console commands can be executed here
 script:
 
-  # Go to docker directory for the dockerfile
-  - cd target/docker
+  # Create docker database container
+  - docker-compose up -d db
 
-  # Creating image from dockerfile
-  - docker build -t xebia/headerbuddy .
+  # Give the mySQL database time to totally finish starting up
+  - sleep 15
 
-  # Create the container
-  - docker run -it -d --name headerbuddy-container -p 8080:8080 xebia/headerbuddy
-
-  # List all docker containers
-  - docker ps
-
-  # Return to root map
-  - cd ..
-  - cd ..
+  # Create the application container
+  - docker-compose up -d headerbuddy
 
   #pull the owasp zap container
   - docker pull owasp/zap2docker-stable
@@ -54,5 +51,9 @@ script:
   #run the container and test the app
   - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
 
+  - docker ps
+
   # curl to check if dockerized API is running
-  - curl -v http://localhost:8080/helloworld
+  - curl -v http://localhost:8080/headerbuddy/api?url=https://www.google.com
+
+
