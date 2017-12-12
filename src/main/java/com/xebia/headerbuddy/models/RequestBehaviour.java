@@ -20,7 +20,16 @@ public abstract class RequestBehaviour {
         URL target = new URL(this.url);
 
         HttpURLConnection connection = (HttpURLConnection) target.openConnection();
-        connection.setRequestMethod(this.methodName);
+        switch (this.methodName) {
+            case "PATCH":   connection.setRequestProperty("X-HTTP-Method-Override", "PATCH");
+                            connection.setRequestMethod("POST");
+                            break;
+            case "CONNECT": connection.setRequestProperty("X-HTTP-Method-Override", "CONNECT");
+                            connection.setRequestMethod("POST");
+                            break;
+            default:        connection.setRequestMethod(this.methodName);
+                            break;
+        }
         Map<String, List<String>> headerFields = connection.getHeaderFields();
 
         List<Header> headers = HeaderSerializer.serialize(headerFields, this.url);

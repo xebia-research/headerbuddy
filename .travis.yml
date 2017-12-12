@@ -2,6 +2,9 @@ language: java
 #sudo: required only required when using docker or when you are using sudo commands
 sudo: false
 
+before_script:
+  - sudo /etc/init.d/mysql stop
+
 cache:
   directories:
     - $HOME/.m2
@@ -9,7 +12,8 @@ cache:
 jdk:
   - oraclejdk8
 
-
+services:
+  - docker
 
 notifications:
   email: false
@@ -26,12 +30,26 @@ notifications:
 #    on_failure: always
 
 install: #forcing a maven install instead of the default maven wrapper install
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+  - mvn install -Dmaven.javadoc.skip=true -B -V
 
 #any console commands can be executed here
 script:
-  - echo this is an example
-  - ls
-  - ls target
-  - mvn -Dtest=* test
-  - echo $TRAVIS_JDK_VERSION
+
+  # Create docker database container
+  - docker-compose up -d db
+
+  # Give the mySQL database time to totally finish starting up
+  - sleep 15
+
+  # Create the application container
+  - docker-compose up -d headerbuddy
+
+  #pull the owasp zap container
+  - docker pull owasp/zap2docker-stable
+
+  #run the container and test the app
+  - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
+
+  - docker ps
+
