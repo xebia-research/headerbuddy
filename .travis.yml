@@ -53,7 +53,3 @@ script:
 
   - docker ps
 
-  # curl to check if dockerized API is running
-  - curl -v http://localhost:8080/headerbuddy/api?url=https://www.google.com
-
-
