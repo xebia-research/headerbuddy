@@ -4,10 +4,10 @@ package com.xebia.headerbuddy.controllers;
 import com.xebia.headerbuddy.annotations.ValidAPIKey;
 import com.xebia.headerbuddy.annotations.ValidMethod;
 import com.xebia.headerbuddy.annotations.ValidURL;
-import com.xebia.headerbuddy.utilities.MethodHandler;
-import org.springframework.validation.annotation.Validated;
 import com.xebia.headerbuddy.models.Header;
 import com.xebia.headerbuddy.models.Report;
+import com.xebia.headerbuddy.utilities.MethodHandler;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +40,7 @@ public class HeaderBuddyController {
                 this.report.addHeaders(headers);
                 this.report.addMethod(methodInParameter);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Message: " + e.getMessage());
         }
 
