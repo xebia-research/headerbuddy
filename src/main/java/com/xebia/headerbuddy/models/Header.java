@@ -21,7 +21,7 @@ public class Header {
     }
 
     public String getName() {
-        if(!this.name.isPresent()) {
+        if (!this.name.isPresent()) {
             return "UNSPECIFIED";
         }
         return this.name.get();

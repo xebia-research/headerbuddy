@@ -6,6 +6,7 @@ public class CustomErrorModel {
     public CustomErrorModel(String message) {
         this.error = message;
     }
+
     public String getError() {
         return this.error;
     }
