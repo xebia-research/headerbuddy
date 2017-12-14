@@ -11,7 +11,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Pattern(regexp = "(?i)^https?:\\/\\/(www\\.)?((?!www\\.)[a-z0-9\\.\\-\\_]+)(\\.([a-z]{1,})|\\:([0-9]+))\\/?([a-z0-9\\/\\.\\-\\_\\:\\?\\=\\&]+)?$",
-        message = "Invalid URL")
+        message = "Invalid URL!")
 @Constraint(validatedBy = ValidURLValidator.class)
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
