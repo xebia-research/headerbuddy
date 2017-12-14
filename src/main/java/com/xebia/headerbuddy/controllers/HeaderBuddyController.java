@@ -6,12 +6,21 @@ import com.xebia.headerbuddy.annotations.ValidMethod;
 import com.xebia.headerbuddy.annotations.ValidURL;
 import com.xebia.headerbuddy.models.Header;
 import com.xebia.headerbuddy.models.Report;
+import com.xebia.headerbuddy.models.entities.Ecategory;
+import com.xebia.headerbuddy.models.entities.Eheader;
+import com.xebia.headerbuddy.models.entities.Evalue;
+import com.xebia.headerbuddy.models.entities.repositories.EcategoryRepository;
+import com.xebia.headerbuddy.models.entities.repositories.EheaderRepository;
+import com.xebia.headerbuddy.models.entities.repositories.EvalueRepository;
 import com.xebia.headerbuddy.utilities.MethodHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @RestController

@@ -6,5 +6,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface EuserRepository extends CrudRepository<Euser, Long> {
 
-    public Iterable<Euser> findCategoryByApikey(@Param("apikey") String apikey);
+    public Iterable<Euser> findByApikey(@Param("apikey") String apikey);
 }

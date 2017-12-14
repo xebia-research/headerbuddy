@@ -36,6 +36,29 @@ public class Evalue {
     @OneToMany(mappedBy = "value")
     private Set<Eurl> urls;
 
+    //Constructors
+    public Evalue(){
+
+    }
+
+    public Evalue(String value, String description) {
+        this.value = value;
+        this.description = description;
+    }
+
+    public Evalue(String value, String description, Ecategory category){
+        this.value = value;
+        this.description = description;
+        this.category = category;
+    }
+
+    public Evalue(String value, String description, Ecategory category, Eheader header){
+        this.value = value;
+        this.description = description;
+        this.category = category;
+        this.header = header;
+    }
+
     //Getters and Setters
     public Integer getId() {
         return id;

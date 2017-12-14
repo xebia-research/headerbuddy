@@ -121,7 +121,7 @@
                 <version>3.0.5</version>
                 <configuration>
                     <effort>Max</effort>
-                    <threshold>Low</threshold>
+                    <threshold>med</threshold>
                     <xmlOutput>true</xmlOutput>
                     <excludeFilterFile>/checkerRules/findbugs_exclude.xml</excludeFilterFile>
                 </configuration>
