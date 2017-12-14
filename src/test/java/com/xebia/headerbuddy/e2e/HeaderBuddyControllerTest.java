@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(HeaderBuddyController.class)
 public class HeaderBuddyControllerTest {
 
-    //auto injects the class for me
+    //auto injects the class
     @Autowired
     private MockMvc mvc;
 
