@@ -6,5 +6,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface EcategoryRepository extends CrudRepository<Ecategory, Long> {
 
-    public Ecategory findByName(@Param("name") String name);
+    public Iterable<Ecategory> findByName(@Param("name") String name);
 }
