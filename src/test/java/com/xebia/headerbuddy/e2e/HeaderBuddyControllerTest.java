@@ -30,7 +30,7 @@ public class HeaderBuddyControllerTest {
     //in any case if the response type is in json there should be a url field with the given url
     @Test
     public void HeaderBuddyControllerTest() throws Exception {
-        this.mvc.perform(get("/headerbuddy/api?key=123&url="+testedUrl).accept(MediaType.APPLICATION_JSON))
+        this.mvc.perform(get("/headerbuddy/api?key=123&url="+testedUrl))
                 //response is status code 200
                 .andExpect(status().isOk())
                 //expected response type is json
