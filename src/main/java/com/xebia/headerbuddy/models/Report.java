@@ -1,14 +1,27 @@
 package com.xebia.headerbuddy.models;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@JacksonXmlRootElement(localName = "report")
 public class Report {
     //start url
     private String url;
     private Date date;
+    @JacksonXmlElementWrapper(localName = "methods")
+    @JacksonXmlProperty(localName = "method")
     private List<String> methods;
+    @JacksonXmlElementWrapper(localName = "headers")
+    @JacksonXmlProperty(localName = "header")
     private List<Header> headers;
 
     public Report(String url) {
