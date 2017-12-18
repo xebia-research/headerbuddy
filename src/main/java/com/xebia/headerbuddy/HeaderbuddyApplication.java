@@ -53,14 +53,14 @@ public class HeaderbuddyApplication implements CommandLineRunner {
         Eheader referrerHeader = new Eheader("Referrer-Policy");
 
         //========== Profiles with associated headers ===============
-        Eprofile browserProfile = new Eprofile("browser", new HashSet<Eheader>(){{
+        Eprofile browserProfile = new Eprofile("browser", new HashSet<Eheader>() {{
             add(cspHeader);
             add(xframeHeader);
             add(serverHeader);
             add(referrerHeader);
         }});
 
-        Eprofile mobileProfile = new Eprofile("mobile", new HashSet<Eheader>(){{
+        Eprofile mobileProfile = new Eprofile("mobile", new HashSet<Eheader>() {{
             add(cspHeader);
             add(serverHeader);
             add(referrerHeader);
@@ -90,13 +90,16 @@ public class HeaderbuddyApplication implements CommandLineRunner {
         //=========== Saving the data ============
         //========================================
 
-        for(Eprofile profile : profiles)
+        for(Eprofile profile : profiles) {
             profileRepository.save(profile);
+        }
 
-        for(Ecategory categorie : categories)
+        for(Ecategory categorie : categories) {
             categoryRepository.save(categorie);
+        }
 
-        for(Evalue value : values)
+        for(Evalue value : values) {
             valueRepository.save(value);
+        }
     }
 }

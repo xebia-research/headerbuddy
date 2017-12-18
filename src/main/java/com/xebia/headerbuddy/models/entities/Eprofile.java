@@ -26,7 +26,7 @@ public class Eprofile {
     private Set<Eheader> headers;
 
     //Constructors
-    public Eprofile(){
+    public Eprofile() {
 
     }
 
@@ -34,7 +34,7 @@ public class Eprofile {
         this(name, null);
     }
 
-    public Eprofile(String name, Set<Eheader> headers){
+    public Eprofile(String name, Set<Eheader> headers) {
         this.name = name;
         this.headers = headers;
     }

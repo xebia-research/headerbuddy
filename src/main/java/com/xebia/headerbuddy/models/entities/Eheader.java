@@ -40,8 +40,8 @@ public class Eheader {
         this(name, profiles, null);
     }
 
-    public Eheader(String name, Set<Eprofile> profiles, Set<Evalue> values){
-        this. name = name;
+    public Eheader(String name, Set<Eprofile> profiles, Set<Evalue> values) {
+        this.name = name;
         this.profiles = profiles;
         this.values = values;
     }

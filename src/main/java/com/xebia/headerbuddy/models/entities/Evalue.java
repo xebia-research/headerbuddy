@@ -37,7 +37,7 @@ public class Evalue {
     private Set<Eurl> urls;
 
     //Constructors
-    public Evalue(){
+    public Evalue() {
 
     }
 
@@ -46,13 +46,13 @@ public class Evalue {
         this.description = description;
     }
 
-    public Evalue(String value, String description, Ecategory category){
+    public Evalue(String value, String description, Ecategory category) {
         this.value = value;
         this.description = description;
         this.category = category;
     }
 
-    public Evalue(String value, String description, Ecategory category, Eheader header){
+    public Evalue(String value, String description, Ecategory category, Eheader header) {
         this.value = value;
         this.description = description;
         this.category = category;
