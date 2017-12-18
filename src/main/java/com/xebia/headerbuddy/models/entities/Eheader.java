@@ -33,11 +33,12 @@ public class Eheader {
     }
 
     public Eheader(String name){
-        this(name, null, null);
+        this.name = name;
     }
 
     public Eheader(String name, Set<Eprofile> profiles){
-        this(name, profiles, null);
+        this.name = name;
+        this.profiles = profiles;
     }
 
     public Eheader(String name, Set<Eprofile> profiles, Set<Evalue> values) {

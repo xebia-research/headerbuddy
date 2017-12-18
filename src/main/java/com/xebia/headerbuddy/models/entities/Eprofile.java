@@ -31,7 +31,7 @@ public class Eprofile {
     }
 
     public Eprofile(String name){
-        this(name, null);
+        this.name = name;
     }
 
     public Eprofile(String name, Set<Eheader> headers) {
