@@ -9,7 +9,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Pattern(regexp = "(?i)^((?!,,)[a-z,])+$")
+@Pattern(regexp = "(?i)^((?!,,)[a-z,])+$", message = "Invalid HTTP Method!")
 @Constraint(validatedBy = ValidMethodValidator.class)
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

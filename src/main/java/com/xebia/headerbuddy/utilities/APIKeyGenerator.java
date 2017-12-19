@@ -1,38 +1,53 @@
 package com.xebia.headerbuddy.utilities;
 
+import com.xebia.headerbuddy.models.ApiKey;
 import com.xebia.headerbuddy.models.entities.Euser;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
 import org.apache.commons.lang.WordUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Component
-public class APIKeyGenerator {
+public abstract class APIKeyGenerator {
 
-    @Autowired
-    private EuserRepository userRepository;
+    public static final int KEY_LENGTH = 23;
+    public static final String allowedLowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+    public static final String allowedUppercaseChars = WordUtils.capitalize(allowedLowercaseChars);
+    public static final String allowedNumericChars = "0123456789";
 
-    public final int KEY_LENGTH = 23;
+    public static ApiKey getKey(EuserRepository userRepository, String email) throws Exception{
+        // Check if a user with this email already has requested a key
+        Euser user = userRepository.findByEmail(email);
+        if (user != null){
+            // throw exception if this user already exists
+            throw new Exception("An API key with this email address already exists!");
+        }
 
-    public final String allowedLowercaseChars = "abcdefghijklmnopqrstuvwxyz";
-    public final String allowedUppercaseChars = WordUtils.capitalize(allowedLowercaseChars);
-    public final String allowedNumericChars = "0123456789";
+        // Try to create a key (fails after 50 times)
+        for (int attempts = 0; attempts < 50; attempts++){
+            // Create key
+            String APIKey = generateKey();
 
-    public String getKey(){
-        String APIKey = generateKey();
+            // if no user exists with this key the key is valid.
+            // save a new user to the db and return the key, else try again
+            if(!userExistsWithApiKey(userRepository, APIKey)){
+                // Create new user
+                Euser newUser = new Euser(APIKey, email);
+                newUser.setCreationdate(new Date());
 
-        if(checkDatabaseForExistingKey("abc"))
-            return "ben hier";
+                // Save the user
+                userRepository.save(newUser);
 
-        return APIKey;
+                // Return the key
+                return new ApiKey(APIKey);
+            }
+        }
+
+        throw new Exception("Can't create API key right now! please try again later.");
     }
 
-    private String generateKey() {
+    public static String generateKey() {
         // StringBuilder for api key
         StringBuilder keyToReturn = new StringBuilder();
 
@@ -57,13 +72,20 @@ public class APIKeyGenerator {
         return keyToReturn.toString();
     }
 
-    private boolean checkDatabaseForExistingKey(String apiKey){
-        Iterable<Euser> users = userRepository.findUserByEmail("a@a.a");
+    private static boolean userExistsWithApiKey(EuserRepository userRepository, String apiKey){
+        // Get user with this API key
+        Euser user = userRepository.findByApikey(apiKey);
 
-        return true;
+        // If a user exists with this key, return true
+        if (user != null){
+            return true;
+        }
+
+        // else return false
+        return false;
     }
 
-    private List<Character> toCharList(char[] charArray){
+    private static List<Character> toCharList(char[] charArray){
         // Convert CharArray to List
         List<Character> charList = new ArrayList<>();
         for(char c : charArray){

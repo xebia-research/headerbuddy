@@ -5,6 +5,9 @@ import com.xebia.headerbuddy.annotations.ValidAPIKey;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+/*
+ * Does nothing at the moment but if you want greater url validation e.g. give some sites not allowance you can create a validate in the  isValid method
+ */
 public class ValidAPIKeyValidator implements ConstraintValidator<ValidAPIKey, String> {
 
     @Override
