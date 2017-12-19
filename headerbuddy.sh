@@ -67,7 +67,7 @@ then
 		echo -e "Value of the custom port is not valid. Only integers are allowed for -p [integers]."
 	fi
 	
-	echo "Run \"headerbuddy.sh -h\" for more information."
+	echo "Run \"./headerbuddy.sh -h\" for more information."
 	
 	exit 
 fi
