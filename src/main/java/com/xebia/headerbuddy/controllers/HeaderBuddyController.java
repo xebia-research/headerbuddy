@@ -4,6 +4,7 @@ import com.xebia.headerbuddy.annotations.ValidAPIKey;
 import com.xebia.headerbuddy.annotations.ValidMethod;
 import com.xebia.headerbuddy.annotations.ValidOutput;
 import com.xebia.headerbuddy.annotations.ValidURL;
+import com.xebia.headerbuddy.models.Analyzer;
 import com.xebia.headerbuddy.models.Header;
 import com.xebia.headerbuddy.models.Report;
 import com.xebia.headerbuddy.models.entities.Eheader;
@@ -55,7 +56,7 @@ public class HeaderBuddyController {
 
     //Test, needs to be removed before merge with develop
     @RequestMapping(value = "/test")
-    public Set<Eheader> test(@RequestParam(value = "url", required = true) @ValidURL String url,
+    public ResponseEntity test(@RequestParam(value = "url", required = true) @ValidURL String url,
                                     @RequestParam(value = "key", required = true) @ValidAPIKey String key,
                                     @RequestParam(value = "output", defaultValue = "json", required = false) @ValidOutput String output,
                                     @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
@@ -75,7 +76,8 @@ public class HeaderBuddyController {
         } catch (Exception e) {
             System.out.println("Message: " + e.getMessage());
         }
-
-        return HeaderSerializer.convertToEHeader(report.getHeaders());
+        Set<Eheader> foundEheaders = HeaderSerializer.convertToEHeader(report.getHeaders());
+        Analyzer analyzer = new Analyzer(foundEheaders, headerRepository);
+        return new ResponseEntity(analyzer, HttpStatus.OK);
     }
 }

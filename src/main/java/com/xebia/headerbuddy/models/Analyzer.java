@@ -2,64 +2,103 @@ package com.xebia.headerbuddy.models;
 
 import com.xebia.headerbuddy.models.entities.Eheader;
 import com.xebia.headerbuddy.models.entities.repositories.EheaderRepository;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Analyzer {
 
     private Set<Eheader> foundHeaders; //The headers from the url.
-    private Set<Eheader> foundDoHeaders; //Do rapport.
-    private Set<Eheader> foundDontHeaders; //Don't rapport.
-    private Set<Eheader> foundRecHeaders; //Recommendations rapport.
-    private Set<Eheader> entityDoHeaders; //Database do headers.
-    private Set<Eheader> entityDontHeaders; //Database don't headers.
-    private Set<Eheader> entityRecHeaders; //Database recommended headers.
-    private Iterable<Eheader> entityHeaders; //Database defined headers.
+    private Set<Eheader> databaseDoHeaders; //Database do headers.
+    private Set<Eheader> databaseDontHeaders; //Database don't headers.
+    private Set<Eheader> databaseRecHeaders; //Database recommended headers.
+
+    private Set<Eheader> missingDoHeaders;
+    private Set<Eheader> foundDontHeaders;
 
     public Analyzer(Set<Eheader> foundHeaders, EheaderRepository headerRepository) {
-        entityHeaders = headerRepository.findAll();
+        databaseDoHeaders = new HashSet<>();
+        databaseDontHeaders = new HashSet<>();
+        databaseRecHeaders = new HashSet<>();
+
         this.foundHeaders = foundHeaders;
 
-        organiseEntityHeaders();
-        organiseFoundHeaders();
+        organiseEntityHeaders(headerRepository.findAll());
+        missingDoHeaders = detectMissingDoHeaders();
+        foundDontHeaders = detectDontHeaders();
+
+        System.out.println("========= Found headers ============");
+        for (Eheader header: foundHeaders){
+            System.out.println(header.getName());
+        }
+
+        System.out.println();
+        System.out.println("============ MISSING DO HEADERS ==============");
+        for (Eheader header : missingDoHeaders){
+            System.out.println(header.getName());
+        }
+
+        System.out.println();
+        System.out.println("============ DONT HEADERS ==============");
+        for (Eheader header : foundDontHeaders){
+            System.out.println(header.getName());
+        }
+
+        System.out.println();
     }
 
-    public void organiseEntityHeaders() {
-        entityHeaders.forEach(eheader -> {
-            eheader.getValues().forEach(evalue -> {
-                if(evalue.getCategory().getName()== "do") {
-                    entityDoHeaders.add(eheader);
-                }
-                else if (evalue.getCategory().getName() == "dont") {
-                    entityDontHeaders.add(eheader);
-                }
-                else if(evalue.getCategory().getName() == "recommendation"){
-                    entityRecHeaders.add(eheader);
-                }
-            });
-        });
-    }
+    private Set<Eheader> detectMissingDoHeaders(){
+        Set<Eheader> missingDoHeaders = new HashSet<>();
+        boolean found;
 
-    public void organiseFoundHeaders() {
-        foundHeaders.forEach(eheader -> {
-            if (entityDoHeaders.contains(eheader)) {
-                foundDoHeaders.add(eheader);
-            } else if (entityDontHeaders.contains(eheader)) {
-                foundDontHeaders.add(eheader);
-            } else if (entityRecHeaders.contains(eheader)) {
-                foundRecHeaders.add(eheader);
+        for (Eheader doHeader: databaseDoHeaders){
+            found = false;
+
+            for (Eheader foundHeader: foundHeaders){
+                if (doHeader.getName().equals(foundHeader.getName())){
+                    found = true;
+                }
             }
-        });
+
+            if (!found){
+                missingDoHeaders.add(doHeader);
+            }
+        }
+
+        return missingDoHeaders;
     }
 
-    public Set<Eheader> getFoundDoHeaders() {
-        return foundDoHeaders;
-    }
+    private Set<Eheader> detectDontHeaders(){
+        Set<Eheader> foundDontHeaders = new HashSet<>();
+        boolean found;
 
-    public Set<Eheader> getFoundDontHeaders() {
+        for (Eheader dontHeader: databaseDontHeaders){
+
+            for (Eheader foundHeader: foundHeaders){
+                if (dontHeader.getName().equals(foundHeader.getName())){
+                    foundDontHeaders.add(dontHeader);
+                    break;
+                }
+            }
+        }
+
         return foundDontHeaders;
     }
 
-    public Set<Eheader> getFoundRecHeaders() {
-        return foundRecHeaders;
+    public void organiseEntityHeaders(Iterable<Eheader> entityHeaders) {
+        entityHeaders.forEach(eheader -> {
+            eheader.getValues().forEach(evalue -> {
+                if(evalue.getCategory().getName().equals("do")) {
+                    databaseDoHeaders.add(eheader);
+                }
+                else if (evalue.getCategory().getName().equals("dont")) {
+                    databaseDontHeaders.add(eheader);
+                }
+                else if(evalue.getCategory().getName().equals("recommendation")){
+                    databaseRecHeaders.add(eheader);
+                }
+            });
+        });
+
+
     }
 }
