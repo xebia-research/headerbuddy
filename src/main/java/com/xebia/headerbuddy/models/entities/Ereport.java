@@ -1,7 +1,5 @@
 package com.xebia.headerbuddy.models.entities;
 
-import com.google.api.client.util.DateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -13,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -24,7 +23,7 @@ public class Ereport {
     private int id;
     @NotNull
     @Column(columnDefinition = "DATETIME")
-    private DateTime date;
+    private Date date;
 
     //Relations
     @ManyToMany
@@ -44,11 +43,11 @@ public class Ereport {
         this.id = id;
     }
 
-    public DateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(DateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
