@@ -1,13 +1,12 @@
 package com.xebia.headerbuddy.models.entities;
 
-import com.google.api.client.util.DateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -22,7 +21,7 @@ public class Euser {
     //Relations
     @NotNull
     @Column(columnDefinition = "DATETIME")
-    private DateTime creationdate;
+    private Date creationdate;
     @OneToMany(mappedBy = "user")
     private Set<Ereport> reports;
 
@@ -57,11 +56,11 @@ public class Euser {
         this.email = email;
     }
 
-    public DateTime getCreationdate() {
+    public Date getCreationdate() {
         return creationdate;
     }
 
-    public void setCreationdate(DateTime creationdate) {
+    public void setCreationdate(Date creationdate) {
         this.creationdate = creationdate;
     }
 

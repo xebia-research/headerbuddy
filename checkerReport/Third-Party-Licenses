@@ -1,5 +1,5 @@
 
-Lists of 146 third-party dependencies.
+Lists of 149 third-party dependencies.
      (BSD License) AntLR Parser Generator (antlr:antlr:2.7.7 - http://www.antlr.org/)
      (Public Domain) AOP alliance (aopalliance:aopalliance:1.0 - http://aopalliance.sourceforge.net)
      (Eclipse Public License - v 1.0) (GNU Lesser General Public License) Logback Classic Module (ch.qos.logback:logback-classic:1.1.11 - http://logback.qos.ch/logback-classic)
@@ -8,10 +8,12 @@ Lists of 146 third-party dependencies.
      (The Apache Software License, Version 2.0) Jackson-annotations (com.fasterxml.jackson.core:jackson-annotations:2.8.0 - http://github.com/FasterXML/jackson)
      (The Apache Software License, Version 2.0) Jackson-core (com.fasterxml.jackson.core:jackson-core:2.8.10 - https://github.com/FasterXML/jackson-core)
      (The Apache Software License, Version 2.0) jackson-databind (com.fasterxml.jackson.core:jackson-databind:2.8.10 - http://github.com/FasterXML/jackson)
+     (The Apache Software License, Version 2.0) Jackson-dataformat-XML (com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.8.10 - http://wiki.fasterxml.com/JacksonExtensionXmlDataBinding)
      (The Apache Software License, Version 2.0) Jackson datatype: Guava (com.fasterxml.jackson.datatype:jackson-datatype-guava:2.8.10 - https://github.com/FasterXML/jackson-datatypes-collections)
      (The Apache Software License, Version 2.0) Jackson-JAXRS-base (com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:2.8.10 - http://github.com/FasterXML/jackson-jaxrs-providers/jackson-jaxrs-base)
      (The Apache Software License, Version 2.0) Jackson-JAXRS-JSON (com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.8.10 - http://github.com/FasterXML/jackson-jaxrs-providers/jackson-jaxrs-json-provider)
      (The Apache Software License, Version 2.0) Jackson module: JAXB-annotations (com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.8.10 - http://github.com/FasterXML/jackson-module-jaxb-annotations)
+     (The Apache License, Version 2.0) Woodstox (com.fasterxml.woodstox:woodstox-core:5.0.3 - https://github.com/FasterXML/woodstox)
      (The Apache Software License, Version 2.0) jffi (com.github.jnr:jffi:1.2.9 - http://github.com/jnr/jffi)
      (The Apache Software License, Version 2.0) jnr-constants (com.github.jnr:jnr-constants:0.8.7 - http://github.com/jnr/jnr-constants)
      (The Apache Software License, Version 2.0) jnr-enxio (com.github.jnr:jnr-enxio:0.9 - http://github.com/jnr/jnr-enxio)
@@ -44,7 +46,7 @@ Lists of 146 third-party dependencies.
      (The Apache Software License, Version 2.0) Bean Validation API (javax.validation:validation-api:1.1.0.Final - http://beanvalidation.org)
      (CDDL 1.1) (GPL2 w/ CPE) javax.ws.rs-api (javax.ws.rs:javax.ws.rs-api:2.0.1 - http://jax-rs-spec.java.net)
      (Eclipse Public License 1.0) JUnit (junit:junit:4.12 - http://junit.org)
-     (The GNU General Public License, Version 2) MySQL Connector/J (mysql:mysql-connector-java:5.1.44 - http://dev.mysql.com/doc/connector-j/en/)
+     (The GNU General Public License, Version 2) MySQL Connector/J (mysql:mysql-connector-java:8.0.8-dmr - http://dev.mysql.com/doc/connector-j/en/)
      (The Apache Software License, Version 2.0) ASM based accessors helper used by json-smart (net.minidev:accessors-smart:1.1 - http://accessors-smart/)
      (The Apache Software License, Version 2.0) JSON Small and Fast Parser (net.minidev:json-smart:2.2.1 - http://www.minidev.net/)
      (The Apache Software License, Version 2.0) Apache Commons Compress (org.apache.commons:commons-compress:1.9 - http://commons.apache.org/proper/commons-compress/)
@@ -74,6 +76,7 @@ Lists of 146 third-party dependencies.
      (The Apache Software License, Version 2.0) Plexus :: Component Annotations (org.codehaus.plexus:plexus-component-annotations:1.5.5 - http://plexus.codehaus.org/plexus-containers/plexus-component-annotations/)
      (The Apache Software License, Version 2.0) Plexus Interpolation API (org.codehaus.plexus:plexus-interpolation:1.21 - http://plexus.codehaus.org/plexus-components/plexus-interpolation)
      (The Apache Software License, Version 2.0) Plexus Common Utilities (org.codehaus.plexus:plexus-utils:3.0.20 - http://plexus.codehaus.org/plexus-utils)
+     (The BSD License) Stax2 API (org.codehaus.woodstox:stax2-api:3.1.4 - http://wiki.fasterxml.com/WoodstoxStax2)
      (Eclipse Public License, Version 1.0) Aether API (org.eclipse.aether:aether-api:1.0.2.v20150114 - http://www.eclipse.org/aether/aether-api/)
      (Eclipse Public License, Version 1.0) Aether Implementation (org.eclipse.aether:aether-impl:1.0.2.v20150114 - http://www.eclipse.org/aether/aether-impl/)
      (Eclipse Public License, Version 1.0) Aether SPI (org.eclipse.aether:aether-spi:1.0.2.v20150114 - http://www.eclipse.org/aether/aether-spi/)
