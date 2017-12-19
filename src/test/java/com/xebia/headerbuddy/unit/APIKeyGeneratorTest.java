@@ -8,13 +8,15 @@ import java.util.regex.Pattern;
 
 public class APIKeyGeneratorTest {
 
+    String APIKey;
+    APIKeyGenerator keyGen = new APIKeyGenerator();
+
     @Test
     public void shouldNotReturnEmptyString(){
         // Arrange
-        String APIKey;
 
         // Act
-        APIKey = APIKeyGenerator.generate();
+        APIKey = keyGen.getKey();
 
         // Assert
         Assert.assertNotEquals("", APIKey);
@@ -23,11 +25,10 @@ public class APIKeyGeneratorTest {
     @Test
     public void shouldReturnStringOfDefinedLength(){
         // Arrange
-        String APIKey;
-        int keyLength = APIKeyGenerator.KEY_LENGTH;
+        int keyLength = keyGen.KEY_LENGTH;
 
         // Act
-        APIKey = APIKeyGenerator.generate();
+        APIKey = keyGen.getKey();
 
         // Assert
         Assert.assertTrue(APIKey.length() == keyLength);
@@ -36,11 +37,10 @@ public class APIKeyGeneratorTest {
     @Test
     public void shouldReturnStringWithoutIllegalCharacters(){
         // Arrange
-        String APIKey;
         String Regex = "(?i)^[a-z0-9]+$";
 
         // Act
-        APIKey = APIKeyGenerator.generate();
+        APIKey = keyGen.getKey();
 
         // Assert
         Assert.assertTrue(Pattern.matches(Regex, APIKey));

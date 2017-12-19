@@ -1,7 +1,6 @@
 package com.xebia.headerbuddy.annotations;
 
 import com.xebia.headerbuddy.annotations.validators.ValidMethodValidator;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import javax.validation.constraints.Pattern;

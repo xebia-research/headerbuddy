@@ -1,27 +1,44 @@
 package com.xebia.headerbuddy.utilities;
 
-import org.apache.commons.lang.StringUtils;
+import com.xebia.headerbuddy.models.entities.Euser;
+import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
 import org.apache.commons.lang.WordUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
-public abstract class APIKeyGenerator {
+@Component
+public class APIKeyGenerator {
 
-    public static final int KEY_LENGTH = 23;
+    @Autowired
+    private EuserRepository userRepository;
 
-    public static final String allowedLowercaseChars = "abcdefghijklmnopqrstuvwxyz";
-    public static final String allowedUppercaseChars = WordUtils.capitalize(allowedLowercaseChars);
-    public static final String allowedNumericChars = "0123456789";
+    public final int KEY_LENGTH = 23;
 
-    public static final String allowedChars = allowedLowercaseChars + allowedUppercaseChars + allowedNumericChars;
+    public final String allowedLowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+    public final String allowedUppercaseChars = WordUtils.capitalize(allowedLowercaseChars);
+    public final String allowedNumericChars = "0123456789";
 
-    public static String generate() {
+    public String getKey(){
+        String APIKey = generateKey();
+
+        if(checkDatabaseForExistingKey("abc"))
+            return "ben hier";
+
+        return APIKey;
+    }
+
+    private String generateKey() {
+        // StringBuilder for api key
         StringBuilder keyToReturn = new StringBuilder();
 
-        // Create char array of allowedChars string
+        // Create List of all allowed characters
+        String allowedChars = allowedLowercaseChars + allowedUppercaseChars + allowedNumericChars;
         char[] allowedCharsArray = allowedChars.toCharArray();
-
-        // Convert charArray to List
         List<Character> allowedCharsList = toCharList(allowedCharsArray);
 
         // Shuffle list
@@ -31,23 +48,23 @@ public abstract class APIKeyGenerator {
         Random random = new Random();
 
         for (int i = 0; i < KEY_LENGTH; i++){
-            // Get random index
+            // Add a random character to the key
             int randomIndex = random.nextInt(allowedCharsList.size());
-
-            // Fetch character
             char toAdd = allowedCharsList.get(randomIndex);
-
-            // add character to key
             keyToReturn.append(toAdd);
         }
-
-        System.out.println(keyToReturn);
 
         return keyToReturn.toString();
     }
 
-    private static List<Character> toCharList(char[] charArray){
-        // Convert to List
+    private boolean checkDatabaseForExistingKey(String apiKey){
+        Iterable<Euser> users = userRepository.findUserByEmail("a@a.a");
+
+        return true;
+    }
+
+    private List<Character> toCharList(char[] charArray){
+        // Convert CharArray to List
         List<Character> charList = new ArrayList<>();
         for(char c : charArray){
             charList.add(c);

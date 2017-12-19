@@ -1,12 +1,12 @@
 package com.xebia.headerbuddy.models.entities;
 
-import com.google.api.client.util.DateTime;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.Column;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -21,11 +21,28 @@ public class Euser {
     //Relations
     @NotNull
     @Column(columnDefinition = "DATETIME")
-    private DateTime creationdate;
-    @OneToMany(mappedBy="user")
-    public Set<Ereport> reports;
+    private Date creationdate;
+    @OneToMany(mappedBy = "user")
+    private Set<Ereport> reports;
 
-    public String getApikey() { return apikey;}
+    //Constructors
+    public Euser() {
+
+    }
+
+    public Euser(String email) {
+        this("", email);
+    }
+
+    public Euser(String apikey, String email) {
+        this.apikey = apikey;
+        this.email = email;
+    }
+
+    //Getters and Setters
+    public String getApikey() {
+        return apikey;
+    }
 
     public void setApikey(String apikey) {
         this.apikey = apikey;
@@ -39,11 +56,20 @@ public class Euser {
         this.email = email;
     }
 
-    public DateTime getCreationdate() {
+    public Date getCreationdate() {
         return creationdate;
     }
 
-    public void setCreationdate(DateTime creationdate) {
+    public void setCreationdate(Date creationdate) {
         this.creationdate = creationdate;
     }
+
+    public Set<Ereport> getReports() {
+        return reports;
+    }
+
+    public void setReports(Set<Ereport> reports) {
+        this.reports = reports;
+    }
+
 }

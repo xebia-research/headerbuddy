@@ -1,6 +1,5 @@
 package com.xebia.headerbuddy.controllers;
 
-
 import com.xebia.headerbuddy.annotations.ValidAPIKey;
 import com.xebia.headerbuddy.annotations.ValidMethod;
 import com.xebia.headerbuddy.annotations.ValidURL;
@@ -41,7 +40,7 @@ public class HeaderBuddyController {
                 this.report.addHeaders(headers);
                 this.report.addMethod(methodInParameter);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Message: " + e.getMessage());
         }
 
@@ -50,6 +49,6 @@ public class HeaderBuddyController {
 
     @RequestMapping("/headerbuddy/key")
     public String requestApiKey(){
-        return APIKeyGenerator.generate();
+        return new APIKeyGenerator().getKey();
     }
 }
