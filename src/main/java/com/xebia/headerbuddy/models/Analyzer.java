@@ -1,18 +1,11 @@
 package com.xebia.headerbuddy.models;
 
-import com.xebia.headerbuddy.models.entities.Ecategory;
 import com.xebia.headerbuddy.models.entities.Eheader;
-import com.xebia.headerbuddy.models.entities.Evalue;
 import com.xebia.headerbuddy.models.entities.repositories.EheaderRepository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class Analyzer {
 
-    private EheaderRepository headerRepository; //The header database.
     private Set<Eheader> foundHeaders; //The headers from the url.
     private Set<Eheader> foundDoHeaders; //Do rapport.
     private Set<Eheader> foundDontHeaders; //Don't rapport.
@@ -23,7 +16,6 @@ public class Analyzer {
     private Iterable<Eheader> entityHeaders; //Database defined headers.
 
     public Analyzer(Set<Eheader> foundHeaders, EheaderRepository headerRepository) {
-        this.headerRepository = headerRepository;
         entityHeaders = headerRepository.findAll();
         this.foundHeaders = foundHeaders;
 
