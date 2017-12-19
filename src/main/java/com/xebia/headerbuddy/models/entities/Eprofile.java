@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToMany;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -20,8 +22,22 @@ public class Eprofile {
     private String name;
 
     //Relations
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Eheader> headers;
+
+    //Constructors
+    public Eprofile() {
+
+    }
+
+    public Eprofile(String name){
+        this.name = name;
+    }
+
+    public Eprofile(String name, Set<Eheader> headers) {
+        this.name = name;
+        this.headers = headers;
+    }
 
     //Getters and Setters
     public Integer getId() {

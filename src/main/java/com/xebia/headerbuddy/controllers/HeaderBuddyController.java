@@ -1,6 +1,5 @@
 package com.xebia.headerbuddy.controllers;
 
-
 import com.xebia.headerbuddy.annotations.ValidAPIKey;
 import com.xebia.headerbuddy.annotations.ValidMethod;
 import com.xebia.headerbuddy.annotations.ValidOutput;

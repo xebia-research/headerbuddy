@@ -66,6 +66,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.8-dmr</version>
         </dependency>
     </dependencies>
 
@@ -125,7 +126,7 @@
                 <version>3.0.5</version>
                 <configuration>
                     <effort>Max</effort>
-                    <threshold>Low</threshold>
+                    <threshold>med</threshold>
                     <xmlOutput>true</xmlOutput>
                     <excludeFilterFile>/checkerRules/findbugs_exclude.xml</excludeFilterFile>
                 </configuration>
