@@ -31,28 +31,28 @@ public class HeaderBuddyUrlParamTest {
     //Test for checking if the url validator works
     @Test
     public void HeaderBuddyURLTest() throws Exception {
-        this.mvc.perform(get("/headerbuddy/api?key=123&url="+urlNoExtension).accept(MediaType.APPLICATION_JSON))
+        this.mvc.perform(get("/headerbuddy/api?key=123&url="+urlNoExtension))
                 //response is status code 400
                 .andExpect(status().isBadRequest())
                 //expected response type is json
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 //expected url in the url field is the tested url
                 .andExpect(jsonPath("$.error").value("Invalid URL!"));
-        this.mvc.perform(get("/headerbuddy/api?key=123&url="+urlNoProtocol).accept(MediaType.APPLICATION_JSON))
+        this.mvc.perform(get("/headerbuddy/api?key=123&url="+urlNoProtocol))
                 //response is status code 400
                 .andExpect(status().isBadRequest())
                 //expected response type is json
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 //expected url in the url field is the tested url
                 .andExpect(jsonPath("$.error").value("Invalid URL!"));
-        this.mvc.perform(get("/headerbuddy/api?key=123&url="+urlFullyCorrect).accept(MediaType.APPLICATION_JSON))
+        this.mvc.perform(get("/headerbuddy/api?key=123&url="+urlFullyCorrect))
                 //response is status code 200
                 .andExpect(status().isOk())
                 //expected response type is json
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 //expected url in the url field is the tested url
                 .andExpect(jsonPath("$.url").value(urlFullyCorrect));
-        this.mvc.perform(get("/headerbuddy/api?key=123&url="+urlCorrect).accept(MediaType.APPLICATION_JSON))
+        this.mvc.perform(get("/headerbuddy/api?key=123&url="+urlCorrect))
                 //response is status code 200
                 .andExpect(status().isOk())
                 //expected response type is json

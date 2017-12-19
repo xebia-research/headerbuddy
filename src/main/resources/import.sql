@@ -39,4 +39,4 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("unsafe-u
 INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "It's a good meassure to hide this information to not make it too easy for attackers", 3, 2);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("DENY", "Completely deny loading in frames", 4, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("SAMEORIGIN", "Only load frames from the same page origin", 4, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("ALLOW-FROM", "Only load frammes from whitelisted sources", 4, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("ALLOW-FROM", "Only load frames from whitelisted sources", 4, 1);
