@@ -1,10 +1,13 @@
 package com.xebia.headerbuddy.utilities;
 
 import com.xebia.headerbuddy.models.Header;
-
-import java.util.ArrayList;
+import com.xebia.headerbuddy.models.entities.Eheader;
+import com.xebia.headerbuddy.models.entities.Evalue;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 public class HeaderSerializer {
 
@@ -44,5 +47,20 @@ public class HeaderSerializer {
         values.add(valueString.substring(lastKnown, valueString.length()).trim());
 
         return values;
+    }
+
+    public static Set<Eheader> convertToEHeader(List<Header> headers) {
+
+        Set<Eheader> eHeaders = new HashSet<Eheader>();
+
+        for (Header header : headers) {
+            Set<Evalue> headerValues = new HashSet<Evalue>();
+            for (String value : header.getValues()) {
+                headerValues.add(new Evalue(value));
+            }
+            eHeaders.add(new Eheader(header.getName(), headerValues));
+        }
+
+        return eHeaders;
     }
 }
