@@ -6,7 +6,9 @@ import com.xebia.headerbuddy.annotations.ValidOutput;
 import com.xebia.headerbuddy.annotations.ValidURL;
 import com.xebia.headerbuddy.models.Header;
 import com.xebia.headerbuddy.models.Report;
+import com.xebia.headerbuddy.models.entities.repositories.EheaderRepository;
 import com.xebia.headerbuddy.utilities.MethodHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +20,9 @@ import java.util.List;
 @RestController
 @Validated
 public class HeaderBuddyController {
+
+    @Autowired
+    private EheaderRepository headerRepository;
 
     private Report report;
 
