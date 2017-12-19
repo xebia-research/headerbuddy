@@ -41,6 +41,10 @@ public class Evalue {
 
     }
 
+    public Evalue(String value){
+        this.value = value;
+    }
+
     public Evalue(String value, String description) {
         this.value = value;
         this.description = description;

@@ -1,5 +1,7 @@
 package com.xebia.headerbuddy.models.entities;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -24,6 +26,8 @@ public class Eheader {
     //Relations
     @ManyToMany(mappedBy = "headers", cascade = CascadeType.ALL)
     private Set<Eprofile> profiles;
+    @JacksonXmlElementWrapper(localName = "values")
+    @JacksonXmlProperty(localName = "value")
     @OneToMany(mappedBy = "header")
     private Set<Evalue> values;
 
@@ -36,9 +40,9 @@ public class Eheader {
         this.name = name;
     }
 
-    public Eheader(String name, Set<Eprofile> profiles){
+    public Eheader(String name, Set<Evalue> values){
         this.name = name;
-        this.profiles = profiles;
+        this.values = values;
     }
 
     public Eheader(String name, Set<Eprofile> profiles, Set<Evalue> values) {
