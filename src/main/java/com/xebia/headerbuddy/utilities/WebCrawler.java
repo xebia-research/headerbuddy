@@ -53,25 +53,23 @@ public class Spider {
 
         while(!this.pagesToVisit.isEmpty()) {
             String url = getUrl();
+            try {
+                Document doc = Jsoup.connect(url).get();
+                Elements linksOnPage = doc.select("a[href]");
 
-            Document doc = Jsoup.connect(url).get();
-            Elements linksOnPage = doc.select("a[href]");
-
-            for (Element l : linksOnPage) {
-                try {
+                for (Element l : linksOnPage) {
                     URL uri = new URL(l.absUrl("href"));
 
                     //check for # and /
-                    String lastCharInUri = uri.toString().substring(uri.toString().length() -1, uri.toString().length());
-                    if(lastCharInUri.equals("#") || lastCharInUri.equals("/"))
-                        pagesToVisit.add(uri.toString().substring(0, uri.toString().length() -1));
+                    String lastCharInUri = uri.toString().substring(uri.toString().length() - 1, uri.toString().length());
+                    if (lastCharInUri.equals("#") || lastCharInUri.equals("/"))
+                        pagesToVisit.add(uri.toString().substring(0, uri.toString().length() - 1));
                     else
                         pagesToVisit.add(uri.toString());
-                } catch (Exception e) {
-                    //do nothing
                 }
+            } catch(Exception e){
+                // do nothing
             }
-
         }
     }
 }
