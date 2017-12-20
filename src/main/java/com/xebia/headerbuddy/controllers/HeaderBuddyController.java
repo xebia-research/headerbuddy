@@ -7,6 +7,7 @@ import com.xebia.headerbuddy.annotations.ValidURL;
 import com.xebia.headerbuddy.models.Header;
 import com.xebia.headerbuddy.models.Report;
 import com.xebia.headerbuddy.utilities.MethodHandler;
+import com.xebia.headerbuddy.utilities.WebCrawler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,7 +28,6 @@ public class HeaderBuddyController {
                                               @RequestParam(value = "output", defaultValue = "json", required = false) @ValidOutput String output,
                                               @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
                                               @RequestParam(value = "spider", defaultValue = "false", required = false) boolean spider) throws Exception {
-        // Create Report
         this.report = new Report(url);
 
         try {
@@ -43,5 +43,21 @@ public class HeaderBuddyController {
         }
 
         return new ResponseEntity(this.report, HttpStatus.OK);
+    }
+
+    //
+    // Temporary request for debug purposes
+    //
+    @RequestMapping(value = "/headerbuddy/crawl")
+    public void headerBuddyWebCrawler(@RequestParam(value = "url") @ValidURL String url){
+        WebCrawler s = new WebCrawler(url);
+        try {
+            s.crawl();
+        } catch (Exception e) { }
+
+        System.out.println("---------------");
+        s.getVisitedPages().forEach(t->{
+            System.out.println(t);
+        });
     }
 }

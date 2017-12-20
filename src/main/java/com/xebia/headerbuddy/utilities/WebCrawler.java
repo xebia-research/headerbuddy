@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class Spider {
+public class WebCrawler {
 
     //unique set
     private Set<String> pagesVisited = new HashSet<String>();
@@ -20,7 +20,7 @@ public class Spider {
     //starting domain
     private String startUrl;
 
-    public Spider(String startUrl) {
+    public WebCrawler(String startUrl) {
         this.pagesToVisit.add(startUrl);
         this.startUrl = startUrl;
     }
@@ -59,6 +59,9 @@ public class Spider {
 
                 for (Element l : linksOnPage) {
                     URL uri = new URL(l.absUrl("href"));
+
+                    // Debug purposes
+                    System.out.println(uri.toString());
 
                     //check for # and /
                     String lastCharInUri = uri.toString().substring(uri.toString().length() - 1, uri.toString().length());
