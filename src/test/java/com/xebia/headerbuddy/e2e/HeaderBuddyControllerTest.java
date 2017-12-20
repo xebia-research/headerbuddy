@@ -1,7 +1,7 @@
 package com.xebia.headerbuddy.e2e;
 
 import com.xebia.headerbuddy.controllers.HeaderBuddyController;
-import com.xebia.headerbuddy.models.entities.repositories.EheaderRepository;
+import com.xebia.headerbuddy.models.entities.repositories.EvalueRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class HeaderBuddyControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private EheaderRepository headerRepository;
+    private EvalueRepository valueRepository;
 
     private String testedUrl = "http://andonoz.com";
 

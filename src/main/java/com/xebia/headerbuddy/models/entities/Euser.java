@@ -1,5 +1,7 @@
 package com.xebia.headerbuddy.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -13,15 +15,19 @@ import java.util.Set;
 @Table(name = "user")
 public class Euser {
 
+    @JsonIgnore
     @Id
     private String apikey;
     @NotNull
     private String email;
 
     //Relations
+    @JsonIgnore
     @NotNull
     @Column(columnDefinition = "DATETIME")
     private Date creationdate;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<Ereport> reports;
 

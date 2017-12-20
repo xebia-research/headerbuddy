@@ -7,10 +7,12 @@ import com.xebia.headerbuddy.annotations.ValidURL;
 import com.xebia.headerbuddy.models.Analyzer;
 import com.xebia.headerbuddy.models.Header;
 import com.xebia.headerbuddy.models.Report;
-import com.xebia.headerbuddy.models.entities.Eheader;
-import com.xebia.headerbuddy.utilities.HeaderSerializer;
-import com.xebia.headerbuddy.models.entities.repositories.EheaderRepository;
+import com.xebia.headerbuddy.models.entities.Ereport;
+import com.xebia.headerbuddy.models.entities.Euser;
+import com.xebia.headerbuddy.models.entities.Evalue;
+import com.xebia.headerbuddy.models.entities.repositories.EvalueRepository;
 import com.xebia.headerbuddy.utilities.MethodHandler;
+import com.xebia.headerbuddy.utilities.ValueSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,7 @@ import java.util.Set;
 public class HeaderBuddyController {
 
     @Autowired
-    private EheaderRepository headerRepository;
+    private EvalueRepository valueRepository;
 
     private Report report;
 
@@ -57,10 +59,10 @@ public class HeaderBuddyController {
     //Test, needs to be removed before merge with develop
     @RequestMapping(value = "/test")
     public ResponseEntity test(@RequestParam(value = "url", required = true) @ValidURL String url,
-                                    @RequestParam(value = "key", required = true) @ValidAPIKey String key,
-                                    @RequestParam(value = "output", defaultValue = "json", required = false) @ValidOutput String output,
-                                    @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
-                                    @RequestParam(value = "spider", defaultValue = "false", required = false) boolean spider) throws Exception {
+                        @RequestParam(value = "key", required = true) @ValidAPIKey String key,
+                        @RequestParam(value = "output", defaultValue = "json", required = false) @ValidOutput String output,
+                        @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
+                        @RequestParam(value = "spider", defaultValue = "false", required = false) boolean spider) throws Exception {
         // Create Report
         this.report = new Report(url);
 
@@ -76,8 +78,13 @@ public class HeaderBuddyController {
         } catch (Exception e) {
             System.out.println("Message: " + e.getMessage());
         }
-        Set<Eheader> foundEheaders = HeaderSerializer.convertToEHeader(report.getHeaders());
-        Analyzer analyzer = new Analyzer(foundEheaders, headerRepository);
-        return new ResponseEntity(analyzer, HttpStatus.OK);
+
+        Set<Evalue> foundValues = ValueSerializer.convertToEvalue(report.getHeaders());
+        Analyzer analyzer = new Analyzer(foundValues, valueRepository.findAll());
+
+        Euser user = new Euser("12345", "test@gmail.com");
+
+        Ereport reporte = analyzer.analyseHeaders(user);
+        return new ResponseEntity(reporte, HttpStatus.OK);
     }
 }

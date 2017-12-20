@@ -1,5 +1,6 @@
 package com.xebia.headerbuddy.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ import java.util.Set;
 @Entity
 @Table(name = "header")
 public class Eheader {
-
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -24,10 +25,11 @@ public class Eheader {
     private String name;
 
     //Relations
+    @JsonIgnore
     @ManyToMany(mappedBy = "headers", cascade = CascadeType.ALL)
     private Set<Eprofile> profiles;
-    @JacksonXmlElementWrapper(localName = "values")
-    @JacksonXmlProperty(localName = "value")
+
+    @JsonIgnore
     @OneToMany(mappedBy = "header")
     private Set<Evalue> values;
 

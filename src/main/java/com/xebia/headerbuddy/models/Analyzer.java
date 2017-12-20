@@ -1,163 +1,177 @@
 package com.xebia.headerbuddy.models;
 
-import com.xebia.headerbuddy.models.entities.Eheader;
+import com.xebia.headerbuddy.models.entities.Ereport;
+import com.xebia.headerbuddy.models.entities.Euser;
 import com.xebia.headerbuddy.models.entities.Evalue;
-import com.xebia.headerbuddy.models.entities.repositories.EheaderRepository;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Analyzer {
 
-    private Set<Eheader> foundHeaders; //The headers from the url.
-    private Set<Eheader> databaseDoHeaders; //Database do headers.
-    private Set<Eheader> databaseDontHeaders; //Database don't headers.
-    private Set<Eheader> databaseRecHeaders; //Database recommended headers.
+    private Set<Evalue> foundValues;
+    private Set<Evalue> databaseDoValues; //Database do headers.
+    private Set<Evalue> databaseDontValues; //Database don't headers.
+    private Set<Evalue> databaseRecValues; //Database recommended headers.
 
-    private Set<Eheader> missingDoHeaders;
-    private Set<Eheader> foundDoHeaders; //Needed for second analyse
-    private Set<Eheader> foundDontHeaders;
-    private Set<Eheader> recommendedHeaders;
+    private Set<Evalue> missingDoValues;
+    private Set<Evalue> foundDoValues;
+    private Set<Evalue> foundDontValues;
+    private Set<Evalue> foundRecValues;
 
-    public Analyzer(Set<Eheader> foundHeaders, EheaderRepository headerRepository) {
-        databaseDoHeaders = new HashSet<>();
-        databaseDontHeaders = new HashSet<>();
-        databaseRecHeaders = new HashSet<>();
-        foundDoHeaders = new HashSet<>();
+    public Analyzer(Set<Evalue> foundValues, Iterable<Evalue> databaseHeaderValues) {
+        databaseDoValues = new HashSet<>();
+        databaseDontValues = new HashSet<>();
+        databaseRecValues = new HashSet<>();
 
-        this.foundHeaders = foundHeaders;
+        this.foundValues = foundValues;
+        organiseValuesByCategory(databaseHeaderValues);
 
-        organiseEntityHeaders(headerRepository.findAll());
-        missingDoHeaders = detectMissingDoHeaders();
-        foundDontHeaders = detectDontHeaders();
-        recommendedHeaders = detectRecommandations(foundDoHeaders);
+        // =================================================
+        // ============== Printing out data ================
+        // =================================================
+//        System.out.println("========= Found values ============");
+//        for (Evalue value: foundValues){
+//            System.out.println("Value: " + value.getValue() + ", Header: " + value.getHeader().getName());
+//        }
+//
+//        System.out.println("========= Database Do values ============");
+//        for (Evalue value: databaseDoValues){
+//            System.out.println("Value: " + value.getValue() + ", Header: " + value.getHeader().getName() + ", Category: " + value.getCategory().getName());
+//        }
+//
+//        System.out.println("========= Database Don't values ============");
+//        for (Evalue value: databaseDontValues){
+//            System.out.println("Value: " + value.getValue() + ", Header: " + value.getHeader().getName() + ", Category: " + value.getCategory().getName());
+//        }
+//
+//        System.out.println("========= Database Rec values ============");
+//        for (Evalue value: databaseRecValues){
+//            System.out.println("Value: " + value.getValue() + ", Header: " + value.getHeader().getName() + ", Category: " + value.getCategory().getName());
+//        }
+//
+//        System.out.println();
+//        System.out.println("========= Missing Do values ============");
+//        for (Evalue value: missingDoValues){
+//            System.out.println("Header: " + value.getHeader().getName() + ", Category: " + value.getCategory().getName());
+//        }
+//
+//        System.out.println("========= Found Do values ============");
+//        for (Evalue value: foundDoValues){
+//            System.out.println("Value: " + value.getValue() + ", Header: " + value.getHeader().getName());
+//        }
+//
+//        System.out.println("========= Found Don't values ============");
+//        for (Evalue value: foundDontValues){
+//            System.out.println("Header: " + value.getHeader().getName());
+//        }
+//
+//        System.out.println("========= Found Rec values ============");
+//        for (Evalue value: foundRecValues){
+//            System.out.println("Value: " + value.getValue() + ", of header: " + value.getHeader().getName() + ", Description: " + value.getDescription());
+//        }
 
-
-        System.out.println("========= Found headers ============");
-        for (Eheader header: foundHeaders){
-            System.out.println(header.getName());
-        }
-
-        System.out.println();
-        System.out.println("============ MISSING DO HEADERS ==============");
-        for (Eheader header : missingDoHeaders){
-            System.out.println(header.getName());
-        }
-
-        System.out.println();
-        System.out.println("============ FOUND DO HEADERS ==============");
-        for (Eheader header : foundDoHeaders){
-            System.out.println(header.getName());
-            for (Evalue value : header.getValues()){
-                System.out.println("    " + value.getValue());
-            }
-        }
-
-        System.out.println();
-        System.out.println("============ DONT HEADERS ==============");
-        for (Eheader header : foundDontHeaders){
-            System.out.println(header.getName());
-        }
-
-        System.out.println();
-        System.out.println("============ REC HEADERS VALUE ==============");
-        for (Eheader header : recommendedHeaders){
-            for (Evalue value : header.getValues()){
-                System.out.println(value.getValue());
-                System.out.println(value.getDescription());
-            }
-        }
-
-        System.out.println();
     }
 
-    private Set<Eheader> detectMissingDoHeaders(){
-        Set<Eheader> missingDoHeaders = new HashSet<>();
-        boolean found;
+    //This method does the analyses
+    public Ereport analyseHeaders(Euser user){
+        missingDoValues = detectMissingDoHeaders(foundValues, databaseDoValues);
+        foundDoValues = detectDoHeaders(foundValues, databaseDoValues);
+        foundDontValues = detectDontHeaders(foundValues, databaseDontValues);
+        foundRecValues = detectRecHeaders(foundDoValues, databaseRecValues);
 
-        for (Eheader doHeader: databaseDoHeaders){
-            found = false;
+        //Create one set with all values needed for report
+        Set<Evalue> reportValues = new HashSet<>();
+        reportValues.addAll(missingDoValues);
+        reportValues.addAll(foundDontValues);
+        reportValues.addAll(foundRecValues);
 
-            for (Eheader foundHeader: foundHeaders){
-                if (doHeader.getName().equals(foundHeader.getName())){
-                    foundDoHeaders.add(foundHeader); // Add to list for second analyses
+
+        Ereport report = new Ereport(user, reportValues);
+
+        return report;
+    }
+
+    private Set<Evalue> detectMissingDoHeaders(Set<Evalue> toAnalyseValues, Set<Evalue> doValues){
+        Set<Evalue> missingDoValues = new HashSet<>();
+
+        for (Evalue doValue : doValues){
+            boolean found = false;
+
+            for (Evalue analyseValue : toAnalyseValues){
+
+                if (analyseValue.getHeader().getName().equals(doValue.getHeader().getName())){
                     found = true;
+                    break;
                 }
             }
 
             if (!found){
-                missingDoHeaders.add(doHeader);
+                missingDoValues.add(doValue);
             }
         }
 
-        return missingDoHeaders;
+        return missingDoValues;
     }
 
-    private Set<Eheader> detectDontHeaders(){
-        Set<Eheader> foundDontHeaders = new HashSet<>();
+    private Set<Evalue> detectDoHeaders(Set<Evalue> toAnalyseValues, Set<Evalue> doValues){
+        Set<Evalue> foundDoValues = new HashSet<>();
 
-        for (Eheader dontHeader: databaseDontHeaders){
+        for (Evalue analyseValue : toAnalyseValues){
+            for (Evalue doValue : doValues){
 
-            for (Eheader foundHeader: foundHeaders){
-                if (dontHeader.getName().equals(foundHeader.getName())){
-                    foundDontHeaders.add(dontHeader);
+                if(analyseValue.getHeader().getName().equals(doValue.getHeader().getName())){
+                    foundDoValues.add(analyseValue);
                     break;
                 }
             }
         }
 
-        return foundDontHeaders;
+        return foundDoValues;
     }
 
-    private Set<Eheader> detectRecommandations(Set<Eheader> headers){
-        Set<Eheader> recHeaders = new HashSet<>();
+    private Set<Evalue> detectDontHeaders(Set<Evalue> toAnalyseValues, Set<Evalue> dontValues){
+        Set<Evalue> foundDontValues = new HashSet<>();
 
-        System.out.println("========== TEST ===============");
-        //TEST
-        for (Eheader testh : databaseRecHeaders){
-            for (Evalue testv : testh.getValues()){
-                System.out.println(testv.getValue() + ", header: " + testv.getHeader().getName() + ", cat: " + testv.getCategory().getName());
-            }
-        }
-        System.out.println("========== TEST END ===============");
+        for (Evalue analyseValue : toAnalyseValues){
+            for (Evalue dontValue : dontValues){
 
-
-        for (Eheader header : headers){
-            for (Eheader recHeader : databaseRecHeaders){
-                if (header.getName().equals(recHeader.getName())){ //Found recommended header
-                    System.out.println("We need to analyse: " + header.getName());
-
-                    for (Evalue value : header.getValues()){
-                        System.out.println("Value: " + value.getValue());
-
-                        for (Evalue recvalue : recHeader.getValues()){
-                            if (value.getValue().equals(recvalue.getValue())){
-                                System.out.println("Found same value: " + recvalue.getValue());
-                                recHeaders.add(recHeader);
-                            }
-                        }
-                    }
+                if (analyseValue.getHeader().getName().equals(dontValue.getHeader().getName())){
+                    foundDontValues.add(dontValue);
+                    break;
                 }
             }
         }
 
-        return recHeaders;
+        return foundDontValues;
     }
 
-    private void organiseEntityHeaders(Iterable<Eheader> entityHeaders) {
-        entityHeaders.forEach(eheader -> {
-            eheader.getValues().forEach(evalue -> {
-                if(evalue.getCategory().getName().equals("do")) {
-                    databaseDoHeaders.add(eheader);
-                }
-                else if (evalue.getCategory().getName().equals("dont")) {
-                    databaseDontHeaders.add(eheader);
-                }
-                else if(evalue.getCategory().getName().equals("recommendation")){
-                    databaseRecHeaders.add(eheader);
-                }
-            });
-        });
+    private Set<Evalue> detectRecHeaders(Set<Evalue> toAnalyseValues, Set<Evalue> recValues){
+        Set<Evalue> foundRecValues = new HashSet<>();
 
+        for (Evalue analyseValue : toAnalyseValues){
+            for (Evalue recValue : recValues){
 
+                //Header and value needs to be the same
+                if(analyseValue.getHeader().getName().equals(recValue.getHeader().getName()) && analyseValue.getValue().equals(recValue.getValue())){
+                   foundRecValues.add(recValue);
+                   break;
+                }
+            }
+        }
+
+        return foundRecValues;
     }
+
+    private void organiseValuesByCategory(Iterable<Evalue> values){
+        for (Evalue value : values){
+            if (value.getCategory().getName().equals("do")){
+                databaseDoValues.add(value);
+            } else if (value.getCategory().getName().equals("dont")){
+                databaseDontValues.add(value);
+            } else if (value.getCategory().getName().equals("recommendation")){
+                databaseRecValues.add(value);
+            }
+        }
+    }
+
 }

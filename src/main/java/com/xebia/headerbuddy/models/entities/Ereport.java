@@ -1,16 +1,11 @@
 package com.xebia.headerbuddy.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Column;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
 import java.util.Set;
 
@@ -20,19 +15,34 @@ public class Ereport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private int id;
     @NotNull
     @Column(columnDefinition = "DATETIME")
     private Date date;
 
     //Relations
-    @ManyToMany
-    private Set<Evalue> values;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Euser user;
+
+    @ManyToMany
+    private Set<Evalue> values;
+
     @OneToMany(mappedBy = "report")
+    @JsonIgnore
     private Set<Eurl> urls;
+
+    //Constructors
+    public Ereport(){
+
+    }
+
+    public Ereport(Euser user, Set<Evalue> values){
+        date = new Date();
+        this.user = user;
+        this.values = values;
+    }
 
     //Getters and Setters
     public int getId() {
