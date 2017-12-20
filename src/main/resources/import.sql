@@ -11,9 +11,7 @@ INSERT INTO header (name) VALUES ("Content-Security-Policy");
 INSERT INTO header (name) VALUES ("Referrer-Policy");
 INSERT INTO header (name) VALUES ("Server");
 INSERT INTO header (name) VALUES ("X-Frame-Options");
-INSERT INTO header (name) VALUES ("");
-INSERT INTO header (name) VALUES ("");
-INSERT INTO header (name) VALUES ("");
+INSERT INTO header (name) VALUES ("Strict-Transport-Security");
 
 # ========================================
 # =========== Headerprofiles =============
@@ -25,8 +23,6 @@ INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 2);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 3);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 4);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 5);
-INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 6);
-INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 7);
 
 # =========== Mobileprofiles =============
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 1);
@@ -64,3 +60,6 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "It'
 INSERT INTO value (value, description, header_id, category_id) VALUES ("DENY", "Completely deny loading in frames", 4, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("SAMEORIGIN", "Only load frames from the same page origin", 4, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("ALLOW-FROM", "Only load frames from whitelisted sources", 4, 1);
+
+# =========== Strict-Transport-Security =============
+INSERT INTO value (value, description, header_id, category_id) VALUES ("max-age=", "The time, in seconds, that the browser should remember that a site is only to be accessed using HTTPS.", 5, 1);
