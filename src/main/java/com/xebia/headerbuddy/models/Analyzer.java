@@ -13,6 +13,7 @@ public class Analyzer {
     private Set<Eheader> databaseRecHeaders; //Database recommended headers.
 
     private Set<Eheader> missingDoHeaders;
+    private Set<Eheader> foundDoHeaders; //Needed for second analyse
     private Set<Eheader> foundDontHeaders;
 
     public Analyzer(Set<Eheader> foundHeaders, EheaderRepository headerRepository) {
@@ -26,6 +27,10 @@ public class Analyzer {
         missingDoHeaders = detectMissingDoHeaders();
         foundDontHeaders = detectDontHeaders();
 
+        //Separate DoHeaders from missingDoHeaders -> Needed for second analyse
+        foundDoHeaders = databaseDoHeaders;
+        foundDoHeaders.removeAll(missingDoHeaders);
+
         System.out.println("========= Found headers ============");
         for (Eheader header: foundHeaders){
             System.out.println(header.getName());
@@ -34,6 +39,12 @@ public class Analyzer {
         System.out.println();
         System.out.println("============ MISSING DO HEADERS ==============");
         for (Eheader header : missingDoHeaders){
+            System.out.println(header.getName());
+        }
+
+        System.out.println();
+        System.out.println("============ FOUND DO HEADERS ==============");
+        for (Eheader header : foundDoHeaders){
             System.out.println(header.getName());
         }
 
@@ -69,7 +80,6 @@ public class Analyzer {
 
     private Set<Eheader> detectDontHeaders(){
         Set<Eheader> foundDontHeaders = new HashSet<>();
-        boolean found;
 
         for (Eheader dontHeader: databaseDontHeaders){
 
