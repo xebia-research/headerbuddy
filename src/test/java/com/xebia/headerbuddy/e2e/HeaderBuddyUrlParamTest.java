@@ -1,31 +1,29 @@
 package com.xebia.headerbuddy.e2e;
 
-import com.xebia.headerbuddy.controllers.HeaderBuddyController;
+import com.xebia.headerbuddy.models.entities.Euser;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//so the annotations won't be ignored
+import java.util.Date;
+
+// for the annotations
 @RunWith(SpringRunner.class)
-//auto-configure the Spring MVC infrastructure and limit the scanned beans this is purely for the main controller(s)
-@WebMvcTest(HeaderBuddyController.class)
+// Run spring on a random port
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class HeaderBuddyUrlParamTest {
 
-    //auto injects the class
     @Autowired
-    private MockMvc mvc;
-
-    @MockBean
+    private TestRestTemplate template;
+    @Autowired
     private EuserRepository userRepository;
 
     private String urlNoExtension = "http://andonoz";
@@ -33,36 +31,47 @@ public class HeaderBuddyUrlParamTest {
     private String urlFullyCorrect = "http://www.andonoz.com";
     private String urlCorrect = "http://www.andonoz.com";
 
-    //Test for checking if the url validator works
+    // Get the random port spring is running on
+    @Value("${local.server.port}")
+    private int port;
+
+    // Add the user for the api key
+    @Before
+    public void init(){
+        Euser u = new Euser("abc", "m@m.nl");
+        u.setCreationdate(new Date());
+        userRepository.save(u);
+    }
+
     @Test
-    public void HeaderBuddyURLTest() throws Exception {
-        this.mvc.perform(get("/headerbuddy/api?key=123&url="+urlNoExtension))
-                //response is status code 400
-                .andExpect(status().isBadRequest())
-                //expected response type is json
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                //expected url in the url field is the tested url
-                .andExpect(jsonPath("$.error").value("Invalid URL!"));
-        this.mvc.perform(get("/headerbuddy/api?key=123&url="+urlNoProtocol))
-                //response is status code 400
-                .andExpect(status().isBadRequest())
-                //expected response type is json
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                //expected url in the url field is the tested url
-                .andExpect(jsonPath("$.error").value("Invalid URL!"));
-        this.mvc.perform(get("/headerbuddy/api?key=123&url="+urlFullyCorrect))
-                //response is status code 200
-                .andExpect(status().isOk())
-                //expected response type is json
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                //expected url in the url field is the tested url
-                .andExpect(jsonPath("$.url").value(urlFullyCorrect));
-        this.mvc.perform(get("/headerbuddy/api?key=123&url="+urlCorrect))
-                //response is status code 200
-                .andExpect(status().isOk())
-                //expected response type is json
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                //expected url in the url field is the tested url
-                .andExpect(jsonPath("$.url").value(urlCorrect));
+    public void HeaderBuddyURLNoExtensionTest() {
+        String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlNoExtension;
+
+        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        Assert.assertTrue("Response code should be 400 (No extension)", response.getStatusCode().is4xxClientError());
+    }
+
+    @Test
+    public void HeaderBuddyURLNoProtocolTest() {
+        String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlNoProtocol;
+
+        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        Assert.assertTrue("Response code should be 400 (No protocol)", response.getStatusCode().is4xxClientError());
+    }
+
+    @Test
+    public void HeaderBuddyURLFullyCorrectTest() {
+        String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlFullyCorrect;
+
+        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        Assert.assertTrue("Response code should be 200 (Fully correct url)", response.getStatusCode().is2xxSuccessful());
+    }
+
+    @Test
+    public void HeaderBuddyURLCorrectTest() {
+        String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlCorrect;
+
+        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        Assert.assertTrue("Response code should be 200 (Correct url)", response.getStatusCode().is2xxSuccessful());
     }
 }
