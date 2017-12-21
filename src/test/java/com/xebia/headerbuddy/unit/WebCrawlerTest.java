@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class WebCrawlerTest {
 
-    private String targetUrl = "https://www.google.com/";
+    private String targetUrl = "http://www.example.exam.ple/";
     private WebCrawler crawler = new WebCrawler(targetUrl);
 
     @Test
