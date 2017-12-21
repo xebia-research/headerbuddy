@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 @RestController
@@ -23,10 +24,10 @@ public class HeaderBuddyController {
 
     @RequestMapping(value = "/headerbuddy/api")
     public ResponseEntity headerBuddy(@RequestParam(value = "url", required = true) @ValidURL String url,
-                                              @RequestParam(value = "key", required = true) @ValidAPIKey String key,
-                                              @RequestParam(value = "output", defaultValue = "json", required = false) @ValidOutput String output,
-                                              @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
-                                              @RequestParam(value = "spider", defaultValue = "false", required = false) boolean spider) throws Exception {
+                                      @RequestParam(value = "key", required = true) @ValidAPIKey String key,
+                                      @RequestParam(value = "output", defaultValue = "json", required = false) @ValidOutput String output,
+                                      @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
+                                      @RequestParam(value = "spider", defaultValue = "false", required = false) boolean spider) throws Exception {
         // Create Report
         this.report = new Report(url);
 

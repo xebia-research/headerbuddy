@@ -96,9 +96,9 @@
           <property name="checkHtml" value="false"/>
         </module>
         -->
-        <module name="JavadocType">
-            <property name="scope" value="public"/>
-        </module>
+        <!--<module name="JavadocType">-->
+        <!--<property name="scope" value="public"/>-->
+        <!--</module>-->
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->

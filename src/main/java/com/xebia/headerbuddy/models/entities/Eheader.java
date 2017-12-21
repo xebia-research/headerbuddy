@@ -1,13 +1,6 @@
 package com.xebia.headerbuddy.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -28,15 +21,15 @@ public class Eheader {
     private Set<Evalue> values;
 
     //Constructors
-    public Eheader(){
+    public Eheader() {
 
     }
 
-    public Eheader(String name){
+    public Eheader(String name) {
         this.name = name;
     }
 
-    public Eheader(String name, Set<Eprofile> profiles){
+    public Eheader(String name, Set<Eprofile> profiles) {
         this.name = name;
         this.profiles = profiles;
     }

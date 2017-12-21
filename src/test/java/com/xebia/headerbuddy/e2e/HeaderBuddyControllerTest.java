@@ -5,13 +5,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 //so the annotations won't be ignored
 @RunWith(SpringRunner.class)
@@ -28,7 +26,7 @@ public class HeaderBuddyControllerTest {
     //in any case if the response type is in json there should be a url field with the given url
     @Test
     public void HeaderBuddyControllerTest() throws Exception {
-        this.mvc.perform(get("/headerbuddy/api?key=123&url="+testedUrl))
+        this.mvc.perform(get("/headerbuddy/api?key=123&url=" + testedUrl))
                 //response is status code 200
                 .andExpect(status().isOk())
                 //expected response type is json

@@ -5,13 +5,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 //so the annotations won't be ignored
@@ -31,14 +29,14 @@ public class HeaderBuddyOutputTest {
     @Test
     public void HeaderBuddyOutputTest() throws Exception {
         //json test
-        this.mvc.perform(get("/headerbuddy/api?output=json&key=123&url="+testedUrl))
+        this.mvc.perform(get("/headerbuddy/api?output=json&key=123&url=" + testedUrl))
                 //response is status code 200
                 .andExpect(status().isOk())
                 //expected response type is json
                 .andExpect(content().contentType("application/json;charset=UTF-8"));
 
         //xml test
-        this.mvc.perform(get("/headerbuddy/api?output=xml&key=123&url="+testedUrl))
+        this.mvc.perform(get("/headerbuddy/api?output=xml&key=123&url=" + testedUrl))
                 //response is status code 200
                 .andExpect(status().isOk())
                 //expected response type is json
