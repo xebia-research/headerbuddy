@@ -1,7 +1,6 @@
 package com.xebia.headerbuddy.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -29,6 +28,7 @@ public class Ecategory {
 
     //Constructors
     public Ecategory() {
+
     }
 
     public Ecategory(String name) {

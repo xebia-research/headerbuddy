@@ -1,8 +1,6 @@
 package com.xebia.headerbuddy.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;

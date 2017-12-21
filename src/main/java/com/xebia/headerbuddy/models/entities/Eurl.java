@@ -21,11 +21,31 @@ public class Eurl {
 
     //Relations
     @ManyToOne
-    @JoinColumn(name = "report_id")
-    private Ereport report;
-    @ManyToOne
     @JoinColumn(name = "value_id")
     private Evalue value;
+    @ManyToOne
+    @JoinColumn(name = "report_id")
+    private Ereport report;
+
+    //Constructors
+    public Eurl(){
+
+    }
+
+    public Eurl(String url){
+        this.url = url;
+    }
+
+    public Eurl(String url, Evalue value){
+        this.url = url;
+        this.value = value;
+    }
+
+    public Eurl(String url, Evalue value, Ereport report){
+        this.url = url;
+        this.value = value;
+        this.report = report;
+    }
 
     //Getters and Setters
     public Integer getId() {

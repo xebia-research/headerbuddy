@@ -6,7 +6,6 @@ import com.xebia.headerbuddy.annotations.ValidOutput;
 import com.xebia.headerbuddy.annotations.ValidURL;
 import com.xebia.headerbuddy.models.Analyzer;
 import com.xebia.headerbuddy.models.Header;
-import com.xebia.headerbuddy.models.Report;
 import com.xebia.headerbuddy.models.entities.Ereport;
 import com.xebia.headerbuddy.models.entities.Euser;
 import com.xebia.headerbuddy.models.entities.Evalue;
@@ -20,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -30,61 +30,35 @@ public class HeaderBuddyController {
     @Autowired
     private EvalueRepository valueRepository;
 
-    private Report report;
-
     @RequestMapping(value = "/headerbuddy/api")
     public ResponseEntity headerBuddy(@RequestParam(value = "url", required = true) @ValidURL String url,
                                               @RequestParam(value = "key", required = true) @ValidAPIKey String key,
                                               @RequestParam(value = "output", defaultValue = "json", required = false) @ValidOutput String output,
                                               @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
                                               @RequestParam(value = "spider", defaultValue = "false", required = false) boolean spider) throws Exception {
-        // Create Report
-        this.report = new Report(url);
+
+        List<Header> foundHeaders = new ArrayList<>();
 
         try {
             List<String> methodsInParameter = MethodHandler.getAllMethodsFromMethodParam(method);
 
-            for (String methodInParameter : methodsInParameter) {
-                List<Header> headers = MethodHandler.executeGivenMethod(methodInParameter, this.report.getUrl());
-                this.report.addHeaders(headers);
-                this.report.addMethod(methodInParameter);
-            }
-        } catch (Exception e) {
-            System.out.println("Message: " + e.getMessage());
-        }
-
-        return new ResponseEntity(this.report, HttpStatus.OK);
-    }
-
-    //Test, needs to be removed before merge with develop
-    @RequestMapping(value = "/test")
-    public ResponseEntity test(@RequestParam(value = "url", required = true) @ValidURL String url,
-                        @RequestParam(value = "key", required = true) @ValidAPIKey String key,
-                        @RequestParam(value = "output", defaultValue = "json", required = false) @ValidOutput String output,
-                        @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
-                        @RequestParam(value = "spider", defaultValue = "false", required = false) boolean spider) throws Exception {
-        // Create Report
-        this.report = new Report(url);
-
-        try {
-            List<String> methodsInParameter = MethodHandler.getAllMethodsFromMethodParam(method);
 
             for (String methodInParameter : methodsInParameter) {
-                List<Header> headers = MethodHandler.executeGivenMethod(methodInParameter, this.report.getUrl());
-                this.report.addHeaders(headers);
-                this.report.addMethod(methodInParameter);
+                List<Header> headers = MethodHandler.executeGivenMethod(methodInParameter, url);
+                foundHeaders.addAll(headers);
             }
 
         } catch (Exception e) {
             System.out.println("Message: " + e.getMessage());
         }
 
-        Set<Evalue> foundValues = ValueSerializer.convertToEvalue(report.getHeaders());
+        Set<Evalue> foundValues = ValueSerializer.convertToEvalue(foundHeaders);
         Analyzer analyzer = new Analyzer(foundValues, valueRepository.findAll());
 
         Euser user = new Euser("12345", "test@gmail.com");
+        Ereport report = analyzer.analyseHeaders(user);
 
-        Ereport reporte = analyzer.analyseHeaders(user);
-        return new ResponseEntity(reporte, HttpStatus.OK);
+        return new ResponseEntity(report, HttpStatus.OK);
     }
+
 }

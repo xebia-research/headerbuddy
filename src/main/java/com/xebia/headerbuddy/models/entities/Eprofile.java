@@ -26,7 +26,7 @@ public class Eprofile {
     private Set<Eheader> headers;
 
     //Constructors
-    public Eprofile() {
+    public Eprofile(){
 
     }
 

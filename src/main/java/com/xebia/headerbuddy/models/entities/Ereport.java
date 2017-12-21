@@ -1,11 +1,9 @@
 package com.xebia.headerbuddy.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
 import java.util.Set;
 
@@ -19,6 +17,7 @@ public class Ereport {
     private int id;
     @NotNull
     @Column(columnDefinition = "DATETIME")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
 
     //Relations
@@ -36,6 +35,10 @@ public class Ereport {
     //Constructors
     public Ereport(){
 
+    }
+
+    public Ereport(Euser user){
+        this.user = user;
     }
 
     public Ereport(Euser user, Set<Evalue> values){
