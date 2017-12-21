@@ -33,7 +33,7 @@ public class Eheader {
 
     //Constructors
     public Eheader(){
-
+        //Default Constructor.
     }
 
     public Eheader(String name){

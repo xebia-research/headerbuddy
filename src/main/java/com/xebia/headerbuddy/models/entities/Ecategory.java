@@ -28,7 +28,7 @@ public class Ecategory {
 
     //Constructors
     public Ecategory() {
-
+        //Default Constructor.
     }
 
     public Ecategory(String name) {

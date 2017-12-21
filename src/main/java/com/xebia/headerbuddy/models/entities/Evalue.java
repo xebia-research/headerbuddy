@@ -45,7 +45,7 @@ public class Evalue {
 
     //Constructors
     public Evalue() {
-
+        //Default Constructor.
     }
 
     public Evalue(String value){

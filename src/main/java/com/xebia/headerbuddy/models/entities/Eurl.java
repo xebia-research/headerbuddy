@@ -29,7 +29,7 @@ public class Eurl {
 
     //Constructors
     public Eurl(){
-
+        //Default Constructor.
     }
 
     public Eurl(String url){

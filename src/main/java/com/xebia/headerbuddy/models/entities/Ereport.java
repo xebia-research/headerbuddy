@@ -34,7 +34,7 @@ public class Ereport {
 
     //Constructors
     public Ereport(){
-
+        //Default Constructor.
     }
 
     public Ereport(Euser user){

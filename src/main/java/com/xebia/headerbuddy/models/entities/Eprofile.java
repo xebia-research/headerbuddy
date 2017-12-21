@@ -27,7 +27,7 @@ public class Eprofile {
 
     //Constructors
     public Eprofile(){
-
+        //Default Constructor.
     }
 
     public Eprofile(String name){

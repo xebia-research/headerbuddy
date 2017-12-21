@@ -1,6 +1,5 @@
 package com.xebia.headerbuddy.models.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -33,7 +32,7 @@ public class Euser {
 
     //Constructors
     public Euser() {
-
+        //Default Constructor.
     }
 
     public Euser(String email) {
