@@ -25,7 +25,7 @@ public class Eheader {
 
     }
 
-    public Eheader(String name) {
+    public Eheader(final String name) {
         this.name = name;
     }
 
