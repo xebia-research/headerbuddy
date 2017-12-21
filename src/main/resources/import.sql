@@ -43,7 +43,7 @@ INSERT INTO category(name) VALUES ("recommendation");
 # =========== Content-Security-Policy =============
 INSERT INTO value (value, description, header_id, category_id) VALUES ("default-src", "Use the server as fallback for other fetch directives", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("connect-src", "Restricts the URLs which can be loaded using script interfaces", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("child-src", "Defines the valid sources for web workers and nested browsing contexts loaded using elements such as <frame> and <iframe>. Don't use this because it is depricated", 1, 2);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("child-src", "Defines the valid sources for web workers and nested browsing contexts loaded using elements such as <frame> and <iframe>. Don't use this because it is depricated", 1, 3);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("font-src", "Specifies valid sources for fonts loaded using @font-face.", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("frame-src", "Specifies valid sources for nested browsing contexts loading using elements such as <frame> and <iframe>.", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("img-src", "Specifies valid sources of images and favicons.", 1, 1);
@@ -56,12 +56,16 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("worker-s
 INSERT INTO value (value, description, header_id, category_id) VALUES ("base-uri", "Restricts the URLs which can be used in a document's <base> element.", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("plugin-types", "Restricts the set of plugins that can be embedded into a document by limiting the types of resources which can be loaded.", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("sandbox", "Enables a sandbox for the requested resource similar to the <iframe> sandbox attribute.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("disown-opener", "Ensures a resource will disown its opener when navigated to. This should not be used because it is still expirimental and may not work as intended.", 1, 2);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("disown-opener", "Ensures a resource will disown its opener when navigated to. This should not be used because it is still expirimental and may not work as intended.", 1, 3);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("form-action", "Restricts the URLs which can be used as the target of a form submissions from a given context.", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("frame-ancestors", "Specifies valid parents that may embed a page using <frame>, <iframe>, <object>, <embed>, or <applet>.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("navigation-to", "Restricts the URLs to which a document can navigate by any means (a, form, window.location, window.open, etc.). This should not be used because it is expirimental and may not work as intended.", 1, 2);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("navigation-to", "Restricts the URLs to which a document can navigate by any means (a, form, window.location, window.open, etc.). This should not be used because it is expirimental and may not work as intended.", 1, 3);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("report-uri", "Instructs the user agent to report attempts to violate the Content Security Policy. These violation reports consist of JSON documents sent via an HTTP POST request to the specified URI. This should be used together with the report-to directive", 1, 3);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("report-to", "Fires a SecurityPolicyViolationEvent. This should be used with the 'report-uri' directive because not all browsers support this directive. if this directive is supported it will ignore report-uri", 1, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("block-all-mixed-content", "Prevents loading any assets using HTTP when the page is loaded using HTTPS.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("referrer", "Used to specify information in the referer (sic) header for links away from a page. Use the Referrer-Policy header instead. This directive is depricated", 1, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("require-sri-for", "Requires the use of SRI for scripts or styles on the page.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("upgrade-insecure-requests", "Instructs user agents to treat all of a site's insecure URLs (those served over HTTP) as though they have been replaced with secure URLs (those served over HTTPS). This directive is intended for web sites with large numbers of insecure legacy URLs that need to be rewritten.", 1, 1);
 
 
 
