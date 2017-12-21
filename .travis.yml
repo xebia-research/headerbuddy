@@ -49,7 +49,7 @@ script:
   - sleep 15
 
   # Run all tests
-  - mvn verify
+  - mvn verify -Plocal
 
   #pull the owasp zap container
   - docker pull owasp/zap2docker-stable
