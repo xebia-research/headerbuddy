@@ -46,6 +46,10 @@ INSERT INTO category(name) VALUES ("recommendation");
 
 # =========== Content-Security-Policy =============
 INSERT INTO value (value, description, header_id, category_id) VALUES ("default-src", "Use the server as fallback for other fetch directives", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("connect-src", "Restricts the URLs which can be loaded using script interfaces", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("child-src", "Defines the valid sources for web workers and nested browsing contexts loaded using elements such as <frame> and <iframe>. Don't use this because it is depricated", 1, 2);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("font-src", "Specifies valid sources for fonts loaded using @font-face.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("frame-src", "Specifies valid sources for nested browsing contexts loading using elements such as <frame> and <iframe>.", 1, 1);
 
 # =========== Referrer-Policy =============
 INSERT INTO value (value, description, header_id, category_id) VALUES ("no-referrer", "The Referer header will be omitted entirely. No referrer information is sent along with requests.", 2, 1);
