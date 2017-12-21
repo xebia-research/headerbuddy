@@ -65,10 +65,12 @@ public class WebCrawler {
 
                     //check for # and /
                     String lastCharInUri = uri.toString().substring(uri.toString().length() - 1, uri.toString().length());
-                    if (lastCharInUri.equals("#") || lastCharInUri.equals("/"))
+                    if (lastCharInUri.equals("#") || lastCharInUri.equals("/")) {
                         pagesToVisit.add(uri.toString().substring(0, uri.toString().length() - 1));
-                    else
+                    }
+                    else {
                         pagesToVisit.add(uri.toString());
+                    }
                 }
             } catch(Exception e){
                 // do nothing
