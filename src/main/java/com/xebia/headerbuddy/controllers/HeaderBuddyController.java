@@ -14,6 +14,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,7 +29,13 @@ public class HeaderBuddyController {
                                               @RequestParam(value = "key", required = true) @ValidAPIKey String key,
                                               @RequestParam(value = "output", defaultValue = "json", required = false) @ValidOutput String output,
                                               @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
-                                              @RequestParam(value = "spider", defaultValue = "false", required = false) boolean spider) throws Exception {
+                                              @RequestParam(value = "crawl", defaultValue = "false", required = false) boolean crawl) throws Exception {
+        // TODO integrate this in the report and make sure the found urls are also called
+        if (crawl){
+            WebCrawler crawler = new WebCrawler(url);
+            crawler.crawl();
+        }
+
         this.report = new Report(url);
 
         try {
@@ -43,21 +51,5 @@ public class HeaderBuddyController {
         }
 
         return new ResponseEntity(this.report, HttpStatus.OK);
-    }
-
-    //
-    // Temporary request for debug purposes
-    //
-    @RequestMapping(value = "/headerbuddy/crawl")
-    public void headerBuddyWebCrawler(@RequestParam(value = "url") @ValidURL String url){
-        WebCrawler s = new WebCrawler(url);
-        try {
-            s.crawl();
-        } catch (Exception e) { }
-
-        System.out.println("---------------");
-        s.getVisitedPages().forEach(t->{
-            System.out.println(t);
-        });
     }
 }

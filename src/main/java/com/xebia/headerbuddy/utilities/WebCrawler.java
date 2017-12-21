@@ -50,31 +50,40 @@ public class WebCrawler {
     }
 
     public void crawl() throws Exception{
+        try {
+            while(!this.pagesToVisit.isEmpty()) {
+                String url = getUrl();
+                try {
+                    Document doc = Jsoup.connect(url).get();
+                    Elements linksOnPage = doc.select("a[href]");
 
-        while(!this.pagesToVisit.isEmpty()) {
-            String url = getUrl();
-            try {
-                Document doc = Jsoup.connect(url).get();
-                Elements linksOnPage = doc.select("a[href]");
+                    for (Element l : linksOnPage) {
+                        URL uri = new URL(l.absUrl("href"));
 
-                for (Element l : linksOnPage) {
-                    URL uri = new URL(l.absUrl("href"));
-
-                    // Debug purposes
-                    System.out.println(uri.toString());
-
-                    //check for # and /
-                    String lastCharInUri = uri.toString().substring(uri.toString().length() - 1, uri.toString().length());
-                    if (lastCharInUri.equals("#") || lastCharInUri.equals("/")) {
-                        pagesToVisit.add(uri.toString().substring(0, uri.toString().length() - 1));
+                        //check for # and /
+                        String lastCharInUri = uri.toString().substring(uri.toString().length() - 1, uri.toString().length());
+                        if (lastCharInUri.equals("#") || lastCharInUri.equals("/")) {
+                            pagesToVisit.add(uri.toString().substring(0, uri.toString().length() - 1));
+                        }
+                        else {
+                            pagesToVisit.add(uri.toString());
+                        }
                     }
-                    else {
-                        pagesToVisit.add(uri.toString());
-                    }
+                } catch(Exception e){
+                    // do nothing
                 }
-            } catch(Exception e){
-                // do nothing
             }
+        } catch (Exception e)
+        {
+            // Ignore
         }
+
+        // TODO remove
+        // Print visitedPages for debug purposes
+        System.out.println("--- crawl result ---");
+        for(String url : pagesVisited){
+            System.out.println(url);
+        }
+        System.out.println("--------------------");
     }
 }
