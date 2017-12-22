@@ -122,40 +122,4 @@ public class AnalyseHandlersTest {
         Assert.assertEquals(val3.getHeader().getName(), resultSet.iterator().next().getHeader().getName());
     }
 
-    @Test
-    public void DontHandelerShouldDetectDontHeaders(){
-        AnalyzerHandeler analyzerHandeler = new DontHandeler();
-
-        // Arrange
-        Eheader header1 = new Eheader("good");
-        Eheader header2 = new Eheader("bad1");
-        Eheader header3 = new Eheader("bad2");
-
-        Ecategory cat1 = new Ecategory("category1");
-
-        Evalue val1 = new Evalue("value1", "", cat1, header1);
-        Evalue val2 = new Evalue("value2", "", cat1, header2);
-        Evalue val3 = new Evalue("value3", "", cat1, header3);
-
-        Set<Evalue> toAnalyseValues = new HashSet<Evalue>() {{
-            add(val1);
-            add(val2);
-            add(val3);
-        }};
-
-        Set<Evalue> toCompareValues = new HashSet<Evalue>() {{
-            add(val2);
-            add(val3);
-        }};
-
-        // Act
-        Set<Evalue> resultSet =analyzerHandeler.detectHeaders(toAnalyseValues, toCompareValues);
-
-        // Assert
-        // Should find two matches
-        Assert.assertEquals(2, resultSet.size());
-        Iterator<Evalue> itr = resultSet.iterator();
-        Assert.assertEquals(header2.getName(), itr.next().getHeader().getName());
-        Assert.assertEquals(header3.getName(), itr.next().getHeader().getName());
-    }
 }

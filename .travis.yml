@@ -35,7 +35,7 @@ install: #forcing a maven install instead of the default maven wrapper install
 
 #any console commands can be executed here
 script:
-
+  
   # Create docker database container
   - docker-compose up -d db
 
@@ -58,4 +58,3 @@ script:
   - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
 
   - docker ps
-
