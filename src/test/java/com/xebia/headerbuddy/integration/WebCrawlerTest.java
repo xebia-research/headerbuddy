@@ -9,7 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Set;
 
-public class WebCrawlerIT {
+public class WebCrawlerTest {
 
     private String targetUrl = "http://www.andonoz.com/";
     private WebCrawler crawler = new WebCrawler(targetUrl);

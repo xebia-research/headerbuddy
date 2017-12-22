@@ -1,6 +1,5 @@
 package com.xebia.headerbuddy.unit;
 
-import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import com.xebia.headerbuddy.utilities.APIKeyGenerator;
