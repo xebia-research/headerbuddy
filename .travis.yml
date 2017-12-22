@@ -36,7 +36,8 @@ install: #forcing a maven install instead of the default maven wrapper install
 #any console commands can be executed here
 script:
 
-  - mvn clear package -DskipTests=true
+  - mvn clear
+  - mvn package -DskipTests=true
   
   # Create docker database container
   - docker-compose up -d db
