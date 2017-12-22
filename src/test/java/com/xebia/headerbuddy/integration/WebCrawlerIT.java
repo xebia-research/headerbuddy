@@ -1,7 +1,6 @@
 package com.xebia.headerbuddy.integration;
 
 import com.xebia.headerbuddy.utilities.WebCrawler;
-import org.eclipse.jgit.util.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
