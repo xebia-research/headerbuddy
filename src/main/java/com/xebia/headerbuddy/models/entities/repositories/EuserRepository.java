@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EuserRepository extends CrudRepository<Euser, Long> {
-    Iterable<Euser> findByApikey(@Param("apikey") String apikey);
-    Iterable<Euser> findByEmail(@Param("email") String email);
+
+    Euser findByApikey(@Param("apikey") String apikey);
+    Euser findByEmail(@Param("email") String email);
 }

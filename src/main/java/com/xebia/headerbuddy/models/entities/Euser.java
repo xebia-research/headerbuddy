@@ -1,6 +1,9 @@
 package com.xebia.headerbuddy.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -17,7 +20,9 @@ public class Euser {
     @JsonIgnore
     @Id
     private String apikey;
+
     @NotNull
+    @JsonRawValue
     private String email;
 
     //Relations
@@ -35,11 +40,11 @@ public class Euser {
         //Default Constructor.
     }
 
-    public Euser(final String email) {
+    public Euser( String email) {
         this("", email);
     }
 
-    public Euser(final String aikey, final String email) {
+    public Euser( String aikey,  String email) {
         this.apikey = aikey;
         this.email = email;
     }
