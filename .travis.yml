@@ -2,9 +2,6 @@ language: java
 #sudo: required only required when using docker or when you are using sudo commands
 sudo: false
 
-before_script:
-  - sudo /etc/init.d/mysql stop
-
 cache:
   directories:
     - $HOME/.m2
@@ -45,7 +42,7 @@ script:
   # Create the application container
   - docker-compose up -d headerbuddy
 
-  - docker logs headerbuddy
+  - docker logs headerbuddy_headerbuddy_1
 
   - docker ps
 
