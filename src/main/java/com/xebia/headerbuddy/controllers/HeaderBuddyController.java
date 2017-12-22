@@ -9,6 +9,7 @@ import com.xebia.headerbuddy.models.ApiKey;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
 import com.xebia.headerbuddy.utilities.APIKeyGenerator;
 import com.xebia.headerbuddy.utilities.MethodHandler;
+import com.xebia.headerbuddy.utilities.WebCrawler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,8 +36,14 @@ public class HeaderBuddyController {
                                               @RequestParam(value = "key", required = true) @ValidAPIKey String key,
                                               @RequestParam(value = "output", defaultValue = "json", required = false) @ValidOutput String output,
                                               @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
-                                              @RequestParam(value = "spider", defaultValue = "false", required = false) boolean spider) throws Exception {
-        // Create Report
+                                              @RequestParam(value = "crawl", defaultValue = "false", required = false) boolean crawl) throws Exception {
+
+        // TODO integrate this in the report and make sure the found urls are also called
+        if (crawl){
+            WebCrawler crawler = new WebCrawler(url);
+            crawler.crawl();
+        }
+
         this.report = new Report(url);
 
         List<String> methodsInParameter = MethodHandler.getAllMethodsFromMethodParam(method);
