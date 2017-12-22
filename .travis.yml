@@ -44,6 +44,7 @@ script:
 
   # Create the application container
   - docker-compose up -d headerbuddy
+  - docker ps
 
   # Give the application time to finish starting up
   - sleep 15
