@@ -1,4 +1,4 @@
-package com.xebia.headerbuddy.models.analyzerhandeler;
+package com.xebia.headerbuddy.models.analysehandlers;
 
 import com.xebia.headerbuddy.models.entities.Evalue;
 import java.util.HashSet;
@@ -8,8 +8,8 @@ public class DefaultHandeler extends AnalyzerHandeler {
 
     @Override
     public Set<Evalue> detectMissingHeaders(Set<Evalue> toAnalyseValues, Set<Evalue> toCompareValues) {
-
         Set<Evalue> missingValues = new HashSet<>();
+
         for (Evalue compareValue : toCompareValues) {
             boolean found = false;
 

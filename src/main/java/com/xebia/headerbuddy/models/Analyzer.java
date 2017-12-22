@@ -1,10 +1,10 @@
 package com.xebia.headerbuddy.models;
 
-import com.xebia.headerbuddy.models.analyzerhandeler.AnalyzerHandeler;
-import com.xebia.headerbuddy.models.analyzerhandeler.DefaultHandeler;
-import com.xebia.headerbuddy.models.analyzerhandeler.DoHandeler;
-import com.xebia.headerbuddy.models.analyzerhandeler.DontHandeler;
-import com.xebia.headerbuddy.models.analyzerhandeler.RecommendationHandeler;
+import com.xebia.headerbuddy.models.analysehandlers.AnalyzerHandeler;
+import com.xebia.headerbuddy.models.analysehandlers.DefaultHandeler;
+import com.xebia.headerbuddy.models.analysehandlers.DoHandeler;
+import com.xebia.headerbuddy.models.analysehandlers.DontHandeler;
+import com.xebia.headerbuddy.models.analysehandlers.RecommendationHandeler;
 import com.xebia.headerbuddy.models.entities.Ereport;
 import com.xebia.headerbuddy.models.entities.Euser;
 import com.xebia.headerbuddy.models.entities.Evalue;
