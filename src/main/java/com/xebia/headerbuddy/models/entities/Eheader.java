@@ -32,20 +32,20 @@ public class Eheader {
     private Set<Evalue> values;
 
     //Constructors
-    public Eheader(){
-
+    public Eheader() {
+        //Default Constructor.
     }
 
-    public Eheader(String name){
+    public Eheader(final String name) {
         this.name = name;
     }
 
-    public Eheader(String name, Set<Evalue> values){
+    public Eheader(final String name, Set<Evalue> values) {
         this.name = name;
         this.values = values;
     }
 
-    public Eheader(String name, Set<Eprofile> profiles, Set<Evalue> values) {
+    public Eheader(final String name, final Set<Eprofile> profiles, final Set<Evalue> values) {
         this.name = name;
         this.profiles = profiles;
         this.values = values;

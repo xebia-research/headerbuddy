@@ -28,20 +28,20 @@ public class Eurl {
     private Ereport report;
 
     //Constructors
-    public Eurl(){
-
+    public Eurl() {
+        //Default Constructor.
     }
 
-    public Eurl(String url){
+    public Eurl(final String url) {
         this.url = url;
     }
 
-    public Eurl(String url, Evalue value){
+    public Eurl(final String url, final Evalue value) {
         this.url = url;
         this.value = value;
     }
 
-    public Eurl(String url, Evalue value, Ereport report){
+    public Eurl(final String url, final Evalue value, final Ereport report) {
         this.url = url;
         this.value = value;
         this.report = report;

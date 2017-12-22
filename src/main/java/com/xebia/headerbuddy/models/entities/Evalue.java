@@ -45,19 +45,19 @@ public class Evalue {
 
     //Constructors
     public Evalue() {
-
+        //Default Constructor.
     }
 
-    public Evalue(String value){
+    public Evalue(final String value) {
         this.value = value;
     }
 
-    public Evalue(String value, String description) {
+    public Evalue(final String value, final String description) {
         this.value = value;
         this.description = description;
     }
 
-    public Evalue(String value, String description, Ecategory category) {
+    public Evalue(final String value, final String description, final Ecategory category) {
         this.value = value;
         this.description = description;
         this.category = category;

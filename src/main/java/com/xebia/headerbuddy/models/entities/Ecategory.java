@@ -28,10 +28,10 @@ public class Ecategory {
 
     //Constructors
     public Ecategory() {
-
+        //Default Constructor.
     }
 
-    public Ecategory(String name) {
+    public Ecategory(final String name) {
         this.name = name;
     }
 
