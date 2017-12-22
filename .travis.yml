@@ -44,6 +44,9 @@ script:
 
   # Create the application container
   - docker-compose up -d headerbuddy
+
+  - docker logs headerbuddy
+
   - docker ps
 
   # Give the application time to finish starting up
