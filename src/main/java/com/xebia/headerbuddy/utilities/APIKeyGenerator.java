@@ -6,7 +6,11 @@ import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
 import org.apache.commons.lang.WordUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 @Component
 public abstract class APIKeyGenerator {
