@@ -26,7 +26,7 @@ public class WebCrawlerIT {
 
     @Test
     public void visitedPagesShouldContainTargetUrl() {
-        Assert.assertTrue(crawler.getVisitedPages().contains(targetUrl));
+        Assert.assertTrue("visitedPages does not contain target url: " + targetUrl + "!", crawler.getVisitedPages().contains(targetUrl));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class WebCrawlerIT {
         for (String url : crawler.getVisitedPages()) {
             if (!url.contains(domain)) {
                 // Fail test if a link is found outside of domain
-                Assert.fail();
+                Assert.fail("visitedPages contains link: " + url + " which is outside the domain of: "+ domain +"!");
             }
         }
     }
@@ -65,7 +65,7 @@ public class WebCrawlerIT {
             // If the url occurs more than one time there are duplicates
             // So fail
             if (count > 1){
-                Assert.fail();
+                Assert.fail("visitedPages contains duplicates of: " + urlToFind + " (" + count + " times)");
             }
         }
     }

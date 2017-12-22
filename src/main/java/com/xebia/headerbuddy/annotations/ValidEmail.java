@@ -1,6 +1,7 @@
 package com.xebia.headerbuddy.annotations;
 
-import com.xebia.headerbuddy.annotations.validators.ValidMethodValidator;
+import com.xebia.headerbuddy.annotations.validators.ValidEmailValidator;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import javax.validation.constraints.Pattern;
@@ -9,13 +10,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Pattern(regexp = "(?i)^((?!,,)[a-z,])+$", message = "Invalid HTTP Method!")
-@Constraint(validatedBy = ValidMethodValidator.class)
+@Pattern(regexp = "(?i)^(.+)\\@(.+)\\.(.+)$", message = "Invalid Email!")
+@Constraint(validatedBy = ValidEmailValidator.class)
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidMethod {
+public @interface ValidEmail {
 
-    String message() default "Invalid HTTP Method!";
+    String message() default "Invalid Email!";
 
     Class<?>[] groups() default {};
 

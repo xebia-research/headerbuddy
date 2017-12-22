@@ -49,7 +49,7 @@ public class WebCrawler {
         return this.pagesVisited;
     }
 
-    public void crawl() throws Exception{
+    public void crawl() {
         try {
             while(!this.pagesToVisit.isEmpty()) {
                 String url = getUrl();

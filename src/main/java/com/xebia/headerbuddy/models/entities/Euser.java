@@ -34,8 +34,8 @@ public class Euser {
         this("", email);
     }
 
-    public Euser(String aikey, String email) {
-        this.apikey = aikey;
+    public Euser(String apikey, String email) {
+        this.apikey = apikey;
         this.email = email;
     }
 
