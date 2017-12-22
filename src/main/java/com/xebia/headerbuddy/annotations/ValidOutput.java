@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Pattern(regexp = "(?i)^(json|xml|html)$",
-        message = "Output is not recognized")
+        message = "Invalid output value!")
 @Constraint(validatedBy = ValidOutputValidator.class)
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

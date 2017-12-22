@@ -31,7 +31,7 @@ notifications:
 
 install: #forcing a maven install instead of the default maven wrapper install
 
-  - mvn install -Dmaven.javadoc.skip=true -B -V
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 #any console commands can be executed here
 script:
@@ -44,6 +44,12 @@ script:
 
   # Create the application container
   - docker-compose up -d headerbuddy
+
+  # Give the application time to finish starting up
+  - sleep 15
+
+  # Run all tests
+  - mvn -Dspring.datasource.url=jdbc:mysql://localhost:3306/headerbuddy verify
 
   #pull the owasp zap container
   - docker pull owasp/zap2docker-stable
