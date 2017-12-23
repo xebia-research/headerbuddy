@@ -31,5 +31,4 @@ deploy:
   bucket: $bucket_name
   skip_cleanup: true
   on:
-    branch: $TRAVIS_PULL_REQUEST_BRANCH
     branch: $TRAVIS_BRANCH
