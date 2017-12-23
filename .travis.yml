@@ -1,61 +1,35 @@
 language: java
-#sudo: required only required when using docker or when you are using sudo commands
 sudo: false
-
 before_script:
-  - sudo /etc/init.d/mysql stop
-
+- sudo /etc/init.d/mysql stop
+- echo $bucket_name
+- echo bucket_name
 cache:
   directories:
-    - $HOME/.m2
-
+  - "$HOME/.m2"
 jdk:
-  - oraclejdk8
-
+- oraclejdk8
 services:
-  - docker
-
+- docker
 notifications:
   email: false
-
-# Set up notification options
-#notifications:
-#  email:
-#    recipients:
-#      - one@example.com
-#      - other@example.com
-#
-    # change is when the repo status goes from pass to fail or vice versa
-#    on_success: change
-#    on_failure: always
-
-install: #forcing a maven install instead of the default maven wrapper install
-
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-
-#any console commands can be executed here
+install:
+- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
-
-  # Create docker database container
-  - docker-compose up -d db
-
-  # Give the mySQL database time to totally finish starting up
-  - sleep 15
-
-  # Create the application container
-  - docker-compose up -d headerbuddy
-
-  # Give the application time to finish starting up
-  - sleep 15
-
-  # Run all tests
-  - mvn -Dspring.datasource.url=jdbc:mysql://localhost:3306/headerbuddy verify
-
-  #pull the owasp zap container
-  - docker pull owasp/zap2docker-stable
-
-  #run the container and test the app
-  - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
-
-  - docker ps
-
+- docker-compose up -d db
+- sleep 15
+- docker-compose up -d headerbuddy
+- sleep 15
+- mvn -Dspring.datasource.url=jdbc:mysql://localhost:3306/headerbuddy verify
+- docker pull owasp/zap2docker-stable
+- docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o
+  addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
+- docker ps
+deploy:
+  provider: gcs
+  access_key_id: GOOGTUXUIOSLVVQIVFES
+  secret_access_key:
+    secure: DDWoIfI7YkwfuLlQBYHPixk6CApWAtWtIx7J8p/CvVvrPCWBPqISv4nTnryWPzhCuCX84ATckiqfGcwEH4v48vvq/tXKoWhqt4pwwn55V5uxAqV33XO8D3BtmrGrX76wNAL4Nrs8yPRcbLal0nKXlHj/Fxs7vumwSSq2xH/3Tt5C/aYbgfDVUxDWrZJ2hPs2fKVaTZrCygYUtmLOrjrkH57MloLz58S2PpTDUKg3rtIwt/E2lypvwkd34EaK+QPqc4/LXqb3NuAgpNbmUZE5vaUQC1gSzePWtKlCNbGCFjTdVr7lF7YPRGZDDIRKapzRMxY46a0/LKZX6WBu4SFp9Ts4tcwBXTm3K1ZkV7ryT1ohBlCiVzjV6VofioxnUULzkGsDgueuTanizmCHD/zJ6tRlcMb6bfXhLA4FG1ZTdtoEu1hglYTyoEJUr1dkiQm0kJR9x/hKui1SOSJFx80BTBgaSuBcaIqQaKswebzMV+eliiC7tg/7Lms82CTcuuor6eykPtdXPT/WerDuU5G1y0udR7s8CBQD3V6pFZ4L67MaEbRoi6n/PGXZ6PyC6QYDuglF5pNIrDW9XEPekFwoE2kngWYUtpj0CDwGaSmNYI5B8MRhxzls1wfsbBzarM0l6i96UQNoHvM16i/D+mx/OnqIw8WtRqoVQfCmuKUY9IA=
+  bucket: $bucket_name
+  on:
+    repo: xebia-research/headerbuddy
