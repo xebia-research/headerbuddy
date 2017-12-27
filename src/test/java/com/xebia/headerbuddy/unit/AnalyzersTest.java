@@ -71,19 +71,15 @@ public class AnalyzersTest {
 
         Set<Evalue> toCompareValues = new HashSet<Evalue>() {{
             add(val2);
-            add(val3);
         }};
 
         // Act
         Set<Evalue> resultSet = analyzer.analyze(toAnalyseValues, toCompareValues);
 
         // Assert
-        // ToAnalyze has two Don't headers
-        Assert.assertEquals(2, resultSet.size());
-
-        Iterator<Evalue> itr = resultSet.iterator();
-        Assert.assertEquals(header3.getName(), itr.next().getHeader().getName());
-        Assert.assertEquals(header2.getName(), itr.next().getHeader().getName());
+        // ToAnalyze has one Don't headers
+        Assert.assertEquals(1, resultSet.size());
+        Assert.assertEquals(header2.getName(), resultSet.iterator().next().getHeader().getName());
     }
 
     @Test
