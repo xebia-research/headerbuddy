@@ -45,27 +45,16 @@ script:
   # Create the application container
   - docker-compose up -d headerbuddy
 
-  - docker logs headerbuddy_headerbuddy_1
-
-  - docker ps
-
   # Give the application time to finish starting up
   - sleep 15
-
-  - docker ps
 
   # Run all tests
   - mvn -Dspring.datasource.url=jdbc:mysql://localhost:3306/headerbuddy verify
 
-  - docker ps
-
   #pull the owasp zap container
   - docker pull owasp/zap2docker-stable
-
-  - docker ps
 
   #run the container and test the app
   - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
 
   - docker ps
-

@@ -1,5 +1,5 @@
 
-Lists of 150 third-party dependencies.
+Lists of 151 third-party dependencies.
      (BSD License) AntLR Parser Generator (antlr:antlr:2.7.7 - http://www.antlr.org/)
      (Public Domain) AOP alliance (aopalliance:aopalliance:1.0 - http://aopalliance.sourceforge.net)
      (Eclipse Public License - v 1.0) (GNU Lesser General Public License) Logback Classic Module (ch.qos.logback:logback-classic:1.1.11 - http://logback.qos.ch/logback-classic)
@@ -45,6 +45,7 @@ Lists of 150 third-party dependencies.
      (CDDL + GPLv2 with classpath exception) javax.transaction API (javax.transaction:javax.transaction-api:1.2 - http://jta-spec.java.net)
      (The Apache Software License, Version 2.0) Bean Validation API (javax.validation:validation-api:1.1.0.Final - http://beanvalidation.org)
      (CDDL 1.1) (GPL2 w/ CPE) javax.ws.rs-api (javax.ws.rs:javax.ws.rs-api:2.0.1 - http://jax-rs-spec.java.net)
+     (CDDL 1.1) (GPL2 w/ CPE) jaxb-api (javax.xml.bind:jaxb-api:2.3.0 - https://github.com/javaee/jaxb-spec/jaxb-api)
      (Eclipse Public License 1.0) JUnit (junit:junit:4.12 - http://junit.org)
      (The GNU General Public License, Version 2) MySQL Connector/J (mysql:mysql-connector-java:8.0.8-dmr - http://dev.mysql.com/doc/connector-j/en/)
      (The Apache Software License, Version 2.0) ASM based accessors helper used by json-smart (net.minidev:accessors-smart:1.1 - http://accessors-smart/)
