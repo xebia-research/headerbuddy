@@ -1,31 +1,29 @@
-package com.xebia.headerbuddy.models.analysehandlers;
+package com.xebia.headerbuddy.models.analyzer;
 
 import com.xebia.headerbuddy.models.entities.Evalue;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RecommendationHandeler extends AnalyzerHandeler {
+public class RecommendationAnalyzer implements Analyzer {
 
     @Override
-    public Set<Evalue> detectMissingHeaders(Set<Evalue> toAnalyseValues, Set<Evalue> toCompareValues) {
-        throw new UnsupportedOperationException();
-    }
+    public Set<Evalue> analyze(Set<Evalue> toAnalyze, Set<Evalue> toCompare) {
 
-    @Override
-    public Set<Evalue> detectHeaders(Set<Evalue> toAnalyseValues, Set<Evalue> toCompareValues) {
         Set<Evalue> foundValues = new HashSet<>();
 
-        for (Evalue analyseValue : toAnalyseValues) {
-            for (Evalue compareValue : toCompareValues) {
+        for (Evalue analyseValue : toAnalyze) {
+            for (Evalue compareValue : toCompare) {
 
                 //Header and value needs to be the same
                 if (analyseValue.getHeader().getName().equals(compareValue.getHeader().getName()) && analyseValue.getValue().equals(compareValue.getValue())) {
+                    //Found not recommended value
                     foundValues.add(compareValue);
                     break;
                 }
             }
         }
 
+        //Return values with wrong settings
         return foundValues;
     }
 }

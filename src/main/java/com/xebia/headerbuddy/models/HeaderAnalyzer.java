@@ -1,17 +1,16 @@
 package com.xebia.headerbuddy.models;
 
-import com.xebia.headerbuddy.models.analysehandlers.AnalyzerHandeler;
-import com.xebia.headerbuddy.models.analysehandlers.DefaultHandeler;
-import com.xebia.headerbuddy.models.analysehandlers.DoHandeler;
-import com.xebia.headerbuddy.models.analysehandlers.DontHandeler;
-import com.xebia.headerbuddy.models.analysehandlers.RecommendationHandeler;
+import com.xebia.headerbuddy.models.analyzer.Analyzer;
+import com.xebia.headerbuddy.models.analyzer.DoAnalyzer;
+import com.xebia.headerbuddy.models.analyzer.RecommendationAnalyzer;
+import com.xebia.headerbuddy.models.analyzer.DontAnalyzer;
 import com.xebia.headerbuddy.models.entities.Ereport;
 import com.xebia.headerbuddy.models.entities.Euser;
 import com.xebia.headerbuddy.models.entities.Evalue;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Analyzer {
+public class HeaderAnalyzer {
 
     private Set<Evalue> foundValues;
     private Set<Evalue> databaseDoValues; //Database do headers.
@@ -19,13 +18,10 @@ public class Analyzer {
     private Set<Evalue> databaseRecValues; //Database recommended headers.
 
     private Set<Evalue> missingDoValues;
-    private Set<Evalue> foundDoValues;
     private Set<Evalue> foundDontValues;
     private Set<Evalue> foundRecValues;
 
-    private AnalyzerHandeler analyzerHandeler;
-
-    public Analyzer(final Set<Evalue> foundValues, final Iterable<Evalue> databaseHeaderValues) {
+    public HeaderAnalyzer(final Set<Evalue> foundValues, final Iterable<Evalue> databaseHeaderValues) {
         databaseDoValues = new HashSet<>();
         databaseDontValues = new HashSet<>();
         databaseRecValues = new HashSet<>();
@@ -38,16 +34,12 @@ public class Analyzer {
     //This method does the analyses
     public Ereport analyseHeaders(Euser user) {
 
-        //Filter all headers with the handelers.
-        analyzerHandeler = new DefaultHandeler();
-        foundDoValues = analyzerHandeler.detectHeaders(foundValues, databaseDoValues);
-        analyzerHandeler = new DoHandeler();
-        missingDoValues = analyzerHandeler.detectMissingHeaders(foundValues, databaseDoValues);
-        analyzerHandeler = new DontHandeler();
-        foundDontValues = analyzerHandeler.detectHeaders(foundValues, databaseDontValues);
-        analyzerHandeler = new RecommendationHandeler();
-        foundRecValues = analyzerHandeler.detectHeaders(foundDoValues, databaseRecValues);
-
+        Analyzer analyzer = new DoAnalyzer();
+        missingDoValues = analyzer.analyze(foundValues, databaseDoValues);
+        analyzer = new DontAnalyzer();
+        foundDontValues = analyzer.analyze(foundValues, databaseDontValues);
+        analyzer = new RecommendationAnalyzer();
+        foundRecValues = analyzer.analyze(detectHeaders(foundValues, databaseDoValues), databaseRecValues);
 
         //Create one set with all values needed for report
         Set<Evalue> reportValues = new HashSet<>();
@@ -59,6 +51,23 @@ public class Analyzer {
         Ereport report = new Ereport(user, reportValues);
 
         return report;
+    }
+
+    private Set<Evalue> detectHeaders(Set<Evalue> toAnalyseValues, Set<Evalue> toCompareValues) {
+        Set<Evalue> foundValues = new HashSet<>();
+
+        for (Evalue analyseValue : toAnalyseValues) {
+            for (Evalue compareValue : toCompareValues) {
+
+
+                if (analyseValue.getHeader().getName().equals(compareValue.getHeader().getName())) {
+                    foundValues.add(analyseValue);
+                    break;
+                }
+            }
+        }
+
+        return foundValues;
     }
 
     private void organiseValuesByCategory(Iterable<Evalue> values) {

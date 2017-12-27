@@ -2,11 +2,12 @@ package com.xebia.headerbuddy.controllers;
 
 import com.xebia.headerbuddy.annotations.ValidOutput;
 import com.xebia.headerbuddy.annotations.ValidURL;
-import com.xebia.headerbuddy.models.Analyzer;
+import com.xebia.headerbuddy.models.HeaderAnalyzer;
 import com.xebia.headerbuddy.models.Header;
 import com.xebia.headerbuddy.models.entities.Ereport;
 import com.xebia.headerbuddy.models.entities.Euser;
 import com.xebia.headerbuddy.models.entities.Evalue;
+import com.xebia.headerbuddy.models.entities.repositories.EreportRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EvalueRepository;
 import com.xebia.headerbuddy.utilities.MethodHandler;
 import com.xebia.headerbuddy.utilities.ValueSerializer;
@@ -38,6 +39,9 @@ public class HeaderBuddyController {
     @Autowired
     private EuserRepository userRepository;
 
+    @Autowired
+    private EreportRepository reportRepository;
+
     @RequestMapping(value = "/headerbuddy/api")
     public ResponseEntity headerBuddy(@RequestParam(value = "url", required = true) @ValidURL String url,
                                               @RequestParam(value = "key", required = true) @ValidAPIKey String key,
@@ -63,10 +67,14 @@ public class HeaderBuddyController {
         }
 
         Set<Evalue> foundValues = ValueSerializer.convertToEvalue(foundHeaders);
-        Analyzer analyzer = new Analyzer(foundValues, valueRepository.findAll());
+        HeaderAnalyzer headerAnalyzer = new HeaderAnalyzer(foundValues, valueRepository.findAll());
 
+        // Perform the actual analysis
         Euser user = userRepository.findByApikey(key);
-        Ereport report = analyzer.analyseHeaders(user);
+        Ereport report = headerAnalyzer.analyseHeaders(user);
+
+        // Save report
+        reportRepository.save(report);
 
         return new ResponseEntity(report, HttpStatus.OK);
     }
