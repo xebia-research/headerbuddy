@@ -22,7 +22,6 @@ public class Euser {
     private String apikey;
 
     @NotNull
-    @JsonRawValue
     private String email;
 
     //Relations
@@ -41,7 +40,7 @@ public class Euser {
     }
 
     public Euser( String email) {
-        this("", email);
+        this.email = email;
     }
 
     public Euser( String aikey,  String email) {

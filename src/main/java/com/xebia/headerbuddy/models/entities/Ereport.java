@@ -31,6 +31,7 @@ public class Ereport {
     private Date date;
 
     //Relations
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Euser user;
