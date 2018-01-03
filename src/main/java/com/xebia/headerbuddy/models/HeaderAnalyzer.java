@@ -8,6 +8,7 @@ import com.xebia.headerbuddy.models.entities.Ereport;
 import com.xebia.headerbuddy.models.entities.Euser;
 import com.xebia.headerbuddy.models.entities.Evalue;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class HeaderAnalyzer {
@@ -42,11 +43,14 @@ public class HeaderAnalyzer {
         foundRecValues = analyzer.analyze(detectHeaders(foundValues, databaseDoValues), databaseRecValues);
 
         //Create one set with all values needed for report
-        Set<Evalue> reportValues = new HashSet<>();
+        Set<Evalue> reportValues = new LinkedHashSet<>();
         reportValues.addAll(missingDoValues);
         reportValues.addAll(foundDontValues);
         reportValues.addAll(foundRecValues);
 
+        for (Evalue val : reportValues){
+            System.out.println("Header: " + val.getHeader().getName() + ", category: " + val.getCategory().getName());
+        }
 
         Ereport report = new Ereport(user, reportValues);
 
