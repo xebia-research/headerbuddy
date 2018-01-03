@@ -28,8 +28,9 @@ INSERT INTO header (name) VALUES ("Cache-Control");
 # =========== Number: 11-20 ==============
 INSERT INTO header (name) VALUES ("Set-Cookie");
 INSERT INTO header (name) VALUES ("Pragma");
-INSERT INTO header (name) VALUES ("Vary");
-# =========== Number: 21-30 ==============
+INSERT INTO header (name) VALUES ("Public-Key-Pins");
+INSERT INTO header (name) VALUES ("Server-Timing");
+INSERT INTO header (name) VALUES ("X-Runtime");
 
 # ========================================
 # =========== Headerprofiles =============
@@ -92,8 +93,6 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("referrer
 INSERT INTO value (value, description, header_id, category_id) VALUES ("require-sri-for", "Requires the use of SRI for scripts or styles on the page.", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("upgrade-insecure-requests", "Instructs user agents to treat all of a site's insecure URLs (those served over HTTP) as though they have been replaced with secure URLs (those served over HTTPS). This directive is intended for web sites with large numbers of insecure legacy URLs that need to be rewritten.", 1, 1);
 
-
-
 # =========== Referrer-Policy =============
 INSERT INTO value (value, description, header_id, category_id) VALUES ("no-referrer", "The Referer header will be omitted entirely. No referrer information is sent along with requests.", 2, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("no-referrer-when-downgrade", "This is the user agent's default behavior if no policy is specified. The origin is sent as referrer to a-priori as-much-secure destination (HTTPS->HTTPS), but isn't sent to a less secure destination (HTTPS->HTTP).", 2, 1);
@@ -152,5 +151,16 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("HttpOnly
 INSERT INTO value (value, description, header_id, category_id) VALUES ("SameSite=Strict", "Allows servers to assert that a cookie ought not to be sent along with cross-site requests, which provides some protection against cross-site request forgery attacks (CSRF).", 11, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("SameSite=Lax", "Allows servers to assert that a cookie ought not to be sent along with cross-site requests, which provides some protection against cross-site request forgery attacks (CSRF).", 11, 1);
 
-# =========== X-Content-Type-Options ===========
+# =========== Pragma ===========
 INSERT INTO value (value, description, header_id, category_id) VALUES ("no-cache", "Same as Cache-Control: no-cache. Forces caches to submit the request to the origin server for validation before releasing a cached copy, It's recomended to use this only for backwards compatibility its better to use cache-control: no-cache.", 12, 3);
+
+# =========== Public-Key-Pins ===========
+INSERT INTO value (value, description, header_id, category_id) VALUES ("pin-sha256", "The quoted string is the Base64 encoded Subject Public Key Information (SPKI) fingerprint. It is possible to specify multiple pins for different public keys. Some browsers might allow other hashing algorithms than SHA-256 in the future, HPKP has the potential to lock out users for a long time if used incorrectly! The use of backup certificates and/or pinning the CA certificate is recommend.", 13, 3);
+
+# =========== Server-Timing ===========
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Never use this header in a live situation this makes the server an easyer target.", 14, 2);
+
+# =========== X-Runtime ===========
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Never use this header in a live situation this makes the server an easyer target.", 15, 2);
+
+
