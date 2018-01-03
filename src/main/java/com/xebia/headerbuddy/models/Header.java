@@ -2,7 +2,6 @@ package com.xebia.headerbuddy.models;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +13,7 @@ public class Header {
     private List<String> values;
     private List<String> urls;
 
-    public Header(String name, List<String> values, String site) {
+    public Header(final String name, final List<String> values, final String site) {
         this.name = Optional.ofNullable(name);
         this.values = values;
 

@@ -13,6 +13,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         configurer.favorPathExtension(false).
+                ignoreAcceptHeader(true).
                 favorParameter(true).
                 parameterName("output").
                 useJaf(false).
