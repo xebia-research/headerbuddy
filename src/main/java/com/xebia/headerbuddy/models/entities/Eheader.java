@@ -40,7 +40,7 @@ public class Eheader {
         this.name = name;
     }
 
-    public Eheader(final String name, Set<Evalue> values) {
+    public Eheader(final String name, final Set<Evalue> values) {
         this.name = name;
         this.values = values;
     }
@@ -56,7 +56,7 @@ public class Eheader {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -64,7 +64,7 @@ public class Eheader {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -72,7 +72,7 @@ public class Eheader {
         return profiles;
     }
 
-    public void setProfiles(Set<Eprofile> profiles) {
+    public void setProfiles(final Set<Eprofile> profiles) {
         this.profiles = profiles;
     }
 
@@ -80,7 +80,7 @@ public class Eheader {
         return values;
     }
 
-    public void setValues(Set<Evalue> values) {
+    public void setValues(final Set<Evalue> values) {
         this.values = values;
     }
 

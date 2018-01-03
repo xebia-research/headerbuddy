@@ -1,8 +1,6 @@
 package com.xebia.headerbuddy.models.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonRawValue;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -22,7 +20,6 @@ public class Euser {
     private String apikey;
 
     @NotNull
-    @JsonRawValue
     private String email;
 
     //Relations
@@ -40,11 +37,11 @@ public class Euser {
         //Default Constructor.
     }
 
-    public Euser( String email) {
+    public Euser(final String email) {
         this("", email);
     }
 
-    public Euser( String aikey,  String email) {
+    public Euser(final String aikey, final String email) {
         this.apikey = aikey;
         this.email = email;
     }
@@ -54,7 +51,7 @@ public class Euser {
         return apikey;
     }
 
-    public void setApikey(String apikey) {
+    public void setApikey(final String apikey) {
         this.apikey = apikey;
     }
 
@@ -62,7 +59,7 @@ public class Euser {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -70,7 +67,7 @@ public class Euser {
         return creationdate;
     }
 
-    public void setCreationdate(Date creationdate) {
+    public void setCreationdate(final Date creationdate) {
         this.creationdate = creationdate;
     }
 
@@ -78,7 +75,7 @@ public class Euser {
         return reports;
     }
 
-    public void setReports(Set<Ereport> reports) {
+    public void setReports(final Set<Ereport> reports) {
         this.reports = reports;
     }
 

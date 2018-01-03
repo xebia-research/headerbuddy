@@ -7,7 +7,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ValueSerializer {
+public final class ValueSerializer {
+
+    private ValueSerializer() {
+        //utility class
+    }
 
     public static Set<Evalue> convertToEvalue(List<Header> headers) {
         Set<Evalue> valuesSet = new HashSet<>();
