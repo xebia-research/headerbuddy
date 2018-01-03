@@ -1,5 +1,9 @@
 package com.xebia.headerbuddy.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -13,28 +17,34 @@ import java.util.Set;
 @Table(name = "user")
 public class Euser {
 
+    @JsonIgnore
     @Id
     private String apikey;
+
     @NotNull
+    @JsonRawValue
     private String email;
 
     //Relations
+    @JsonIgnore
     @NotNull
     @Column(columnDefinition = "DATETIME")
     private Date creationdate;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<Ereport> reports;
 
     //Constructors
     public Euser() {
-
+        //Default Constructor.
     }
 
-    public Euser(String email) {
+    public Euser( String email) {
         this("", email);
     }
 
-    public Euser(String aikey, String email) {
+    public Euser( String aikey,  String email) {
         this.apikey = aikey;
         this.email = email;
     }

@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface EheaderRepository extends CrudRepository<Eheader, Long> {
 
-    public List<Eheader> findByName(@Param("name") String name);
+    List<Eheader> findByName(@Param("name") String name);
 }

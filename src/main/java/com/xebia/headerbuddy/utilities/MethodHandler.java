@@ -5,7 +5,6 @@ import com.xebia.headerbuddy.models.RequestBehaviour;
 import org.apache.commons.lang.WordUtils;
 import org.eclipse.jgit.util.StringUtils;
 import org.reflections.Reflections;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

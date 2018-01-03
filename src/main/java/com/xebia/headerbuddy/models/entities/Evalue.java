@@ -1,5 +1,6 @@
 package com.xebia.headerbuddy.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -18,35 +19,45 @@ public class Evalue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Integer id;
     @NotNull
     private String value;
     private String description;
 
     //Relations
+    @JsonIgnore
     @ManyToMany(mappedBy = "values")
     private Set<Ereport> reports;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Ecategory category;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "header_id")
     private Eheader header;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "value")
     private Set<Eurl> urls;
 
     //Constructors
     public Evalue() {
-
+        //Default Constructor.
     }
 
-    public Evalue(String value, String description) {
+    public Evalue(final String value) {
+        this.value = value;
+    }
+
+    public Evalue(final String value, final String description) {
         this.value = value;
         this.description = description;
     }
 
-    public Evalue(String value, String description, Ecategory category) {
+    public Evalue(final String value, final String description, final Ecategory category) {
         this.value = value;
         this.description = description;
         this.category = category;

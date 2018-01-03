@@ -27,14 +27,14 @@ public class Eprofile {
 
     //Constructors
     public Eprofile() {
-
+        //Default Constructor.
     }
 
-    public Eprofile(String name){
+    public Eprofile(final String name) {
         this.name = name;
     }
 
-    public Eprofile(String name, Set<Eheader> headers) {
+    public Eprofile(final String name, final Set<Eheader> headers) {
         this.name = name;
         this.headers = headers;
     }

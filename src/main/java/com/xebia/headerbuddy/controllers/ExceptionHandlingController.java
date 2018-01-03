@@ -1,12 +1,8 @@
 package com.xebia.headerbuddy.controllers;
 
 import com.xebia.headerbuddy.models.CustomErrorModel;
-import org.hibernate.jpa.internal.schemagen.ScriptTargetOutputToFile;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.HttpMediaTypeException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

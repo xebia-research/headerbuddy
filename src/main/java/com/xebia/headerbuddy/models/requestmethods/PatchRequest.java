@@ -4,7 +4,7 @@ import com.xebia.headerbuddy.models.RequestBehaviour;
 
 public class PatchRequest extends RequestBehaviour {
 
-    public PatchRequest(String url) {
+    public PatchRequest(final String url) {
         super(url, "PATCH");
     }
 }
