@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EcategoryRepository extends CrudRepository<Ecategory, Long> {
 
-    public Iterable<Ecategory> findByName(@Param("name") String name);
+    Iterable<Ecategory> findByName(@Param("name") String name);
 }

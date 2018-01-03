@@ -5,13 +5,16 @@ import com.xebia.headerbuddy.models.RequestBehaviour;
 import org.apache.commons.lang.WordUtils;
 import org.eclipse.jgit.util.StringUtils;
 import org.reflections.Reflections;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class MethodHandler {
+public final class MethodHandler {
+
+    private MethodHandler() {
+        //utility class
+    }
 
     /*
      * @param {method} String of method(s) divided by a ,

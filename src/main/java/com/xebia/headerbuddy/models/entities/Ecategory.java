@@ -1,6 +1,12 @@
 package com.xebia.headerbuddy.models.entities;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -8,6 +14,7 @@ import java.util.Set;
 @Table(name = "category")
 public class Ecategory {
 
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -15,14 +22,16 @@ public class Ecategory {
     private String name;
 
     //Relations
+    @JsonIgnore
     @OneToMany(mappedBy = "value")
     private Set<Evalue> values;
 
     //Constructors
     public Ecategory() {
+        //Default Constructor.
     }
 
-    public Ecategory(String name) {
+    public Ecategory(final String name) {
         this.name = name;
     }
 

@@ -28,7 +28,6 @@
         <exclude name="ShortClassName"/>
     </rule>
 
-    <rule ref="rulesets/java/strictexception.xml/AvoidThrowingRawExceptionTypes"/>
     <rule ref="rulesets/java/strictexception.xml/AvoidRethrowingException"/>
     <rule ref="rulesets/java/design.xml/UncommentedEmptyConstructor"/>
 </ruleset>

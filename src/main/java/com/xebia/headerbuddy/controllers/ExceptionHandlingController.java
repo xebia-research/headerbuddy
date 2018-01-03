@@ -28,7 +28,6 @@ public class ExceptionHandlingController {
         String errorMessage = "";
         for (ConstraintViolation cv : cve.getConstraintViolations()) {
             errorMessage = cv.getMessage();
-            break;
         }
         return new ResponseEntity(new CustomErrorModel(errorMessage), HttpStatus.BAD_REQUEST);
     }
