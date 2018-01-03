@@ -63,7 +63,7 @@ public class Evalue {
         this.category = category;
     }
 
-    public Evalue(String value, String description, Ecategory category, Eheader header) {
+    public Evalue(final String value, final String description, final Ecategory category, final Eheader header) {
         this.value = value;
         this.description = description;
         this.category = category;
@@ -75,7 +75,7 @@ public class Evalue {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -83,7 +83,7 @@ public class Evalue {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(final String value) {
         this.value = value;
     }
 
@@ -91,7 +91,7 @@ public class Evalue {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -99,7 +99,7 @@ public class Evalue {
         return reports;
     }
 
-    public void setReports(Set<Ereport> reports) {
+    public void setReports(final Set<Ereport> reports) {
         this.reports = reports;
     }
 
@@ -107,7 +107,7 @@ public class Evalue {
         return category;
     }
 
-    public void setCategory(Ecategory category) {
+    public void setCategory(final Ecategory category) {
         this.category = category;
     }
 
@@ -115,7 +115,7 @@ public class Evalue {
         return header;
     }
 
-    public void setHeader(Eheader header) {
+    public void setHeader(final Eheader header) {
         this.header = header;
     }
 
@@ -123,7 +123,7 @@ public class Evalue {
         return urls;
     }
 
-    public void setUrls(Set<Eurl> urls) {
+    public void setUrls(final Set<Eurl> urls) {
         this.urls = urls;
     }
 
