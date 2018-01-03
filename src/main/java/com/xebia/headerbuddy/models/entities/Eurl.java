@@ -2,33 +2,57 @@ package com.xebia.headerbuddy.models.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
-import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "url")
 public class Eurl {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @NotNull
     private String url;
 
     //Relations
     @ManyToOne
-    @JoinColumn(name="report_id")
-    public Ereport report;
+    @JoinColumn(name = "value_id")
+    private Evalue value;
     @ManyToOne
-    @JoinColumn(name="value_id")
-    public Evalue value;
+    @JoinColumn(name = "report_id")
+    private Ereport report;
 
-    public Integer getId() { return id; }
+    //Constructors
+    public Eurl() {
+        //Default Constructor.
+    }
 
-    public void setId(Integer id) {
+    public Eurl(final String url) {
+        this.url = url;
+    }
+
+    public Eurl(final String url, final Evalue value) {
+        this.url = url;
+        this.value = value;
+    }
+
+    public Eurl(final String url, final Evalue value, final Ereport report) {
+        this.url = url;
+        this.value = value;
+        this.report = report;
+    }
+
+    //Getters and Setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -36,7 +60,24 @@ public class Eurl {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
+
+    public Ereport getReport() {
+        return report;
+    }
+
+    public void setReport(final Ereport report) {
+        this.report = report;
+    }
+
+    public Evalue getValue() {
+        return value;
+    }
+
+    public void setValue(final Evalue value) {
+        this.value = value;
+    }
+
 }

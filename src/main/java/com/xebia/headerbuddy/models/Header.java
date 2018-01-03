@@ -1,18 +1,19 @@
 package com.xebia.headerbuddy.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class Header {
     private Optional<String> name;
+    @JacksonXmlElementWrapper(localName = "values")
+    @JacksonXmlProperty(localName = "value")
     private List<String> values;
-    @JsonIgnore
     private List<String> urls;
 
-    public Header(String name, List<String> values, String site) {
+    public Header(final String name, final List<String> values, final String site) {
         this.name = Optional.ofNullable(name);
         this.values = values;
 
@@ -21,7 +22,7 @@ public class Header {
     }
 
     public String getName() {
-        if(!this.name.isPresent()) {
+        if (!this.name.isPresent()) {
             return "UNSPECIFIED";
         }
         return this.name.get();

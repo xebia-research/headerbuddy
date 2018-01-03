@@ -1,10 +1,9 @@
 package com.xebia.headerbuddy.utilities;
 
 import com.xebia.headerbuddy.models.Header;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 public class HeaderSerializer {
 
@@ -24,15 +23,15 @@ public class HeaderSerializer {
         String valueString = headerValues.toString().trim();
 
         //delete the first and last char those are useless
-        valueString = valueString.substring(1, valueString.length()-1);
+        valueString = valueString.substring(1, valueString.length() - 1);
 
         List<String> values = new ArrayList<>();
         int lastKnown = 0;
 
-        if(valueString.contains(",") || valueString.contains(";")) {
+        if (valueString.contains(",") || valueString.contains(";")) {
             for (int i = 0; i < valueString.length(); i++) {
                 //check for a , or ;
-                if(valueString.charAt(i) == ',' || valueString.charAt(i) == ';' ) {
+                if (valueString.charAt(i) == ',' || valueString.charAt(i) == ';') {
                     //get the string from the lastKnown to the iterator and trim it
                     values.add(valueString.substring(lastKnown, i).trim());
                     //update the last known and skip the , or ;
@@ -45,4 +44,5 @@ public class HeaderSerializer {
 
         return values;
     }
+
 }
