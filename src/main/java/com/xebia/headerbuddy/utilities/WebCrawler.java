@@ -14,13 +14,13 @@ import java.util.Set;
 public class WebCrawler {
 
     //unique set
-    private Set<String> pagesVisited = new HashSet<String>();
+    private Set<String> pagesVisited = new HashSet<>();
     //bunch of url's
-    private List<String> pagesToVisit = new LinkedList<String>();
+    private List<String> pagesToVisit = new LinkedList<>();
     //starting domain
     private String startUrl;
 
-    public WebCrawler(String startUrl) {
+    public WebCrawler(final String startUrl) {
         this.pagesToVisit.add(startUrl);
         this.startUrl = startUrl;
     }
@@ -28,10 +28,9 @@ public class WebCrawler {
         String url;
 
         // if true it continues till it finds an url that's not visited yet
-        do
-        {
+        do {
             url = this.pagesToVisit.remove(0);
-        } while(this.pagesVisited.contains(url));
+        } while (this.pagesVisited.contains(url));
 
         //check if domain is in the same starting domain
         String domain = new URL(url).getHost().startsWith("www.") ? new URL(url).getHost().substring(4) : new URL(url).getHost();
@@ -51,7 +50,7 @@ public class WebCrawler {
 
     public void crawl() {
         try {
-            while(!this.pagesToVisit.isEmpty()) {
+            while (!this.pagesToVisit.isEmpty()) {
                 String url = getUrl();
                 try {
                     Document doc = Jsoup.connect(url).get();
@@ -64,26 +63,16 @@ public class WebCrawler {
                         String lastCharInUri = uri.toString().substring(uri.toString().length() - 1, uri.toString().length());
                         if (lastCharInUri.equals("#") || lastCharInUri.equals("/")) {
                             pagesToVisit.add(uri.toString().substring(0, uri.toString().length() - 1));
-                        }
-                        else {
+                        } else {
                             pagesToVisit.add(uri.toString());
                         }
                     }
-                } catch(Exception e){
+                } catch (Exception e) {
                     // do nothing
                 }
             }
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             // Ignore
         }
-
-        // TODO remove
-        // Print visitedPages for debug purposes
-        System.out.println("--- crawl result ---");
-        for(String url : pagesVisited){
-            System.out.println(url);
-        }
-        System.out.println("--------------------");
     }
 }

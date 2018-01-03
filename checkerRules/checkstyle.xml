@@ -75,9 +75,9 @@
 
         <property name="tabWidth" value="4"/>
 
-        <module name="Indentation">
-            <property name="caseIndent" value="0"/>
-        </module>
+        <!--<module name="Indentation">-->
+            <!--<property name="caseIndent" value="0"/>-->
+        <!--</module>-->
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html
@@ -96,16 +96,16 @@
           <property name="checkHtml" value="false"/>
         </module>
         -->
-        <module name="JavadocType">
-            <property name="scope" value="public"/>
-        </module>
+        <!--<module name="JavadocType">-->
+        <!--<property name="scope" value="public"/>-->
+        <!--</module>-->
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->
-        <module name="ConstantName">
-            <property name="format"
-                      value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$|log"/>
-        </module>
+        <!--<module name="ConstantName">-->
+            <!--<property name="format"-->
+                      <!--value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$|log"/>-->
+        <!--</module>-->
         <module name="LocalFinalVariableName"/>
         <module name="LocalVariableName"/>
         <module name="MemberName"/>
@@ -146,7 +146,7 @@
         <!-- Checks for Size Violations.                    -->
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
         <module name="LineLength">
-            <property name="max" value="120"/>
+            <property name="max" value="200"/>
             <property name="ignorePattern" value="@version|@see|@todo|TODO|import"/>
         </module>
         <module name="MethodLength"/>
@@ -201,11 +201,11 @@
         <!--module name="AvoidInlineConditionals"/-->
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode"/>
-        <module name="HiddenField">
-            <property name="ignoreConstructorParameter" value="true"/>
-            <property name="ignoreSetter" value="true"/>
-            <property name="ignoreAbstractMethods" value="true"/>
-        </module>
+        <!--<module name="HiddenField">-->
+            <!--<property name="ignoreConstructorParameter" value="true"/>-->
+            <!--<property name="ignoreSetter" value="true"/>-->
+            <!--<property name="ignoreAbstractMethods" value="true"/>-->
+        <!--</module>-->
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
         <module name="MagicNumber">
@@ -237,8 +237,8 @@
         <!-- Checks for class design                         -->
         <!-- See http://checkstyle.sf.net/config_design.html -->
         <!-- <module name="DesignForExtension"/>  -->
-        <module name="FinalClass"/>
-        <module name="HideUtilityClassConstructor"/>
+        <!--<module name="FinalClass"/>-->
+        <!--<module name="HideUtilityClassConstructor"/>-->
         <module name="InterfaceIsType"/>
         <module name="VisibilityModifier"/>
         <module name="MutableException"/>

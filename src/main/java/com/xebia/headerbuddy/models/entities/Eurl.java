@@ -46,7 +46,7 @@ public class Eurl {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -54,7 +54,7 @@ public class Eurl {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
 
@@ -62,7 +62,8 @@ public class Eurl {
         return report;
     }
 
-    public void setReport(Ereport report) {
+    public void setReport(final Ereport report) {
         this.report = report;
     }
+
 }

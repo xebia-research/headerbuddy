@@ -55,8 +55,8 @@ public class HeaderBuddyController {
         List<Header> foundHeaders = new ArrayList<>();
         Set<String> visitedPages = new HashSet<>();
 
-        // TODO Make sure the found urls are also called
-        if (crawl){
+        if (crawl) {
+
             WebCrawler crawler = new WebCrawler(url);
             crawler.crawl();
             visitedPages = crawler.getVisitedPages();
@@ -91,7 +91,7 @@ public class HeaderBuddyController {
     }
 
     @RequestMapping(value = "/headerbuddy/key")
-    public ResponseEntity requestApiKey(@RequestParam(value = "email", required = true) @ValidEmail String email) throws Exception{
+    public ResponseEntity requestApiKey(@RequestParam(value = "email", required = true) @ValidEmail String email) throws Exception {
         // Get the api key
         ApiKey key = APIKeyGenerator.getKey(userRepository, email);
 
