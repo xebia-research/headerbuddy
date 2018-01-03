@@ -158,9 +158,9 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("no-cache
 INSERT INTO value (value, description, header_id, category_id) VALUES ("pin-sha256", "The quoted string is the Base64 encoded Subject Public Key Information (SPKI) fingerprint. It is possible to specify multiple pins for different public keys. Some browsers might allow other hashing algorithms than SHA-256 in the future, HPKP has the potential to lock out users for a long time if used incorrectly! The use of backup certificates and/or pinning the CA certificate is recommend.", 13, 3);
 
 # =========== Server-Timing ===========
-INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Never use this header in a live situation this makes the server an easyer target.", 14, 2);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Never use this header in a live situation this makes the server an easier target.", 14, 2);
 
 # =========== X-Runtime ===========
-INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Never use this header in a live situation this makes the server an easyer target.", 15, 2);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Never use this header in a live situation this makes the server an easier target.", 15, 2);
 
 
