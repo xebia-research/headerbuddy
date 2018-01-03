@@ -16,14 +16,8 @@ while getopts "a:u:m:o:s:k:p:i:h" arg; do
 		a)
 			EMAIL=${OPTARG//[[:blank:]]/}
 
-			if [ ! -z "$EMAIL" ]
-			then
-				GENERATEDKEY=$(curl http://$IP:$PORT/headerbuddy/key?email=$EMAIL)
-				echo "$GENERATEDKEY";
-			else
-				echo "Email is not valid."
-				exit
-			fi
+			GENERATEDKEY=$(curl http://$IP:$PORT/headerbuddy/key?email=$EMAIL)
+			echo "$GENERATEDKEY";
 			;;
 		u)
 			URL=${OPTARG//[[:blank:]]/}
@@ -103,4 +97,4 @@ fi
 
 
 
-exit 
+exit
