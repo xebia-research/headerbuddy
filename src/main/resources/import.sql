@@ -28,7 +28,9 @@ INSERT INTO header (name) VALUES ("Cache-Control");
 # =========== Number: 11-20 ==============
 INSERT INTO header (name) VALUES ("Set-Cookie");
 INSERT INTO header (name) VALUES ("Pragma");
-# =========== Number: 21-30 ==============
+INSERT INTO header (name) VALUES ("Public-Key-Pins");
+INSERT INTO header (name) VALUES ("Server-Timing");
+INSERT INTO header (name) VALUES ("X-Runtime");
 
 # ========================================
 # =========== Headerprofiles =============
@@ -91,8 +93,6 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("referrer
 INSERT INTO value (value, description, header_id, category_id) VALUES ("require-sri-for", "Requires the use of SRI for scripts or styles on the page.", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("upgrade-insecure-requests", "Instructs user agents to treat all of a site's insecure URLs (those served over HTTP) as though they have been replaced with secure URLs (those served over HTTPS). This directive is intended for web sites with large numbers of insecure legacy URLs that need to be rewritten.", 1, 1);
 
-
-
 # =========== Referrer-Policy =============
 INSERT INTO value (value, description, header_id, category_id) VALUES ("no-referrer", "The Referer header will be omitted entirely. No referrer information is sent along with requests.", 2, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("no-referrer-when-downgrade", "This is the user agent's default behavior if no policy is specified. The origin is sent as referrer to a-priori as-much-secure destination (HTTPS->HTTPS), but isn't sent to a less secure destination (HTTPS->HTTP).", 2, 1);
@@ -112,7 +112,7 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("SAMEORIG
 INSERT INTO value (value, description, header_id, category_id) VALUES ("ALLOW-FROM", "Only load frames from whitelisted sources.", 4, 1);
 
 # =========== Strict-Transport-Security =============
-INSERT INTO value (value, description, header_id, category_id) VALUES ("max-age=", "The time, in seconds, that the browser should remember that a site is only to be accessed using HTTPS.", 5, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("max-age", "The time, in seconds, that the browser should remember that a site is only to be accessed using HTTPS.", 5, 1);
 
 # =========== X-Powered-By ===========
 INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "This header shows potential vulnerable server information.", 6, 2);
@@ -124,7 +124,7 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Thi
 INSERT INTO value (value, description, header_id, category_id) VALUES ("0", "Disables XSS filtering, it's recommended to set this to 1 because older browser may not support the new headers.", 8, 3);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("1", "Enables XSS filtering (usually default in browsers). If a cross-site scripting attack is detected, the browser will sanitize the page (remove the unsafe parts).", 8, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("1; mode=block", "Enables XSS filtering. Rather than sanitizing the page, the browser will prevent rendering of the page if an attack is detected.", 8, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("1; report=", "Enables XSS filtering. If a cross-site scripting attack is detected, the browser will sanitize the page and report the violation. This uses the functionality of the CSP report-uri directive to send a report.", 8, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("1; report", "Enables XSS filtering. If a cross-site scripting attack is detected, the browser will sanitize the page and report the violation. This uses the functionality of the CSP report-uri directive to send a report.", 8, 1);
 
 # =========== X-Content-Type-Options ===========
 INSERT INTO value (value, description, header_id, category_id) VALUES ("nosniff", "Blocks a request if the requested type is: 'style' and the MIME type is not "text/css", or 'script' and the MIME type is not a JavaScript MIME type.", 9, 1);
@@ -137,19 +137,30 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("no-trans
 INSERT INTO value (value, description, header_id, category_id) VALUES ("public", "Indicates that the response may be cached by any cache. Because this header is depened on how the website is being used it's adviced to double check if you really need this. Because this header is depened on how the website is being used it's adviced to double check if you really need this.", 10, 3);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("private", "Indicates that the response is intended for a single user and must not be stored by a shared cache. A private cache may store the response. Because this header is depened on how the website is being used it's adviced to double check if you really need this.", 10, 3);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("proxy-revalidate", "Same as must-revalidate, but it only applies to shared caches (e.g., proxies) and is ignored by a private cache. Because this header is depened on how the website is being used it's adviced to double check if you really need this.", 10, 3);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("max-age=", "Specifies the maximum amount of time a resource will be considered fresh. Contrary to Expires, this directive is relative to the time of the request. Because this header is depened on how the website is being used it's adviced to double check if you really need this.", 10, 3);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("s-maxage=", "Overrides max-age or the Expires header, but it only applies to shared caches (e.g., proxies) and is ignored by a private cache. Because this header is depened on how the website is being used it's adviced to double check if you really need this.", 10, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("max-age", "Specifies the maximum amount of time a resource will be considered fresh. Contrary to Expires, this directive is relative to the time of the request. Because this header is depened on how the website is being used it's adviced to double check if you really need this.", 10, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("s-maxage", "Overrides max-age or the Expires header, but it only applies to shared caches (e.g., proxies) and is ignored by a private cache. Because this header is depened on how the website is being used it's adviced to double check if you really need this.", 10, 3);
 
 # =========== Set-Cookie ===========
-INSERT INTO value (value, description, header_id, category_id) VALUES ("<cookie-name>=<cookie-value>", "", 11, 3);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("Expires=", "It's not recommended to set this because a client can change his time stamp which can keep the sessionn alive alot longer.", 11, 3);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("Max-Age=", "Number of seconds until the cookie expires. A zero or negative number will expire the cookie immediately. Older browsers (ie6, ie7, and ie8) do not support max-age. For other browsers, if both (Expires and Max-Age) are set, Max-Age will have precedence.", 11, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("Domain=", "Be sure that this domain can be publicy shown.", 11, 3);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("Path=", "It's not smart to show the structure of your servers this can cause vulnerabilities.", 11, 2);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("", "", 11, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("Expires", "It's not recommended to set this because a client can change his time stamp which can keep the sessionn alive alot longer.", 11, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("Max-Age", "Number of seconds until the cookie expires. A zero or negative number will expire the cookie immediately. Older browsers (ie6, ie7, and ie8) do not support max-age. For other browsers, if both (Expires and Max-Age) are set, Max-Age will have precedence.", 11, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("Domain", "Be sure that this domain can be publicy shown.", 11, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("Path", "It's not smart to show the structure of your servers this can cause vulnerabilities.", 11, 2);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("Secure", "A secure cookie will only be sent to the server when a request is made using SSL and the HTTPS protocol. However, confidential or sensitive information should never be stored or transmitted in HTTP Cookies as the entire mechanism is inherently insecure and this doesn't mean that any information is encrypted, for example.", 11, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("HttpOnly", "HTTP-only cookies aren't accessible via JavaScript through the Document.cookie property, the XMLHttpRequest and Request APIs to mitigate attacks against cross-site scripting (XSS).", 11, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("SameSite=Strict", "Allows servers to assert that a cookie ought not to be sent along with cross-site requests, which provides some protection against cross-site request forgery attacks (CSRF).", 11, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("SameSite=Lax", "Allows servers to assert that a cookie ought not to be sent along with cross-site requests, which provides some protection against cross-site request forgery attacks (CSRF).", 11, 1);
 
-# =========== X-Content-Type-Options ===========
+# =========== Pragma ===========
 INSERT INTO value (value, description, header_id, category_id) VALUES ("no-cache", "Same as Cache-Control: no-cache. Forces caches to submit the request to the origin server for validation before releasing a cached copy, It's recomended to use this only for backwards compatibility its better to use cache-control: no-cache.", 12, 3);
+
+# =========== Public-Key-Pins ===========
+INSERT INTO value (value, description, header_id, category_id) VALUES ("pin-sha256", "The quoted string is the Base64 encoded Subject Public Key Information (SPKI) fingerprint. It is possible to specify multiple pins for different public keys. Some browsers might allow other hashing algorithms than SHA-256 in the future, HPKP has the potential to lock out users for a long time if used incorrectly! The use of backup certificates and/or pinning the CA certificate is recommend.", 13, 3);
+
+# =========== Server-Timing ===========
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Never use this header in a live situation this makes the server an easier target.", 14, 2);
+
+# =========== X-Runtime ===========
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Never use this header in a live situation this makes the server an easier target.", 15, 2);
+
+
