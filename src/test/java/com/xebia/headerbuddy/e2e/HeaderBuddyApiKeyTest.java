@@ -19,42 +19,42 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 // Run spring on a random port
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HeaderBuddyOutputTest {
+public class HeaderBuddyApiKeyTest {
 
     @Autowired
     private TestRestTemplate template;
     @Autowired
     private EuserRepository userRepository;
 
-    private String testedUrl = "http://andonoz.com";
-
     // Get the random port spring is running on
     @Value("${local.server.port}")
     private int port;
 
+    private String key = "abc";
+    private String email = "m@m.nl";
+    private String testedUrl = "http://www.andonoz.com";
+
     // Add the user for the api key
     @Before
     public void init(){
-        Euser u = new Euser("abc", "m@m.nl");
+        Euser u = new Euser(key, email);
         u.setCreationdate(new Date());
         userRepository.save(u);
     }
 
     @Test
-    public void HeaderBuddyOutputJsonTest() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedUrl;
+    public void HeaderBuddyCorrectApiKeyTest() {
+        String url = "http://localhost:"+port+"/headerbuddy/api?key="+ key +"&url=" + testedUrl;
 
-        ResponseEntity<String> jsonResponse = template.getForEntity(url + "output=json", String.class);
-        Assert.assertTrue("Response code should be 200 (Json response)", jsonResponse.getStatusCode().is2xxSuccessful());
-        Assert.assertTrue("Content type should be json", jsonResponse.getHeaders().getContentType().toString().equals("application/json;charset=UTF-8"));
+        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        Assert.assertTrue("Response code should be 200 (Correct api key)", response.getStatusCode().is2xxSuccessful());
     }
 
     @Test
-    public void HeaderBuddyOutputXmlTest() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+testedUrl;
+    public void HeaderBuddyWrongApiKeyTest() {
+        String url = "http://localhost:"+port+"/headerbuddy/api?key=wrong&url=" + testedUrl;
 
-        ResponseEntity<String> xmlResponse = template.getForEntity(url, String.class);
-        Assert.assertTrue("Response code should be 200 (Xml response)", xmlResponse.getStatusCode().is2xxSuccessful());
-        Assert.assertTrue("Content type should be xml", xmlResponse.getHeaders().getContentType().toString().equals("application/xml;charset=UTF-8"));
+        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        Assert.assertTrue("Response code should be 400 (Wrong api key)", response.getStatusCode().is4xxClientError());
     }
 }

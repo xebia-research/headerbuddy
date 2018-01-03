@@ -3,10 +3,9 @@ package com.xebia.headerbuddy.models;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 @JacksonXmlRootElement(localName = "report")
 public class Report {
