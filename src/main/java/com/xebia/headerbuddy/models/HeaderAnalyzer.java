@@ -48,10 +48,6 @@ public class HeaderAnalyzer {
         reportValues.addAll(foundDontValues);
         reportValues.addAll(foundRecValues);
 
-        for (Evalue val : reportValues){
-            System.out.println("Header: " + val.getHeader().getName() + ", category: " + val.getCategory().getName());
-        }
-
         Ereport report = new Ereport(user, reportValues);
 
         return report;

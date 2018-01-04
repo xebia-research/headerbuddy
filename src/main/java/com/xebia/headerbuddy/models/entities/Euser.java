@@ -37,7 +37,7 @@ public class Euser {
         //Default Constructor.
     }
 
-    public Euser( String email) {
+    public Euser(final String email) {
         this.email = email;
     }
 

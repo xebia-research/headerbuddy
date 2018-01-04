@@ -11,7 +11,11 @@ import com.xebia.headerbuddy.models.entities.Evalue;
 import com.xebia.headerbuddy.models.entities.repositories.EreportRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EurlRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EvalueRepository;
-import com.xebia.headerbuddy.utilities.*;
+import com.xebia.headerbuddy.utilities.WebCrawler;
+import com.xebia.headerbuddy.utilities.MethodHandler;
+import com.xebia.headerbuddy.utilities.ValueSerializer;
+import com.xebia.headerbuddy.utilities.UrlSerializer;
+import com.xebia.headerbuddy.utilities.APIKeyGenerator;
 import com.xebia.headerbuddy.annotations.ValidAPIKey;
 import com.xebia.headerbuddy.annotations.ValidEmail;
 import com.xebia.headerbuddy.annotations.ValidMethod;
@@ -82,7 +86,7 @@ public class HeaderBuddyController {
 
         // Save data
         reportRepository.save(report);
-        for (Eurl visitedUrl : visitedUrls){
+        for (Eurl visitedUrl : visitedUrls) {
             visitedUrl.setReport(report);
             urlRepository.save(visitedUrl);
         }

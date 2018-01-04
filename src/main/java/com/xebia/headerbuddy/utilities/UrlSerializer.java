@@ -9,7 +9,7 @@ public class UrlSerializer {
     public static Set<Eurl> convertToEurl(Set<String> urls) {
         Set<Eurl> urlSet = new HashSet<>();
 
-        for (String url : urls){
+        for (String url : urls) {
             urlSet.add(new Eurl(url));
         }
 
