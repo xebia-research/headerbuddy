@@ -2,9 +2,7 @@ package com.xebia.headerbuddy.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -13,8 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
@@ -34,16 +32,18 @@ public class Ereport {
     private Date date;
 
     //Relations
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Euser user;
 
+    @JsonProperty("visited pages")
+    @OneToMany(mappedBy = "report")
+    private Set<Eurl> urls;
+
+    @JsonProperty("advice")
     @ManyToMany
     private Set<Evalue> values;
-
-    @OneToMany(mappedBy = "report")
-    @JsonIgnore
-    private Set<Eurl> urls;
 
     //Constructors
     public Ereport() {
@@ -100,5 +100,4 @@ public class Ereport {
     public void setUrls(final Set<Eurl> urls) {
         this.urls = urls;
     }
-
 }
