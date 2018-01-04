@@ -3,12 +3,19 @@ package com.xebia.headerbuddy.models;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
 @JacksonXmlRootElement(localName = "report")
 public class Report {
+
+    // The logger
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     //start url
     private String url;
     private Date date;
@@ -24,6 +31,7 @@ public class Report {
         this.date = new Date();
         this.headers = new ArrayList<>();
         this.methods = new ArrayList<>();
+        logger.info("Report created");
     }
 
     public String getUrl() {
