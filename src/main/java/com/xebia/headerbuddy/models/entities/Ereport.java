@@ -2,6 +2,9 @@ package com.xebia.headerbuddy.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -24,6 +27,7 @@ public class Ereport {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     private int id;
+
     @NotNull
     @Column(columnDefinition = "DATETIME")
     @JsonFormat(pattern = "yyyy-MM-dd")
