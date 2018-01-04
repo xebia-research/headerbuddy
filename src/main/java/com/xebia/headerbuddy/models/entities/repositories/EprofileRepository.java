@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface EprofileRepository extends CrudRepository<Eprofile, Long> {
 
-    List<Eprofile> findByName(@Param("name") String name);
+    Iterable<Eprofile> findByName(@Param("name") String name);
 }

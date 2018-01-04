@@ -6,7 +6,8 @@ INSERT INTO user (apikey, email, creationdate) VALUES ("abc", "headerbuddy@defau
 # ========================================
 # ============== Profiles ================
 # ========================================
-INSERT INTO profile (name) VALUES ("browser");
+INSERT INTO profile (name) VALUES ("http");
+INSERT INTO profile (name) VALUES ("https");
 INSERT INTO profile (name) VALUES ("mobile");
 
 # ========================================
@@ -36,7 +37,7 @@ INSERT INTO header (name) VALUES ("X-Runtime");
 # =========== Headerprofiles =============
 # ========================================
 
-# =========== Browserprofiles ============
+# =========== HTTP profile ============
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 1);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 2);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 3);
@@ -49,8 +50,28 @@ INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 9);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 10);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 11);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 12);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 13);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 14);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 15);
 
-# =========== Mobileprofiles =============
+# =========== HTTPS profile ============
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 1);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 2);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 3);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 4);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 5);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 6);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 7);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 8);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 9);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 10);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 11);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 12);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 13);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 14);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 15);
+
+# =========== Mobile profile =============
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 1);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 2);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 3);

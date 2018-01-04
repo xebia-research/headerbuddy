@@ -8,19 +8,12 @@ import com.xebia.headerbuddy.models.entities.Ereport;
 import com.xebia.headerbuddy.models.entities.Eurl;
 import com.xebia.headerbuddy.models.entities.Euser;
 import com.xebia.headerbuddy.models.entities.Evalue;
-import com.xebia.headerbuddy.models.entities.repositories.EreportRepository;
-import com.xebia.headerbuddy.models.entities.repositories.EurlRepository;
-import com.xebia.headerbuddy.models.entities.repositories.EvalueRepository;
-import com.xebia.headerbuddy.utilities.WebCrawler;
-import com.xebia.headerbuddy.utilities.MethodHandler;
-import com.xebia.headerbuddy.utilities.ValueSerializer;
-import com.xebia.headerbuddy.utilities.UrlSerializer;
-import com.xebia.headerbuddy.utilities.APIKeyGenerator;
+import com.xebia.headerbuddy.models.entities.repositories.*;
+import com.xebia.headerbuddy.utilities.*;
 import com.xebia.headerbuddy.annotations.ValidAPIKey;
 import com.xebia.headerbuddy.annotations.ValidEmail;
 import com.xebia.headerbuddy.annotations.ValidMethod;
 import com.xebia.headerbuddy.models.ApiKey;
-import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +42,9 @@ public class HeaderBuddyController {
     @Autowired
     private EurlRepository urlRepository;
 
+    @Autowired
+    private EprofileRepository profileRepository;
+
     @RequestMapping(value = "/headerbuddy/api")
     public ResponseEntity headerBuddy(@RequestParam(value = "url", required = true) @ValidURL String url,
                                               @RequestParam(value = "key", required = true) @ValidAPIKey String key,
@@ -68,6 +64,8 @@ public class HeaderBuddyController {
             visitedPages.add(url);
         }
 
+        Set<Evalue> correctProtocolValues = ProtocolHandler.getEvaluesByProtocol(visitedPages, profileRepository, valueRepository);
+
         List<String> methodsInParameter = MethodHandler.getAllMethodsFromMethodParam(method);
 
         for (String methodInParameter : methodsInParameter) {
@@ -77,7 +75,7 @@ public class HeaderBuddyController {
 
         Set<Evalue> foundValues = ValueSerializer.convertToEvalue(foundHeaders);
         Set<Eurl> visitedUrls = UrlSerializer.convertToEurl(visitedPages);
-        HeaderAnalyzer headerAnalyzer = new HeaderAnalyzer(foundValues, valueRepository.findAll());
+        HeaderAnalyzer headerAnalyzer = new HeaderAnalyzer(foundValues, correctProtocolValues);
 
         // Perform the actual analysis
         Euser user = userRepository.findByApikey(key);
