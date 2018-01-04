@@ -18,6 +18,8 @@ import com.xebia.headerbuddy.models.ApiKey;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
 import com.xebia.headerbuddy.utilities.APIKeyGenerator;
 import com.xebia.headerbuddy.utilities.WebCrawler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,9 @@ import java.util.Set;
 @RestController
 @Validated
 public class HeaderBuddyController {
+
+    // The logger
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private EvalueRepository valueRepository;
@@ -75,6 +80,9 @@ public class HeaderBuddyController {
 
         // Save report
         reportRepository.save(report);
+        // log that the report was saved
+        logger.info("report saved");
+
 
         return new ResponseEntity(report, HttpStatus.OK);
     }
