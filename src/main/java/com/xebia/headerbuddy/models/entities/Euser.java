@@ -38,7 +38,7 @@ public class Euser {
     }
 
     public Euser(final String email) {
-        this("", email);
+        this.email = email;
     }
 
     public Euser(final String aikey, final String email) {
