@@ -153,7 +153,7 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("1; mode=
 INSERT INTO value (value, description, header_id, category_id) VALUES ("1; report", "Enables XSS filtering. If a cross-site scripting attack is detected, the browser will sanitize the page and report the violation. This uses the functionality of the CSP report-uri directive to send a report.", 8, 1);
 
 # =========== X-Content-Type-Options ===========
-INSERT INTO value (value, description, header_id, category_id) VALUES ("nosniff", "Blocks a request if the requested type is: 'style' and the MIME type is not "text/css", or 'script' and the MIME type is not a JavaScript MIME type.", 9, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("nosniff", "Blocks a request if the requested type is: 'style' and the MIME type is not text/css, or 'script' and the MIME type is not a JavaScript MIME type.", 9, 1);
 
 # =========== Cache-Control ===========
 INSERT INTO value (value, description, header_id, category_id) VALUES ("must-revalidate", "The cache must verify the status of the stale resources before using it and expired ones should not be used. Because this header is depened on how the website is being used it's adviced to double check if you really need this.", 10, 3);
