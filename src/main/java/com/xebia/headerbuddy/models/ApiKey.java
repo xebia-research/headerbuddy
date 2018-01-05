@@ -1,13 +1,13 @@
 package com.xebia.headerbuddy.models;
 
 public class ApiKey {
-    private String APIKey;
+    private String key;
 
-    public ApiKey(String apiKey){
-        this.APIKey = apiKey;
+    public ApiKey(final String apiKey) {
+        this.key = apiKey;
     }
 
-    public String getAPIKey() {
-        return APIKey;
+    public String getApiKey() {
+        return key;
     }
 }

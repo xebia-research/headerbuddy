@@ -15,7 +15,9 @@
     <rule ref="rulesets/java/clone.xml"/>
     <rule ref="rulesets/java/finalizers.xml"/>
     <rule ref="rulesets/java/imports.xml"/>
-    <rule ref="rulesets/java/logging-java.xml"/>
+    <rule ref="rulesets/java/logging-java.xml">
+            <exclude name="LoggerIsNotStaticFinal"/>
+    </rule>
     <rule ref="rulesets/java/braces.xml"/>
     <rule ref="rulesets/java/strings.xml"/>
     <rule ref="rulesets/java/basic.xml"/>
@@ -25,9 +27,9 @@
         <exclude name="ShortMethodName"/>
         <exclude name="ShortVariable"/>
         <exclude name="VariableNamingConventions"/>
+        <exclude name="ShortClassName"/>
     </rule>
 
-    <rule ref="rulesets/java/strictexception.xml/AvoidThrowingRawExceptionTypes"/>
     <rule ref="rulesets/java/strictexception.xml/AvoidRethrowingException"/>
     <rule ref="rulesets/java/design.xml/UncommentedEmptyConstructor"/>
 </ruleset>

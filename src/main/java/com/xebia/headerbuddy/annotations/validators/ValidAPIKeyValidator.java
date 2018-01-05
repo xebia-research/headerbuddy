@@ -25,7 +25,7 @@ public class ValidAPIKeyValidator implements ConstraintValidator<ValidAPIKey, St
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         // If a user exists with this api key the key is valid
-        if(userRepository.findByApikey(value) != null){
+        if (userRepository.findByApikey(value) != null) {
             return true;
         }
         return false;

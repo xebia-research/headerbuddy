@@ -26,11 +26,12 @@ public class Report {
     @JacksonXmlProperty(localName = "header")
     private List<Header> headers;
 
-    public Report(String url) {
+    public Report(final String url) {
         this.url = url;
         this.date = new Date();
         this.headers = new ArrayList<>();
         this.methods = new ArrayList<>();
+        // log that the report was created
         logger.info("Report created");
     }
 

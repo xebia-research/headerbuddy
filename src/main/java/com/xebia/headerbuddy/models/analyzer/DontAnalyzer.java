@@ -4,7 +4,7 @@ import com.xebia.headerbuddy.models.entities.Evalue;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DontAnalyzer implements Analyzer{
+public class DontAnalyzer implements Analyzer {
 
     @Override
     public Set<Evalue> analyze(Set<Evalue> toAnalyze, Set<Evalue> toCompare) {
