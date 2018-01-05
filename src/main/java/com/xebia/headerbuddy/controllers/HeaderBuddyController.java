@@ -92,6 +92,9 @@ public class HeaderBuddyController {
         // Get the api key
         ApiKey key = APIKeyGenerator.getKey(userRepository, email);
 
+        // log that a response entity is being created
+        logger.info("response entity is going to be created");
+
         return new ResponseEntity(key, HttpStatus.OK);
     }
 }
