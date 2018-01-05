@@ -40,7 +40,7 @@ public class HeaderAnalyzer {
         analyzer = new DontAnalyzer();
         foundDontValues = analyzer.analyze(foundValues, databaseDontValues);
         analyzer = new RecommendationAnalyzer();
-        foundRecValues = analyzer.analyze(detectHeaders(foundValues, databaseDoValues), databaseRecValues);
+        foundRecValues = analyzer.analyze(foundValues, databaseRecValues);
 
         //Create one set with all values needed for report
         Set<Evalue> reportValues = new LinkedHashSet<>();
@@ -58,8 +58,6 @@ public class HeaderAnalyzer {
 
         for (Evalue analyseValue : toAnalyseValues) {
             for (Evalue compareValue : toCompareValues) {
-
-
                 if (analyseValue.getHeader().getName().equals(compareValue.getHeader().getName())) {
                     foundValues.add(analyseValue);
                     break;

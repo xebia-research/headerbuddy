@@ -66,7 +66,6 @@ public class HeaderBuddyController {
         Set<String> visitedPages = new HashSet<>();
 
         if (crawl) {
-
             WebCrawler crawler = new WebCrawler(url);
             crawler.crawl();
             visitedPages = crawler.getVisitedPages();
@@ -74,6 +73,7 @@ public class HeaderBuddyController {
             visitedPages.add(url);
         }
 
+        //Get the correct values by protocol profile.
         Set<Evalue> correctProtocolValues = ProtocolHandler.getEvaluesByProtocol(visitedPages, profileRepository, valueRepository);
 
         List<String> methodsInParameter = MethodHandler.getAllMethodsFromMethodParam(method);

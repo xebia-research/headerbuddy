@@ -32,6 +32,8 @@ INSERT INTO header (name) VALUES ("Pragma");
 INSERT INTO header (name) VALUES ("Public-Key-Pins");
 INSERT INTO header (name) VALUES ("Server-Timing");
 INSERT INTO header (name) VALUES ("X-Runtime");
+INSERT INTO header (name) VALUES ("X-Content-Security-Policy");
+INSERT INTO header (name) VALUES ("X-Webkit-CSP");
 
 # ========================================
 # =========== Headerprofiles =============
@@ -42,7 +44,6 @@ INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 1);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 2);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 3);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 4);
-INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 5);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 6);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 7);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 8);
@@ -53,6 +54,8 @@ INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 12);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 13);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 14);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 15);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 16);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (1, 17);
 
 # =========== HTTPS profile ============
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 1);
@@ -70,6 +73,8 @@ INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 12);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 13);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 14);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 15);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 16);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 17);
 
 # =========== Mobile profile =============
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 1);
@@ -162,11 +167,9 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("max-age"
 INSERT INTO value (value, description, header_id, category_id) VALUES ("s-maxage", "Overrides max-age or the Expires header, but it only applies to shared caches (e.g., proxies) and is ignored by a private cache. Because this header is depened on how the website is being used it's adviced to double check if you really need this.", 10, 3);
 
 # =========== Set-Cookie ===========
-INSERT INTO value (value, description, header_id, category_id) VALUES ("", "", 11, 3);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("Expires", "It's not recommended to set this because a client can change his time stamp which can keep the sessionn alive alot longer.", 11, 3);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("Max-Age", "Number of seconds until the cookie expires. A zero or negative number will expire the cookie immediately. Older browsers (ie6, ie7, and ie8) do not support max-age. For other browsers, if both (Expires and Max-Age) are set, Max-Age will have precedence.", 11, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("Domain", "Be sure that this domain can be publicy shown.", 11, 3);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("Path", "It's not smart to show the structure of your servers this can cause vulnerabilities.", 11, 2);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("Secure", "A secure cookie will only be sent to the server when a request is made using SSL and the HTTPS protocol. However, confidential or sensitive information should never be stored or transmitted in HTTP Cookies as the entire mechanism is inherently insecure and this doesn't mean that any information is encrypted, for example.", 11, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("HttpOnly", "HTTP-only cookies aren't accessible via JavaScript through the Document.cookie property, the XMLHttpRequest and Request APIs to mitigate attacks against cross-site scripting (XSS).", 11, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("SameSite=Strict", "Allows servers to assert that a cookie ought not to be sent along with cross-site requests, which provides some protection against cross-site request forgery attacks (CSRF).", 11, 1);
@@ -184,4 +187,9 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Nev
 # =========== X-Runtime ===========
 INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Never use this header in a live situation this makes the server an easier target.", 15, 2);
 
+# =========== X-Content-Security-Policy ===========
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "It's recomended not to use this header because it is outdated, use 'Content-Security-Policy' instead. Note: Having both 'Content-Security-Policy' and 'X-Content-Security-Policy' active and the same can cause problems with diffrent browsers. ", 16, 3);
+
+# =========== X-Webkit-CSP ===========
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "It's recomended not to use this header because it is outdated, use 'Content-Security-Policy' instead. Note: Having both 'Content-Security-Policy' and 'X-Webkit-CSP' active and the same can cause problems with diffrent browsers.", 17, 3);
 
