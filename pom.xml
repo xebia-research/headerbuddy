@@ -114,7 +114,7 @@
                     </failOnViolation> <!-- this is actually true by default, but can be disabled -->
                     <printFailingErrors>true</printFailingErrors>
                     <rulesets>
-                        <ruleset>/checkerRules/pmd-ruleset_xml.xml</ruleset>
+                        <ruleset>/ruleSets/pmd-ruleset_xml.xml</ruleset>
                     </rulesets>
                 </configuration>
                 <executions>
@@ -137,7 +137,7 @@
                         <id>validate</id>
                         <phase>validate</phase>
                         <configuration>
-                            <configLocation>/checkerRules/checkstyle.xml</configLocation>
+                            <configLocation>/ruleSets/checkstyle.xml</configLocation>
                             <failOnViolation>false</failOnViolation>
                             <encoding>UTF-8</encoding>
                             <consoleOutput>true</consoleOutput>
@@ -157,7 +157,7 @@
                     <effort>Max</effort>
                     <threshold>med</threshold>
                     <xmlOutput>true</xmlOutput>
-                    <excludeFilterFile>/checkerRules/findbugs_exclude.xml</excludeFilterFile>
+                    <excludeFilterFile>/ruleSets/findbugs_exclude.xml</excludeFilterFile>
                 </configuration>
                 <executions>
                     <execution>
@@ -262,7 +262,7 @@
                 <artifactId>dependency-check-maven</artifactId>
                 <version>3.0.2</version>
                 <configuration>
-                    <outputDirectory>${basedir}/checkerReport</outputDirectory>
+                    <outputDirectory>globalReports</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -277,8 +277,8 @@
                 <artifactId>license-maven-plugin</artifactId>
                 <version>1.14</version>
                 <configuration>
-                    <licensesOutputDirectory>${basedir}/checkerReport</licensesOutputDirectory>
-                    <outputDirectory>${basedir}/checkerReport</outputDirectory>
+                    <licensesOutputDirectory>globalReports</licensesOutputDirectory>
+                    <outputDirectory>globalReports</outputDirectory>
                     <thirdPartyFilename>Third-Party-Licenses</thirdPartyFilename>
                 </configuration>
                 <executions>

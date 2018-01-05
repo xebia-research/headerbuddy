@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
-    <property name="LOG_FILE" value="${basedir}/target/logs/spring-boot-logging.log"/>
-    <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
-    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
-    <root level="WARN">
-        <appender-ref ref="FILE" />
+    <include resource="custom-file-appender.xml" />
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <root level="TRACE">
+        <appender-ref ref="DEBUG-FILE" />
+        <appender-ref ref="ERROR-WARN-FILE" />
+        <appender-ref ref="INFO-FILE" />
+        <appender-ref ref="TRACE-FILE" />
         <appender-ref ref="CONSOLE"/>
     </root>
 </configuration>
