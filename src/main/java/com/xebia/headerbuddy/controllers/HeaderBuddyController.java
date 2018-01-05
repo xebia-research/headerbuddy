@@ -11,16 +11,13 @@ import com.xebia.headerbuddy.models.entities.Evalue;
 import com.xebia.headerbuddy.models.entities.repositories.EreportRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EurlRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EvalueRepository;
-import com.xebia.headerbuddy.utilities.WebCrawler;
-import com.xebia.headerbuddy.utilities.MethodHandler;
-import com.xebia.headerbuddy.utilities.ValueSerializer;
-import com.xebia.headerbuddy.utilities.UrlSerializer;
-import com.xebia.headerbuddy.utilities.APIKeyGenerator;
+import com.xebia.headerbuddy.utilities.*;
 import com.xebia.headerbuddy.annotations.ValidAPIKey;
 import com.xebia.headerbuddy.annotations.ValidEmail;
 import com.xebia.headerbuddy.annotations.ValidMethod;
 import com.xebia.headerbuddy.models.ApiKey;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
+import org.rythmengine.Rythm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +25,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -89,6 +88,15 @@ public class HeaderBuddyController {
         for (Eurl visitedUrl : visitedUrls) {
             visitedUrl.setReport(report);
             urlRepository.save(visitedUrl);
+        }
+
+        if (output.equalsIgnoreCase("html")){
+            // Get html file from resources
+            ClassLoader cl = getClass().getClassLoader();
+            File htmlReport = new File(cl.getResource("report.html").getFile());
+
+            // Return rendered file
+            return new ResponseEntity(Rythm.render(htmlReport ,report), HttpStatus.OK);
         }
 
         return new ResponseEntity(report, HttpStatus.OK);

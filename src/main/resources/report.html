@@ -1,0 +1,69 @@
+@args(){
+	com.xebia.headerbuddy.models.entities.Ereport report
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HeaderBuddy</title>
+	<link rel='stylesheet' href='../style.css' />
+</head>
+<body>
+	<header class='main-header'>	
+		<div class='header-content content'>
+			<h1 class='title title-font'>Header<span class='lightblue title-font'>Buddy</span></h1>
+			<h3 class='subtitle'>you checked:</h3>
+			<h2 class='subtitle'><a href='@report.getUrls().iterator().next().getUrl()' target='_blank' class='lightblue'>@report.getUrls().iterator().next().getUrl()</a></h2>
+		</div>
+	</header>
+	
+	<div class='report-content content'>
+		
+		@if (report.getUrls().size() > 1) {
+		
+		<article class='found-urls'>
+			<h3>Checked URL's</h3>
+			<hr />
+			<table>
+			
+			@for(com.xebia.headerbuddy.models.entities.Eurl url : report.getUrls()) {
+			
+				<tr>
+					<td><a href='@url.getUrl()'>@url.getUrl()</a></td>
+				</tr>
+			
+			}
+			</table>
+		</article>
+
+		}
+		
+		@cache(){
+
+		<div class='headers'>
+			<h3>Found headers</h3>
+			<hr/>
+
+			@for (com.xebia.headerbuddy.models.entities.Evalue value : report.getValues()) {
+
+			<article class='single-header'>
+
+				<header class='cat-orange'>
+					<h3>@value.getCategory().getName()</h3>
+				</header>
+
+				<div class='single-header-content'>
+					<span class='code-text'>@value.getHeader().getName(): @value.getValue()</span>
+					<br />
+					<span class='header-desc'>@value.getDescription()</span>
+				</div>
+			</article>
+
+			}
+
+		</headers>
+
+		}
+
+	</div>
+</body>
+</html>
