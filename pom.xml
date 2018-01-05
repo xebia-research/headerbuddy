@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>headerbuddy</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Headerbuddy description todo</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -77,6 +77,16 @@
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
             <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>LATEST</version>
         </dependency>
     </dependencies>
 
