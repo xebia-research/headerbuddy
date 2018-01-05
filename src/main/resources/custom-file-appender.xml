@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
     <appender name="DEBUG-FILE" class="ch.qos.logback.core.FileAppender">
-        <file>${basedir}/globalReports/Logs/Debug-Log.log</file>
+        <file>${basedir}/src/main/resources/Logs/Debug-Log.log</file>
         <append>false</append>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>DEBUG</level>
@@ -15,7 +15,7 @@
         </encoder>
     </appender>
     <appender name="ERROR-WARN-FILE" class="ch.qos.logback.core.FileAppender">
-        <file>${basedir}/globalReports/Logs/Error-Warn-Log.log</file>
+        <file>${basedir}/src/main/resources/Logs/Error-Warn-Log.log</file>
         <append>false</append>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
@@ -27,7 +27,7 @@
         </encoder>
     </appender>
     <appender name="INFO-FILE" class="ch.qos.logback.core.FileAppender">
-        <file>${basedir}/globalReports/Logs/Info-Log.log</file>
+        <file>${basedir}/src/main/resources/Logs/Info-Log.log</file>
         <append>false</append>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
@@ -41,7 +41,7 @@
         </encoder>
     </appender>
     <appender name="TRACE-FILE" class="ch.qos.logback.core.FileAppender">
-        <file>${basedir}/globalReports/Logs/Trace-Log.log</file>
+        <file>${basedir}/src/main/resources/Logs/Trace-Log.log</file>
         <append>false</append>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>TRACE</level>
