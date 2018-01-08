@@ -1,5 +1,7 @@
 package com.xebia.headerbuddy.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -13,29 +15,34 @@ import java.util.Set;
 @Table(name = "user")
 public class Euser {
 
+    @JsonIgnore
     @Id
     private String apikey;
+
     @NotNull
     private String email;
 
     //Relations
+    @JsonIgnore
     @NotNull
     @Column(columnDefinition = "DATETIME")
     private Date creationdate;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<Ereport> reports;
 
     //Constructors
     public Euser() {
-
+        //Default Constructor.
     }
 
-    public Euser(String email) {
-        this("", email);
+    public Euser(final String email) {
+        this.email = email;
     }
 
-    public Euser(String apikey, String email) {
-        this.apikey = apikey;
+    public Euser(final String aikey, final String email) {
+        this.apikey = aikey;
         this.email = email;
     }
 
@@ -44,7 +51,7 @@ public class Euser {
         return apikey;
     }
 
-    public void setApikey(String apikey) {
+    public void setApikey(final String apikey) {
         this.apikey = apikey;
     }
 
@@ -52,7 +59,7 @@ public class Euser {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -60,7 +67,7 @@ public class Euser {
         return creationdate;
     }
 
-    public void setCreationdate(Date creationdate) {
+    public void setCreationdate(final Date creationdate) {
         this.creationdate = creationdate;
     }
 
@@ -68,7 +75,7 @@ public class Euser {
         return reports;
     }
 
-    public void setReports(Set<Ereport> reports) {
+    public void setReports(final Set<Ereport> reports) {
         this.reports = reports;
     }
 

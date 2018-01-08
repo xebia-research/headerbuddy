@@ -1,9 +1,9 @@
 package com.xebia.headerbuddy.models.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToMany;
 import javax.persistence.CascadeType;
@@ -22,19 +22,19 @@ public class Eprofile {
     private String name;
 
     //Relations
-    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Eheader> headers;
 
     //Constructors
     public Eprofile() {
-
+        //Default Constructor.
     }
 
-    public Eprofile(String name){
+    public Eprofile(final String name) {
         this.name = name;
     }
 
-    public Eprofile(String name, Set<Eheader> headers) {
+    public Eprofile(final String name, final Set<Eheader> headers) {
         this.name = name;
         this.headers = headers;
     }
@@ -44,7 +44,7 @@ public class Eprofile {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -52,7 +52,7 @@ public class Eprofile {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -60,7 +60,7 @@ public class Eprofile {
         return headers;
     }
 
-    public void setHeaders(Set<Eheader> headers) {
+    public void setHeaders(final Set<Eheader> headers) {
         this.headers = headers;
     }
 

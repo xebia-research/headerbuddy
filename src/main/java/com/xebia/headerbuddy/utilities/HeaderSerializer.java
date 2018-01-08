@@ -2,9 +2,9 @@ package com.xebia.headerbuddy.utilities;
 
 import com.xebia.headerbuddy.models.Header;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 public class HeaderSerializer {
 
@@ -45,4 +45,5 @@ public class HeaderSerializer {
 
         return values;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.xebia.headerbuddy.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "url")
 public class Eurl {
 
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -20,19 +22,31 @@ public class Eurl {
     private String url;
 
     //Relations
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "report_id")
     private Ereport report;
-    @ManyToOne
-    @JoinColumn(name = "value_id")
-    private Evalue value;
+
+    //Constructors
+    public Eurl() {
+        //Default Constructor.
+    }
+
+    public Eurl(final String url) {
+        this.url = url;
+    }
+
+    public Eurl(final String url, final Evalue value, final Ereport report) {
+        this.url = url;
+        this.report = report;
+    }
 
     //Getters and Setters
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -40,7 +54,7 @@ public class Eurl {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
 
@@ -48,16 +62,8 @@ public class Eurl {
         return report;
     }
 
-    public void setReport(Ereport report) {
+    public void setReport(final Ereport report) {
         this.report = report;
-    }
-
-    public Evalue getValue() {
-        return value;
-    }
-
-    public void setValue(Evalue value) {
-        this.value = value;
     }
 
 }

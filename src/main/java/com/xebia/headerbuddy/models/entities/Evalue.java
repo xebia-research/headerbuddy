@@ -1,5 +1,6 @@
 package com.xebia.headerbuddy.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -8,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -18,41 +19,48 @@ public class Evalue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Integer id;
     @NotNull
     private String value;
+    @Lob
     private String description;
 
     //Relations
+    @JsonIgnore
     @ManyToMany(mappedBy = "values")
     private Set<Ereport> reports;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Ecategory category;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "header_id")
     private Eheader header;
-    @OneToMany(mappedBy = "value")
-    private Set<Eurl> urls;
 
     //Constructors
     public Evalue() {
-
+        //Default Constructor.
     }
 
-    public Evalue(String value, String description) {
+    public Evalue(final String value) {
+        this.value = value;
+    }
+
+    public Evalue(final String value, final String description) {
         this.value = value;
         this.description = description;
     }
 
-    public Evalue(String value, String description, Ecategory category) {
+    public Evalue(final String value, final String description, final Ecategory category) {
         this.value = value;
         this.description = description;
         this.category = category;
     }
 
-    public Evalue(String value, String description, Ecategory category, Eheader header) {
+    public Evalue(final String value, final String description, final Ecategory category, final Eheader header) {
         this.value = value;
         this.description = description;
         this.category = category;
@@ -64,7 +72,7 @@ public class Evalue {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -72,7 +80,7 @@ public class Evalue {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(final String value) {
         this.value = value;
     }
 
@@ -80,7 +88,7 @@ public class Evalue {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -88,7 +96,7 @@ public class Evalue {
         return reports;
     }
 
-    public void setReports(Set<Ereport> reports) {
+    public void setReports(final Set<Ereport> reports) {
         this.reports = reports;
     }
 
@@ -96,7 +104,7 @@ public class Evalue {
         return category;
     }
 
-    public void setCategory(Ecategory category) {
+    public void setCategory(final Ecategory category) {
         this.category = category;
     }
 
@@ -104,16 +112,8 @@ public class Evalue {
         return header;
     }
 
-    public void setHeader(Eheader header) {
+    public void setHeader(final Eheader header) {
         this.header = header;
-    }
-
-    public Set<Eurl> getUrls() {
-        return urls;
-    }
-
-    public void setUrls(Set<Eurl> urls) {
-        this.urls = urls;
     }
 
 }
