@@ -1,6 +1,8 @@
 package com.xebia.headerbuddy.models;
 
 import com.xebia.headerbuddy.utilities.HeaderSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
@@ -12,6 +14,9 @@ import java.util.Map;
 import java.util.Optional;
 
 public abstract class RequestBehaviour {
+    // The logger
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private String url;
     private String methodName;
 
@@ -57,13 +62,13 @@ public abstract class RequestBehaviour {
             details = Optional.ofNullable(new CertificateDetails(connection.getServerCertificates()));
         } catch (MalformedURLException malEx) {
             //if it does'nt work the list is empty
-            //TODO log error
-        } catch (IOException ex) {
+            logger.error(malEx.getMessage());
+        } catch (IOException ioEx) {
             //if it does'nt work the list is empty
-            //TODO log error
-        } catch (Exception e) {
+            logger.error(ioEx.getMessage());
+        } catch (Exception ex) {
             //if it does'nt work the list is empty
-            //TODO log error
+            logger.error(ex.getMessage());
         }
         return details;
     }
