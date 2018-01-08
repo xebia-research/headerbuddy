@@ -1,10 +1,15 @@
 package com.xebia.headerbuddy.models;
 
 import com.xebia.headerbuddy.utilities.HeaderSerializer;
+
+import javax.net.ssl.HttpsURLConnection;
+import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public abstract class RequestBehaviour {
     private String url;
@@ -40,6 +45,29 @@ public abstract class RequestBehaviour {
         return headers;
     }
 
+    public Optional<CertificateDetails> getCertificateDetails() {
+        Optional<CertificateDetails> details = Optional.empty();
+
+        try {
+            URL target = new URL(this.url);
+
+            HttpsURLConnection connection = (HttpsURLConnection) target.openConnection();
+            connection.connect();
+
+            details = Optional.ofNullable(new CertificateDetails(connection.getServerCertificates()));
+        } catch (MalformedURLException malEx) {
+            //if it does'nt work the list is empty
+            //TODO log error
+        } catch (IOException ex) {
+            //if it does'nt work the list is empty
+            //TODO log error
+        } catch (Exception e) {
+            //if it does'nt work the list is empty
+            //TODO log error
+        }
+        return details;
+    }
+
     //Getters and setters
 
     public String getUrl() {
@@ -57,4 +85,5 @@ public abstract class RequestBehaviour {
     public void setMethodName(String methodName) {
         this.methodName = methodName;
     }
+
 }

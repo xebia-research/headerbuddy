@@ -2,9 +2,11 @@ package com.xebia.headerbuddy.controllers;
 
 import com.xebia.headerbuddy.annotations.ValidOutput;
 import com.xebia.headerbuddy.annotations.ValidURL;
+import com.xebia.headerbuddy.models.ApiKey;
+import com.xebia.headerbuddy.models.CertificateDetails;
 import com.xebia.headerbuddy.models.CustomErrorModel;
-import com.xebia.headerbuddy.models.HeaderAnalyzer;
 import com.xebia.headerbuddy.models.Header;
+import com.xebia.headerbuddy.models.HeaderAnalyzer;
 import com.xebia.headerbuddy.models.entities.Ereport;
 import com.xebia.headerbuddy.models.entities.Eurl;
 import com.xebia.headerbuddy.models.entities.Euser;
@@ -12,6 +14,7 @@ import com.xebia.headerbuddy.models.entities.Evalue;
 import com.xebia.headerbuddy.models.entities.repositories.EreportRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EurlRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EvalueRepository;
+import com.xebia.headerbuddy.models.requestmethods.GetRequest;
 import com.xebia.headerbuddy.utilities.WebCrawler;
 import com.xebia.headerbuddy.utilities.MethodHandler;
 import com.xebia.headerbuddy.utilities.ValueSerializer;
@@ -20,7 +23,6 @@ import com.xebia.headerbuddy.utilities.APIKeyGenerator;
 import com.xebia.headerbuddy.annotations.ValidAPIKey;
 import com.xebia.headerbuddy.annotations.ValidEmail;
 import com.xebia.headerbuddy.annotations.ValidMethod;
-import com.xebia.headerbuddy.models.ApiKey;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -35,10 +37,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+
 
 @RestController
 @Validated
@@ -107,6 +112,12 @@ public class HeaderBuddyController {
         for (Eurl visitedUrl : visitedUrls) {
             visitedUrl.setReport(report);
             urlRepository.save(visitedUrl);
+        }
+
+        //check certificate
+        Optional<CertificateDetails> certificate = new GetRequest(url).getCertificateDetails();
+        if (certificate.isPresent()) {
+            report.setNote("Certificate end date: " + certificate.get().getExpireDate());
         }
 
         return new ResponseEntity(report, HttpStatus.OK);
