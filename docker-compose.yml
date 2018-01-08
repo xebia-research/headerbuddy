@@ -3,7 +3,7 @@ services:
   headerbuddy:
     build: .
     build:
-      context: ./target/docker
+      context: ./
       dockerfile: Dockerfile
     ports:
         - 8080:8080
