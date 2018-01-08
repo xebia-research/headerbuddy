@@ -22,6 +22,8 @@ import com.xebia.headerbuddy.annotations.ValidEmail;
 import com.xebia.headerbuddy.annotations.ValidMethod;
 import com.xebia.headerbuddy.models.ApiKey;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -43,6 +45,9 @@ import java.util.Set;
 @RestController
 @Validated
 public class HeaderBuddyController {
+
+    // The logger
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private EvalueRepository valueRepository;
@@ -104,10 +109,14 @@ public class HeaderBuddyController {
 
         // Save data
         reportRepository.save(report);
+
         for (Eurl visitedUrl : visitedUrls) {
             visitedUrl.setReport(report);
             urlRepository.save(visitedUrl);
         }
+
+        // log that the report was saved
+        logger.info("report saved");
 
         return new ResponseEntity(report, HttpStatus.OK);
     }
@@ -121,6 +130,9 @@ public class HeaderBuddyController {
     public ResponseEntity requestApiKey(@ApiParam(value = "An email-address", required = true) @RequestParam(value = "email", required = true) @ValidEmail String email) throws Exception {
         // Get the api key
         ApiKey key = APIKeyGenerator.getKey(userRepository, email);
+
+        // log that a response entity is being created
+        logger.info("response entity is going to be created");
 
         return new ResponseEntity(key, HttpStatus.OK);
     }
