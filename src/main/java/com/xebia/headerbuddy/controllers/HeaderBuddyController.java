@@ -11,7 +11,11 @@ import com.xebia.headerbuddy.models.entities.Evalue;
 import com.xebia.headerbuddy.models.entities.repositories.EreportRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EurlRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EvalueRepository;
-import com.xebia.headerbuddy.utilities.*;
+import com.xebia.headerbuddy.utilities.WebCrawler;
+import com.xebia.headerbuddy.utilities.MethodHandler;
+import com.xebia.headerbuddy.utilities.ValueSerializer;
+import com.xebia.headerbuddy.utilities.UrlSerializer;
+import com.xebia.headerbuddy.utilities.APIKeyGenerator;
 import com.xebia.headerbuddy.annotations.ValidAPIKey;
 import com.xebia.headerbuddy.annotations.ValidEmail;
 import com.xebia.headerbuddy.annotations.ValidMethod;
@@ -90,13 +94,13 @@ public class HeaderBuddyController {
             urlRepository.save(visitedUrl);
         }
 
-        if (output.equalsIgnoreCase("html")){
+        if (output.equalsIgnoreCase("html")) {
             // Get html file from resources
             ClassLoader cl = getClass().getClassLoader();
             File htmlReport = new File(cl.getResource("report.html").getFile());
 
             // Return rendered file
-            return new ResponseEntity(Rythm.render(htmlReport ,report), HttpStatus.OK);
+            return new ResponseEntity(Rythm.render(htmlReport, report), HttpStatus.OK);
         }
 
         return new ResponseEntity(report, HttpStatus.OK);

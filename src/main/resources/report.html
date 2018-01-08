@@ -1,3 +1,4 @@
+@// Get the report given als the model for this view
 @args(){
 	com.xebia.headerbuddy.models.entities.Ereport report
 }
@@ -6,21 +7,43 @@
 <head>
     <title>HeaderBuddy</title>
 	<link rel='stylesheet' href='../style.css' />
+	<script>
+		// Source: https://css-tricks.com/snippets/javascript/get-url-variables/
+        function getQueryVariable(variable)
+        {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                if(pair[0] == variable){return pair[1];}
+            }
+            return("");
+        }
+	</script>
 </head>
 <body>
-	<header class='main-header'>	
-		<div class='header-content content'>
-			<h1 class='title title-font'>Header<span class='lightblue title-font'>Buddy</span></h1>
+	<header class='title-header'>
+		<div class='content'>
+			<h1 class='title title-font'>Header<span class='title-accent-color title-font'>Buddy</span></h1>
 			<h3 class='subtitle'>you checked:</h3>
-			<h2 class='subtitle'><a href='@report.getUrls().iterator().next().getUrl()' target='_blank' class='lightblue'>@report.getUrls().iterator().next().getUrl()</a></h2>
+			<h2 class='subtitle'>
+				<span class='title-accent-color'>
+					<script>
+						// Get called website from get variable
+						document.write(getQueryVariable("url"));
+					</script>
+					<noscript><span class="err-msg">Error retrieving url!</span></noscript>
+				</span>
+			</h2>
 		</div>
 	</header>
 	
 	<div class='report-content content'>
-		
+
+		@// only show the found urls if the report has more than one url.
 		@if (report.getUrls().size() > 1) {
 		
-		<article class='found-urls'>
+		<article class='wide-article urls'>
 			<h3>Checked URL's</h3>
 			<hr />
 			<table>
@@ -36,34 +59,92 @@
 		</article>
 
 		}
-		
-		@cache(){
+
+		<article class="wide-article legend">
+			<h3>Legend</h3>
+			<hr />
+
+			<div class="category">
+				<header>
+					<h3>DO</h3>
+				</header>
+				<p>
+					These are the headers that you don't have and should definitely implement.
+				</p>
+			</div>
+
+			<div class="category">
+				<header>
+					<h3>DONT</h3>
+				</header>
+				<p>
+					There are the headers that you do have but should not be implemented.
+				</p>
+			</div>
+
+			<div class="category">
+				<header>
+					<h3>RECOMMENDATION</h3>
+				</header>
+				<p>
+					These are the headers that you do have but are not correctly configured. Recommendations are heavily dependant on the application context.
+				</p>
+			</div>
+
+		</article>
 
 		<div class='headers'>
-			<h3>Found headers</h3>
+			<h3>Found vulnerabilities</h3>
 			<hr/>
 
+			@// Show every found vulnerability
 			@for (com.xebia.headerbuddy.models.entities.Evalue value : report.getValues()) {
 
 			<article class='single-header'>
 
-				<header class='cat-orange'>
-					<h3>@value.getCategory().getName()</h3>
-				</header>
+				@// If the vulnerability is a recommendation give it an orange background, else red
+				@if (value.getCategory().getName().equalsIgnoreCase("recommendation")) {
+					<header class="header-category orange-bg">
+				} else {
+					<header class="header-category red-bg">
+				}
+						<h3>@value.getCategory().getName()</h3>
+					</header>
 
 				<div class='single-header-content'>
-					<span class='code-text'>@value.getHeader().getName(): @value.getValue()</span>
+
+					@// If the vulnerability is a recommendation give the header value a red color
+					@if (value.getCategory().getName().equalsIgnoreCase("recommendation")) {
+						<span class='code-text'>@value.getHeader().getName():
+							<span class="red-text">@value.getValue()</span>
+						</span>
+					} else {
+						<span class='code-text'>@value.getHeader().getName(): @value.getValue()</span>
+					}
+
 					<br />
 					<span class='header-desc'>@value.getDescription()</span>
+				</div>
+			</article>
+
+			} else {
+
+			@// Show this if no vulnerabilities are found
+
+			<article class="single-header">
+				<header class="header-category green-bg">
+					<h3>:)</h3>
+				</header>
+				<div class="single-header-content">
+					<span class="header-desc">
+						No vulnerabilities found. Well done!
+					</span>
 				</div>
 			</article>
 
 			}
 
 		</headers>
-
-		}
-
 	</div>
 </body>
 </html>

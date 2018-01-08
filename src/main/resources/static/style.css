@@ -1,5 +1,6 @@
 /* FONTS */
 @import url('https://fonts.googleapis.com/css?family=Inconsolata|Patua+One|Roboto');
+/* GENERAL */
 * {
 	margin: 0px;
 	padding: 0px;
@@ -11,88 +12,109 @@ body {
 	background-repeat: repeat;
 	background-color: #F0F0F0;
 }
-.container {
-	max-width: 900px;
-	background-color: #FFF;
-	margin: auto;
-}
-.content {
-	max-width: 900px;
-	margin: auto;
-}
 hr {
 	border: 0px;
 	height: 1px;
 	background-color: #CCC;
 }
-.lightblue{
-	color: #efc3e8;
+.content {
+	max-width: 900px;
+	margin: auto;
 }
-.title-font{
+.title-font {
 	font-family: 'Patua One', sans-serif;
 }
+.title-accent-color {
+	color: #efc3e8;
+}
+.wide-article {
+	margin-top: 20px;
+	padding: 20px;
+	width: calc(100% - 40px);
+}
+.red-text {
+	color: #FF0000;
+}
+.red-bg {
+	background-color: #F00;
+}
+.orange-bg {
+	background-color: #F93;
+}
+.green-bg {
+	background-color: #3C3;
+}
+.err-msg {
+	background-color: #F00;
+	color: #FFF;
+}
 /* HEADER */
-.main-header {
+.title-header {
 	width: 100%;
 	background-color: #6c1d5f;
 	border-bottom: 4px solid #b5309f;
 	padding: 20px 0px;
 }
-.header-content {
+.title-header .content {
 	text-align: center;
 }
-.main-header .title {
+.title-header .title {
 	color: #FFF;
 	margin-bottom: 20px;
 	font-size: 40px;
 }
-.main-header .subtitle {
+.title-header .subtitle {
 	color: #FFF;
 	word-break: break-all;
 }
 /* REPORT */
-.report-content{
-	padding: 20px 0px;
-}
 article {
 	width: 100%;
 	background-color: #FFF;
 	box-shadow: 3px 3px 0px 0px #CCC;
 }
-/* USER DETAILS */
-.found-urls {
-	padding: 20px;
-	width: calc(100% - 40px);
-}
-.found-urls table{
+/* FOUND URLS */
+.urls table {
 	margin-top: 10px;
 	border-spacing: 10px;
 }
-.found-urls table .value{
+.urls table .value {
 	font-family: 'Inconsolata', serif;
 	word-break: break-all;
 }
-/* HEADERS */
+/* LEGEND */
+.legend hr {
+	margin-bottom: 10px;
+}
+.legend .category {
+	padding: 10px;
+}
+.legend .category header {
+	width: calc(100% - 10px);
+	background-color: #E0E0E0;
+	padding: 5px;
+}
+.legend .category p {
+	width: calc(100% - 30px);
+	padding: 10px 15px;
+	word-break: break-all;
+}
+/* FOUND HEADERS */
 .headers {
 	padding: 20px;
 }
 .single-header {
 	margin: 20px 0px;
 }
-.single-header header{
+.header-category {
 	width: calc(100% - 20px);
 	padding: 10px;
 }
-.single-header header h3{
+.single-header .header-category h3 {
 	color: #FFF;
+	text-transform: uppercase;
 }
-.single-header .cat-red{
-	background-color: #F00;
-}
-.single-header .cat-orange{
-	background-color: #F93; 
-}
-.single-header-content{
+.single-header-content {
 	padding: 20px;
 }
 .code-text {
