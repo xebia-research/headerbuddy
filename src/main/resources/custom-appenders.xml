@@ -54,4 +54,13 @@
             <pattern>%d{dd-MM-yyyy HH:mm:ss}%n time since start in ms %-4relative. thread [%thread]. level of event [%-5level].%n occurred in class %C. logger: %logger{0}:%n  message:%n  - %msg%n%n</pattern>
         </encoder>
     </appender>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
 </included>
