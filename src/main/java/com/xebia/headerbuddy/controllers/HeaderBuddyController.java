@@ -91,7 +91,7 @@ public class HeaderBuddyController {
         }
 
         //Get the correct values by protocol profile.
-        Set<Evalue> correctProtocolValues = ProtocolHandler.getEvaluesByProtocol(visitedPages, profileRepository, valueRepository);
+        Set<Evalue> correctProtocolValues = ProtocolHandler.getEvaluesByProtocol(visitedPages, profileRepository.findAll(), valueRepository.findAll());
 
         List<String> methodsInParameter = MethodHandler.getAllMethodsFromMethodParam(method);
 
@@ -107,6 +107,7 @@ public class HeaderBuddyController {
         // Perform the actual analysis
         Euser user = userRepository.findByApikey(key);
         Ereport report = headerAnalyzer.analyseHeaders(user);
+        report.setProfile(ProtocolHandler.getUsedProtocol());
         report.setUrls(visitedUrls);
 
         // Save data

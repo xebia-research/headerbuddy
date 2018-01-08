@@ -2,25 +2,24 @@ package com.xebia.headerbuddy.utilities;
 
 import com.xebia.headerbuddy.models.entities.Eprofile;
 import com.xebia.headerbuddy.models.entities.Evalue;
-import com.xebia.headerbuddy.models.entities.repositories.EprofileRepository;
-import com.xebia.headerbuddy.models.entities.repositories.EvalueRepository;
-
 import java.util.HashSet;
 import java.util.Set;
 
 public class ProtocolHandler {
 
-    public static Set<Evalue> getEvaluesByProtocol(Set<String> urls, EprofileRepository profiles, EvalueRepository values) {
+    private static String usedProtocol;
+
+    public static Set<Evalue> getEvaluesByProtocol(Set<String> urls, Iterable<Eprofile> profiles, Iterable<Evalue> values) {
         Set<Evalue> correctEvalues = new HashSet<Evalue>();
 
         //Trim all the urls to just the protocols that are being used.
         Set<String> protocols = convertToProtocolSet(urls);
 
         //Define what protocol needs to be used for the analayzer
-        String finalProtocol = getFinalProtocol(protocols, profiles.findAll());
+        String finalProtocol = getFinalProtocol(protocols, profiles);
 
         //Add all values by correct protocol profile.
-        for (Evalue value : values.findAll()) {
+        for (Evalue value : values) {
             for (Eprofile profile : value.getHeader().getProfiles()) {
                 if (profile.getName().equals(finalProtocol)) {
                     correctEvalues.add(value);
@@ -44,11 +43,16 @@ public class ProtocolHandler {
         }
 
         //Define what protocol needs to be used.
+        String protocol;
+
         if (foundProtocols.contains("https")) {
-            return "https";
+            protocol = "https";
         } else {
-            return "http";
+            protocol = "http";
         }
+
+        usedProtocol = protocol;
+        return protocol;
     }
 
 
@@ -59,5 +63,9 @@ public class ProtocolHandler {
             protocols.add(trimmedToProtocol);
         }
         return protocols;
+    }
+
+    public static String getUsedProtocol() {
+        return usedProtocol;
     }
 }
