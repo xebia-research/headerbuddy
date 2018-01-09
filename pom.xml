@@ -30,19 +30,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>1.5.9.RELEASE</version>
             <exclusions>
-                <exclusion>  <!-- declare the exclusion here -->
+                <exclusion>
                     <groupId>org.apache.tomcat</groupId>
                     <artifactId>tomcat-annotations-api</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
-
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.tomcat</groupId>-->
-            <!--<artifactId>tomcat-annotations-api</artifactId>-->
-            <!--<version>9.0.2</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -121,7 +114,7 @@
             <artifactId>springfox-swagger2</artifactId>
             <version>LATEST</version>
             <exclusions>
-                <exclusion>  <!-- declare the exclusion here -->
+                <exclusion>
                     <groupId>org.mapstruct</groupId>
                     <artifactId>mapstruct</artifactId>
                 </exclusion>
