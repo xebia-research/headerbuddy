@@ -14,14 +14,14 @@ import javax.validation.ConstraintViolationException;
 import java.io.File;
 
 @RestControllerAdvice
-public class ExceptionHandlingController{
+public class ExceptionHandlingController {
     // Universal Exception handler
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ResponseEntity handleException(Exception exception, HttpServletRequest req) {
         ResponseEntity responseEntity = getHtmlErrorIfApplicable(req, exception.getMessage());
 
-        if (responseEntity == null){
+        if (responseEntity == null) {
             responseEntity = new ResponseEntity(new CustomErrorModel(exception.getMessage()), HttpStatus.BAD_REQUEST);
         }
 
@@ -33,7 +33,7 @@ public class ExceptionHandlingController{
     @ResponseBody
     public ResponseEntity handleConstraintException(ConstraintViolationException cve, HttpServletRequest req) {
         String errorMessage = "";
-        for (ConstraintViolation cv : cve.getConstraintViolations()){
+        for (ConstraintViolation cv : cve.getConstraintViolations()) {
             errorMessage = cv.getMessage();
         }
 
@@ -46,8 +46,8 @@ public class ExceptionHandlingController{
         return responseEntity;
     }
 
-    private ResponseEntity getHtmlErrorIfApplicable(HttpServletRequest req, String errorMessage){
-        if (req.getQueryString().contains("output=html")){
+    private ResponseEntity getHtmlErrorIfApplicable(HttpServletRequest req, String errorMessage) {
+        if (req.getQueryString().contains("output=html")) {
             // Get html file from resources
             ClassLoader cl = getClass().getClassLoader();
             File htmlErr = new File(cl.getResource("error.html").getFile());
