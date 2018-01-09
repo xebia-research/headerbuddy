@@ -22,7 +22,7 @@ public class RecommendationAnalyzer implements Analyzer {
                 String compareValueName = compareValue.getValue();
 
                 //Header and value needs to be the same. If the value of the database is '*' it needs to be added in any case.
-                if ((analyseHeaderName.equals(compareHeaderName) && analyseValueName.equals(compareValueName)) || (analyseHeaderName.equals(compareHeaderName) && compareValueName.equals("*"))) {
+                if (analyseHeaderName.equalsIgnoreCase(compareHeaderName) && (analyseValueName.equalsIgnoreCase(compareValueName) || compareValueName.equalsIgnoreCase("*"))) {
                     //Found not recommended value
                     foundValues.add(compareValue);
                     break;
