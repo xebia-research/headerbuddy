@@ -176,7 +176,7 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("SameSite
 INSERT INTO value (value, description, header_id, category_id) VALUES ("SameSite=Lax", "Allows servers to assert that a cookie ought not to be sent along with cross-site requests, which provides some protection against cross-site request forgery attacks (CSRF).", 11, 1);
 
 # =========== Pragma ===========
-INSERT INTO value (value, description, header_id, category_id) VALUES ("no-cache", "Same as Cache-Control: no-cache. Forces caches to submit the request to the origin server for validation before releasing a cached copy, It's Recommended to use this only for backwards compatibility its better to use cache-control: no-cache.", 12, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("no-cache", "Same as Cache-Control: no-cache. Forces caches to submit the request to the origin server for validation before releasing a cached copy, It's recommended to use this only for backwards compatibility its better to use cache-control: no-cache.", 12, 3);
 
 # =========== Public-Key-Pins ===========
 INSERT INTO value (value, description, header_id, category_id) VALUES ("pin-sha256", "The quoted string is the Base64 encoded Subject Public Key Information (SPKI) fingerprint. It is possible to specify multiple pins for different public keys. Some browsers might allow other hashing algorithms than SHA-256 in the future, HPKP has the potential to lock out users for a long time if used incorrectly! The use of backup certificates and/or pinning the CA certificate is recommend.", 13, 3);
@@ -188,8 +188,8 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Nev
 INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Never use this header in a live situation this makes the server an easier target.", 15, 2);
 
 # =========== X-Content-Security-Policy ===========
-INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "It's Recommended not to use this header because it is outdated, use 'Content-Security-Policy' instead. Note: Implementing both 'Content-Security-Policy' and 'X-Content-Security-Policy' can cause problems depending on the used browsers.", 16, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "It's recommended not to use this header because it is outdated, use 'Content-Security-Policy' instead. Note: Implementing both 'Content-Security-Policy' and 'X-Content-Security-Policy' can cause problems depending on the used browsers.", 16, 3);
 
 # =========== X-Webkit-CSP ===========
-INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "It's Recommended not to use this header because it is outdated, use 'Content-Security-Policy' instead. Note: Implementing both 'Content-Security-Policy' and 'X-Webkit-CSP' can cause problems depending on the used browsers.", 17, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "It's recommended not to use this header because it is outdated, use 'Content-Security-Policy' instead. Note: Implementing both 'Content-Security-Policy' and 'X-Webkit-CSP' can cause problems depending on the used browsers.", 17, 3);
 
