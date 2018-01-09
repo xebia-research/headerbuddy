@@ -188,8 +188,8 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Nev
 INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Never use this header in a live situation this makes the server an easier target.", 15, 2);
 
 # =========== X-Content-Security-Policy ===========
-INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "It's recomended not to use this header because it is outdated, use 'Content-Security-Policy' instead. Note: Having both 'Content-Security-Policy' and 'X-Content-Security-Policy' active and the same can cause problems with diffrent browsers. ", 16, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "It's recomended not to use this header because it is outdated, use 'Content-Security-Policy' instead. Note: Implementing both 'Content-Security-Policy' and 'X-Content-Security-Policy' can cause problems depending on the used browsers.", 16, 3);
 
 # =========== X-Webkit-CSP ===========
-INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "It's recomended not to use this header because it is outdated, use 'Content-Security-Policy' instead. Note: Having both 'Content-Security-Policy' and 'X-Webkit-CSP' active and the same can cause problems with diffrent browsers.", 17, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "It's recomended not to use this header because it is outdated, use 'Content-Security-Policy' instead. Note: Implementing both 'Content-Security-Policy' and 'X-Webkit-CSP' can cause problems depending on the used browsers.", 17, 3);
 

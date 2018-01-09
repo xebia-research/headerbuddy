@@ -1,8 +1,6 @@
 package com.xebia.headerbuddy.models.analyzer;
 
 import com.xebia.headerbuddy.models.entities.Evalue;
-
-
 import java.util.HashSet;
 import java.util.Set;
 
