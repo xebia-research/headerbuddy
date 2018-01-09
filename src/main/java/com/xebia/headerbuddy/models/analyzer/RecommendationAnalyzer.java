@@ -14,8 +14,13 @@ public class RecommendationAnalyzer implements Analyzer {
         for (Evalue analyseValue : toAnalyze) {
             for (Evalue compareValue : toCompare) {
 
-                //Header and value needs to be the same
-                if (analyseValue.getHeader().getName().equals(compareValue.getHeader().getName()) && analyseValue.getValue().equals(compareValue.getValue())) {
+                String analyseHeaderName = analyseValue.getHeader().getName();
+                String compareHeaderName = compareValue.getHeader().getName();
+                String analyseValueName = analyseValue.getValue();
+                String compareValueName = compareValue.getValue();
+
+                //Header and value needs to be the same. If the value of the database is '*' it needs to be added in any case.
+                if (analyseHeaderName.equalsIgnoreCase(compareHeaderName) && (analyseValueName.equalsIgnoreCase(compareValueName) || compareValueName.equalsIgnoreCase("*"))) {
                     //Found not recommended value
                     foundValues.add(compareValue);
                     break;
