@@ -71,8 +71,6 @@ public final class MethodHandler {
                 // Create new instance of found class
                 RequestBehaviour instance = (RequestBehaviour) classInst.getConstructor(String.class).newInstance(url);
                 foundHeaders.addAll(instance.doRequest());
-
-                System.out.println("Excecuted " + requestMethod + " request for url: " + url);
             }
         }
 
