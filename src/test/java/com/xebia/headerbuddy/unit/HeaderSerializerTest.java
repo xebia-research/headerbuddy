@@ -14,7 +14,6 @@ public class HeaderSerializerTest {
     static final String WEBSITE = "http://website.com";
     static final String HEADER1 = "X-Frame-Options";
     static final String HEADER2 = "Server";
-    static final String HEADER3 = "Server";
     static final String VALUE1 = "Value1=1";
     static final String VALUE2 = "value2";
     static final String VALUE3 = "value3=httponly";

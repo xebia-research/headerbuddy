@@ -13,23 +13,39 @@ import java.util.Set;
 
 public class ProtocolHandlerTest {
 
+    // Arrange
+    static final Eheader header1 = new Eheader("header1");
+    static final Eheader header2 = new Eheader("header2");
+    static final Eheader header3 = new Eheader("header3");
+    static final Eheader header4 = new Eheader("header4");
+
+    static final Ecategory cat1 = new Ecategory("do");
+
+    static final Evalue val1 = new Evalue("value1", "", cat1, header1);
+    static final Evalue val2 = new Evalue("value2", "", cat1, header2);
+    static final Evalue val3 = new Evalue("unsafe", "", cat1, header3);
+    static final Evalue val4 = new Evalue("onlyhttps", "", cat1, header4);
+
+    static final Eprofile prof1 = new Eprofile("http");
+    static final Eprofile prof2 = new Eprofile("https");
+
+    //Dummy database data for values.
+    static final Iterable<Evalue> databaseValues = new HashSet<Evalue>() {{
+        add(val1);
+        add(val2);
+        add(val3);
+        add(val4);
+    }};
+
+    //Dummy database data for profiles.
+    static final Iterable<Eprofile> databaseProfiles = new HashSet<Eprofile>(){{
+        add(prof1);
+        add(prof2);
+    }};
+
     @Test
     public void getEvaluesByProtocolTestWithOnlyHttp(){
-        // Arrange
-        Eheader header1 = new Eheader("header1");
-        Eheader header2 = new Eheader("header2");
-        Eheader header3 = new Eheader("header3");
-        Eheader header4 = new Eheader("header4");
-
-        Ecategory cat1 = new Ecategory("do");
-
-        Evalue val1 = new Evalue("value1", "", cat1, header1);
-        Evalue val2 = new Evalue("value2", "", cat1, header2);
-        Evalue val3 = new Evalue("unsafe", "", cat1, header3);
-        Evalue val4 = new Evalue("onlyhttps", "", cat1, header4);
-
-        Eprofile prof1 = new Eprofile("http");
-        Eprofile prof2 = new Eprofile("https");
+        //arrange
 
         //Setting the profiles to the headers.
         header1.setProfiles(new HashSet<Eprofile>(){{
@@ -50,20 +66,6 @@ public class ProtocolHandlerTest {
         header4.setProfiles(new HashSet<Eprofile>(){{
             add(prof2);
         }});
-
-        //Dummy database data for values.
-        Iterable<Evalue> databaseValues = new HashSet<Evalue>() {{
-            add(val1);
-            add(val2);
-            add(val3);
-            add(val4);
-        }};
-
-        //Dummy database data for profiles.
-        Iterable<Eprofile> databaseProfiles = new HashSet<Eprofile>(){{
-            add(prof1);
-            add(prof2);
-        }};
 
         //Urls to get protocol.
         Set<String> listOfUrlsWithHttpOnly = new HashSet<String>(){{
@@ -85,21 +87,7 @@ public class ProtocolHandlerTest {
 
     @Test
     public void getEvaluesByProtocolTestWithOnlyHttps(){
-        // Arrange
-        Eheader header1 = new Eheader("header1");
-        Eheader header2 = new Eheader("header2");
-        Eheader header3 = new Eheader("header3");
-        Eheader header4 = new Eheader("header4");
-
-        Ecategory cat1 = new Ecategory("do");
-
-        Evalue val1 = new Evalue("value1", "", cat1, header1);
-        Evalue val2 = new Evalue("value2", "", cat1, header2);
-        Evalue val3 = new Evalue("unsafe", "", cat1, header3);
-        Evalue val4 = new Evalue("onlyhttps", "", cat1, header4);
-
-        Eprofile prof1 = new Eprofile("http");
-        Eprofile prof2 = new Eprofile("https");
+        //arrange
 
         //Setting the profiles to the headers.
         header1.setProfiles(new HashSet<Eprofile>(){{
@@ -120,20 +108,6 @@ public class ProtocolHandlerTest {
         header4.setProfiles(new HashSet<Eprofile>(){{
             add(prof2);
         }});
-
-        //Dummy database data for values.
-        Iterable<Evalue> databaseValues = new HashSet<Evalue>() {{
-            add(val1);
-            add(val2);
-            add(val3);
-            add(val4);
-        }};
-
-        //Dummy database data for profiles.
-        Iterable<Eprofile> databaseProfiles = new HashSet<Eprofile>(){{
-            add(prof1);
-            add(prof2);
-        }};
 
         //Urls to get protocol.
         Set<String> listOfUrlsWithHttpOnly = new HashSet<String>(){{
@@ -146,7 +120,7 @@ public class ProtocolHandlerTest {
         Set<Evalue> resultSet = ProtocolHandler.getEvaluesByProtocol(listOfUrlsWithHttpOnly, databaseProfiles, databaseValues);
 
         // Assert
-        // Check if only http headers are added.
+        // Check if http & https headers are added.
         Assert.assertTrue(resultSet.contains(val1));
         Assert.assertTrue(resultSet.contains(val2));
         Assert.assertTrue(resultSet.contains(val3));
@@ -155,21 +129,7 @@ public class ProtocolHandlerTest {
 
     @Test
     public void getEvaluesByProtocolTestWithHttpAndHttps(){
-        // Arrange
-        Eheader header1 = new Eheader("header1");
-        Eheader header2 = new Eheader("header2");
-        Eheader header3 = new Eheader("header3");
-        Eheader header4 = new Eheader("header4");
-
-        Ecategory cat1 = new Ecategory("do");
-
-        Evalue val1 = new Evalue("value1", "", cat1, header1);
-        Evalue val2 = new Evalue("value2", "", cat1, header2);
-        Evalue val3 = new Evalue("unsafe", "", cat1, header3);
-        Evalue val4 = new Evalue("onlyhttps", "", cat1, header4);
-
-        Eprofile prof1 = new Eprofile("http");
-        Eprofile prof2 = new Eprofile("https");
+        //arrange
 
         //Setting the profiles to the headers.
         header1.setProfiles(new HashSet<Eprofile>(){{
@@ -190,20 +150,6 @@ public class ProtocolHandlerTest {
         header4.setProfiles(new HashSet<Eprofile>(){{
             add(prof2);
         }});
-
-        //Dummy database data for values.
-        Iterable<Evalue> databaseValues = new HashSet<Evalue>() {{
-            add(val1);
-            add(val2);
-            add(val3);
-            add(val4);
-        }};
-
-        //Dummy database data for profiles.
-        Iterable<Eprofile> databaseProfiles = new HashSet<Eprofile>(){{
-            add(prof1);
-            add(prof2);
-        }};
 
         //Urls to get protocol.
         Set<String> listOfUrlsWithHttpOnly = new HashSet<String>(){{
@@ -216,7 +162,7 @@ public class ProtocolHandlerTest {
         Set<Evalue> resultSet = ProtocolHandler.getEvaluesByProtocol(listOfUrlsWithHttpOnly, databaseProfiles, databaseValues);
 
         // Assert
-        // Check if only http headers are added.
+        // Check if http & https headers are added.
         Assert.assertTrue(resultSet.contains(val1));
         Assert.assertTrue(resultSet.contains(val2));
         Assert.assertTrue(resultSet.contains(val3));
@@ -225,21 +171,7 @@ public class ProtocolHandlerTest {
 
     @Test
     public void getEvaluesByProtocolTestWithUnknownProtocolsReturnHttpAsDefault(){
-        // Arrange
-        Eheader header1 = new Eheader("header1");
-        Eheader header2 = new Eheader("header2");
-        Eheader header3 = new Eheader("header3");
-        Eheader header4 = new Eheader("header4");
-
-        Ecategory cat1 = new Ecategory("do");
-
-        Evalue val1 = new Evalue("value1", "", cat1, header1);
-        Evalue val2 = new Evalue("value2", "", cat1, header2);
-        Evalue val3 = new Evalue("unsafe", "", cat1, header3);
-        Evalue val4 = new Evalue("onlyhttps", "", cat1, header4);
-
-        Eprofile prof1 = new Eprofile("http");
-        Eprofile prof2 = new Eprofile("https");
+        //arrange
 
         //Setting the profiles to the headers.
         header1.setProfiles(new HashSet<Eprofile>(){{
@@ -260,20 +192,6 @@ public class ProtocolHandlerTest {
         header4.setProfiles(new HashSet<Eprofile>(){{
             add(prof2);
         }});
-
-        //Dummy database data for values.
-        Iterable<Evalue> databaseValues = new HashSet<Evalue>() {{
-            add(val1);
-            add(val2);
-            add(val3);
-            add(val4);
-        }};
-
-        //Dummy database data for profiles.
-        Iterable<Eprofile> databaseProfiles = new HashSet<Eprofile>(){{
-            add(prof1);
-            add(prof2);
-        }};
 
         //Urls to get protocol.
         Set<String> listOfUrlsWithHttpOnly = new HashSet<String>(){{
