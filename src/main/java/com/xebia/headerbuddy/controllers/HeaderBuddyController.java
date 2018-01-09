@@ -23,7 +23,9 @@ import com.xebia.headerbuddy.models.ApiKey;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
 import org.rythmengine.Rythm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +54,7 @@ public class HeaderBuddyController {
     @Autowired
     private EurlRepository urlRepository;
 
-    @RequestMapping(value = "/headerbuddy/api")
+    @RequestMapping(value = "/headerbuddy/api", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_HTML_VALUE})
     public ResponseEntity headerBuddy(@RequestParam(value = "url", required = true) @ValidURL String url,
                                               @RequestParam(value = "key", required = true) @ValidAPIKey String key,
                                               @RequestParam(value = "output", defaultValue = "json", required = false) @ValidOutput String output,

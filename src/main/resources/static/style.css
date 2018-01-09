@@ -17,6 +17,9 @@ hr {
 	height: 1px;
 	background-color: #CCC;
 }
+a:hover {
+	color: #999;
+}
 .content {
 	max-width: 900px;
 	margin: auto;
@@ -72,6 +75,18 @@ article {
 	width: 100%;
 	background-color: #FFF;
 	box-shadow: 3px 3px 0px 0px #CCC;
+}
+/* DETAILS */
+.details table {
+	padding: 20px;
+	width: calc(100% - 40px);
+}
+.details table th {
+	text-align: left;
+}
+.details table td {
+	width: 50%;
+	word-break: break-all;
 }
 /* FOUND URLS */
 .urls table {

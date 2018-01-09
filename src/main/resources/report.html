@@ -40,6 +40,27 @@
 	
 	<div class='report-content content'>
 
+		<article class="wide-article details">
+			<h3>Details</h3>
+			<hr />
+			<table>
+				<tr>
+					<th>Date:</th>
+					<th>By:</th>
+				</tr>
+				<tr>
+					<td>@report.getDate()</td>
+					<td>
+						@if (report.getUser() == null) {
+							n/a
+						} else {
+						@report.getUser().getEmail()
+						}
+					</td>
+				</tr>
+			</table>
+		</article>
+
 		@// only show the found urls if the report has more than one url.
 		@if (report.getUrls().size() > 1) {
 		
@@ -144,7 +165,7 @@
 
 			}
 
-		</headers>
+		</div>
 	</div>
 </body>
 </html>
