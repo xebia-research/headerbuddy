@@ -10,7 +10,6 @@ import com.xebia.headerbuddy.models.entities.Evalue;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 public class AnalyzersTest {

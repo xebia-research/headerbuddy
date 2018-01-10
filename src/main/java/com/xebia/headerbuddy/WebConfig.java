@@ -26,7 +26,25 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // HTML file resources
         registry.addResourceHandler("style.css").addResourceLocations("classpath:/static/");
         registry.addResourceHandler("bg.png").addResourceLocations("classpath:/static/");
+
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+        //Log files registry
+        String logPath = "classpath:/Logs/";
+        registry.addResourceHandler("Debug-Log.log")
+                .addResourceLocations(logPath);
+        registry.addResourceHandler("Error-Warn-Log.log")
+                .addResourceLocations(logPath);
+        registry.addResourceHandler("Info-Log.log")
+                .addResourceLocations(logPath);
+        registry.addResourceHandler("Trace-Log.log")
+                .addResourceLocations(logPath);
     }
 }

@@ -8,8 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringRunner;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -30,7 +28,6 @@ public class HeaderBuddyUrlParamTest {
 
     private String urlNoExtension = "http://andonoz";
     private String urlNoProtocol = "www.andonoz.com";
-    private String urlFullyCorrect = "http://www.andonoz.com";
     private String urlCorrect = "http://www.andonoz.com";
 
     // Get the random port spring is running on
@@ -59,14 +56,6 @@ public class HeaderBuddyUrlParamTest {
 
         ResponseEntity<String> response = template.getForEntity(url, String.class);
         Assert.assertTrue("Response code should be 400 (No protocol)", response.getStatusCode().is4xxClientError());
-    }
-
-    @Test
-    public void HeaderBuddyURLFullyCorrectTest() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlFullyCorrect;
-
-        ResponseEntity<String> response = template.getForEntity(url, String.class);
-        Assert.assertTrue("Response code should be 200 (Fully correct url)", response.getStatusCode().is2xxSuccessful());
     }
 
     @Test

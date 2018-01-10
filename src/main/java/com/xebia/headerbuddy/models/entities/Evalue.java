@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ public class Evalue {
     private Integer id;
     @NotNull
     private String value;
+    @Lob
     private String description;
 
     //Relations

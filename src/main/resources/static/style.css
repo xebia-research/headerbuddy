@@ -88,6 +88,19 @@ article {
 	width: 50%;
 	word-break: break-all;
 }
+.details .tr-padding-top {
+	padding-top: 20px;
+}
+.details .profile {
+	width: 100%;
+	padding: 10px;
+	background-color: #E0E0E0;
+	text-align: center;
+	word-break: break-all;
+}
+.details .profile h3 {
+	text-transform: uppercase;
+}
 /* FOUND URLS */
 .urls table {
 	margin-top: 10px;

@@ -12,9 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.util.Date;
 
 // for the annotations
@@ -43,20 +40,42 @@ public class HeaderBuddyOutputTest {
     }
 
     @Test
-    public void HeaderBuddyOutputJsonTest() {
+    public void undefinedOutputShouldReturnJson() {
         String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedUrl;
 
-        ResponseEntity<String> jsonResponse = template.getForEntity(url + "output=json", String.class);
-        Assert.assertTrue("Response code should be 200 (Json response)", jsonResponse.getStatusCode().is2xxSuccessful());
-        Assert.assertTrue("Content type should be json", jsonResponse.getHeaders().getContentType().toString().equals("application/json;charset=UTF-8"));
+        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        Assert.assertTrue("Content type should be json", response.getHeaders().getContentType().toString().contains("application/json"));
     }
 
     @Test
-    public void HeaderBuddyOutputXmlTest() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+testedUrl;
+    public void jsonOutputShouldReturnJson() {
+        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedUrl;
 
-        ResponseEntity<String> xmlResponse = template.getForEntity(url, String.class);
-        Assert.assertTrue("Response code should be 200 (Xml response)", xmlResponse.getStatusCode().is2xxSuccessful());
-        Assert.assertTrue("Content type should be xml", xmlResponse.getHeaders().getContentType().toString().equals("application/xml;charset=UTF-8"));
+        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        Assert.assertTrue("Content type should be json", response.getHeaders().getContentType().toString().contains("application/json"));
+    }
+
+    @Test
+    public void xmlOutputShouldReturnXml() {
+        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedUrl+"&output=xml";
+
+        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        Assert.assertTrue("Content type should be xml", response.getHeaders().getContentType().toString().contains("application/xml"));
+    }
+
+    @Test
+    public void htmlOutputShouldReturnHtml() {
+        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedUrl+"&output=html";
+
+        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        Assert.assertTrue("Content type should be xml", response.getHeaders().getContentType().toString().contains("text/html"));
+    }
+
+    @Test
+    public void wrongOutputShouldReturnError() {
+        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedUrl+"&output=wrong";
+
+        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        Assert.assertTrue("Response code should be 400 (wrong output)", response.getStatusCode().is4xxClientError());
     }
 }
