@@ -4,8 +4,6 @@ import com.xebia.headerbuddy.models.analyzer.Analyzer;
 import com.xebia.headerbuddy.models.analyzer.DoAnalyzer;
 import com.xebia.headerbuddy.models.analyzer.RecommendationAnalyzer;
 import com.xebia.headerbuddy.models.analyzer.DontAnalyzer;
-import com.xebia.headerbuddy.models.entities.Ereport;
-import com.xebia.headerbuddy.models.entities.Euser;
 import com.xebia.headerbuddy.models.entities.Evalue;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -33,7 +31,7 @@ public class HeaderAnalyzer {
     }
 
     //This method does the analyses
-    public Ereport analyseHeaders(Euser user) {
+    public Set<Evalue> analyseHeaders() {
 
         Analyzer analyzer = new DoAnalyzer();
         missingDoValues = analyzer.analyze(foundValues, databaseDoValues);
@@ -48,9 +46,7 @@ public class HeaderAnalyzer {
         reportValues.addAll(foundDontValues);
         reportValues.addAll(foundRecValues);
 
-        Ereport report = new Ereport(user, reportValues);
-
-        return report;
+        return reportValues;
     }
 
     private Set<Evalue> detectHeaders(Set<Evalue> toAnalyseValues, Set<Evalue> toCompareValues) {

@@ -26,7 +26,8 @@ public class HeaderBuddyControllerTest {
     @Autowired
     private EuserRepository userRepository;
 
-    private String testedUrl = "http://andonoz.com";
+    @Value("${test.http.url}")
+    private String testedUrl;
 
     // Get the random port spring is running on
     @Value("${local.server.port}")

@@ -2,6 +2,7 @@ package com.xebia.headerbuddy.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -31,9 +32,9 @@ public class Ereport {
     private Date date;
 
     //Relations
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Euser user;
 
     @JsonProperty("visited pages")
@@ -51,10 +52,11 @@ public class Ereport {
 
     public Ereport(final Euser user) {
         this.user = user;
+        this.date = new Date();
     }
 
     public Ereport(final Euser user, final Set<Evalue> values) {
-        date = new Date();
+        this.date = new Date();
         this.user = user;
         this.values = values;
     }
@@ -85,7 +87,7 @@ public class Ereport {
     }
 
     public Euser getUser() {
-        return user;
+        return this.user;
     }
 
     public void setUser(final Euser user) {

@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 
 public class WebCrawler {
-
     //unique set
     private Set<String> pagesVisited = new HashSet<>();
     //bunch of url's
@@ -24,7 +23,8 @@ public class WebCrawler {
         this.pagesToVisit.add(startUrl);
         this.startUrl = startUrl;
     }
-    private String getUrl() throws Exception {
+
+    protected String getUrl() throws Exception {
         String url;
 
         // if true it continues till it finds an url that's not visited yet
@@ -48,9 +48,13 @@ public class WebCrawler {
         return this.pagesVisited;
     }
 
-    public void crawl() {
+    public void crawl(int limit) {
         try {
             while (!this.pagesToVisit.isEmpty()) {
+                if (pagesVisited.size() >= limit) {
+                    return;
+                }
+
                 String url = getUrl();
                 try {
                     Document doc = Jsoup.connect(url).get();

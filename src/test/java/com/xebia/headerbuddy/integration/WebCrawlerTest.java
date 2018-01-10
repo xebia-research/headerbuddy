@@ -17,7 +17,7 @@ public class WebCrawlerTest {
     @Before
     public void init(){
         try{
-            crawler.crawl();
+            crawler.crawl(10);
         } catch (Exception e){
             // Ignored
         }

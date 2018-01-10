@@ -22,15 +22,18 @@ import com.xebia.headerbuddy.annotations.ValidMethod;
 import com.xebia.headerbuddy.models.ApiKey;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -49,9 +52,12 @@ public class HeaderBuddyController {
     @Autowired
     private EurlRepository urlRepository;
 
+    @Autowired
+    private Environment env;
+
     @RequestMapping(value = "/headerbuddy/api")
     public ResponseEntity headerBuddy(@RequestParam(value = "url", required = true) @ValidURL String url,
-                                              @RequestParam(value = "key", required = true) @ValidAPIKey String key,
+                                              @RequestParam(value = "key", required = false) @ValidAPIKey Optional<String> key,
                                               @RequestParam(value = "output", defaultValue = "json", required = false) @ValidOutput String output,
                                               @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
                                               @RequestParam(value = "crawl", defaultValue = "false", required = false) boolean crawl) throws Exception {
@@ -60,9 +66,8 @@ public class HeaderBuddyController {
         Set<String> visitedPages = new HashSet<>();
 
         if (crawl) {
-
             WebCrawler crawler = new WebCrawler(url);
-            crawler.crawl();
+            crawler.crawl(Integer.parseInt(env.getProperty("webcrawler.limit")));
             visitedPages = crawler.getVisitedPages();
         } else {
             visitedPages.add(url);
@@ -80,8 +85,14 @@ public class HeaderBuddyController {
         HeaderAnalyzer headerAnalyzer = new HeaderAnalyzer(foundValues, valueRepository.findAll());
 
         // Perform the actual analysis
-        Euser user = userRepository.findByApikey(key);
-        Ereport report = headerAnalyzer.analyseHeaders(user);
+        Euser user;
+        if (key.isPresent()) {
+            user = userRepository.findByApikey(key.get());
+        } else {
+            user = null;
+        }
+
+        Ereport report = new Ereport(user, headerAnalyzer.analyseHeaders());
         report.setUrls(visitedUrls);
 
         // Save data
