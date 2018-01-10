@@ -31,6 +31,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -65,6 +67,9 @@ public class HeaderBuddyController {
     @Autowired
     private EprofileRepository profileRepository;
 
+    @Autowired
+    private Environment env;
+
     @ApiOperation(value = "Creates a report of your service based on the response headers")
     @ApiResponses(value = {
             @ApiResponse(code = org.apache.http.HttpStatus.SC_BAD_REQUEST, message = "Failed on wrong input (parameter)", response = CustomErrorModel.class),
@@ -72,22 +77,22 @@ public class HeaderBuddyController {
     })
     @RequestMapping(value = "/headerbuddy/api", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity headerBuddy(
-        @ApiParam(value = "The url to the service", required = true)
+            @ApiParam(value = "The url to the service", required = true)
         @RequestParam(value = "url", required = true) @ValidURL String url,
-        @ApiParam(value = "The api key", required = true)
-        @RequestParam(value = "key", required = true) @ValidAPIKey String key,
-        @ApiParam("The respose output type (xml, json)")
+            @ApiParam(value = "The api key")
+        @RequestParam(value = "key", required = false) @ValidAPIKey String key,
+            @ApiParam("The respose output type (xml, json)")
         @RequestParam(value = "output", defaultValue = "json", required = false) @ValidOutput String output,
-        @ApiParam(value = "The methods used")
+            @ApiParam(value = "The methods used")
         @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
-        @ApiParam("The crawler")
+            @ApiParam("The crawler")
         @RequestParam(value = "crawl", defaultValue = "false", required = false) boolean crawl) throws Exception {
 
         Set<String> visitedPages = new HashSet<>();
 
         if (crawl) {
             WebCrawler crawler = new WebCrawler(url);
-            crawler.crawl();
+            crawler.crawl(Integer.parseInt(env.getProperty("webcrawler.limit")));
             visitedPages = crawler.getVisitedPages();
         } else {
             visitedPages.add(url);
@@ -103,8 +108,14 @@ public class HeaderBuddyController {
         HeaderAnalyzer headerAnalyzer = new HeaderAnalyzer(foundValues, correctProtocolValues);
 
         // Perform the actual analysis
-        Euser user = userRepository.findByApikey(key);
-        Ereport report = headerAnalyzer.analyseHeaders(user);
+        Euser user;
+        if (key != null) {
+            user = userRepository.findByApikey(key);
+        } else {
+            user = null;
+        }
+
+        Ereport report = new Ereport(user, headerAnalyzer.analyseHeaders());
         report.setProfile(ProtocolHandler.getUsedProtocol());
         report.setUrls(visitedUrls);
 
