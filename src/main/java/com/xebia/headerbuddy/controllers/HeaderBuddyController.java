@@ -9,9 +9,11 @@ import com.xebia.headerbuddy.models.entities.Ereport;
 import com.xebia.headerbuddy.models.entities.Eurl;
 import com.xebia.headerbuddy.models.entities.Euser;
 import com.xebia.headerbuddy.models.entities.Evalue;
+import com.xebia.headerbuddy.models.entities.repositories.EprofileRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EreportRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EurlRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EvalueRepository;
+import com.xebia.headerbuddy.utilities.ProtocolHandler;
 import com.xebia.headerbuddy.utilities.WebCrawler;
 import com.xebia.headerbuddy.utilities.MethodHandler;
 import com.xebia.headerbuddy.utilities.ValueSerializer;
@@ -22,6 +24,8 @@ import com.xebia.headerbuddy.annotations.ValidEmail;
 import com.xebia.headerbuddy.annotations.ValidMethod;
 import com.xebia.headerbuddy.models.ApiKey;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -35,7 +39,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,6 +46,9 @@ import java.util.Set;
 @RestController
 @Validated
 public class HeaderBuddyController {
+
+    // The logger
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private EvalueRepository valueRepository;
@@ -55,6 +61,9 @@ public class HeaderBuddyController {
 
     @Autowired
     private EurlRepository urlRepository;
+
+    @Autowired
+    private EprofileRepository profileRepository;
 
     @ApiOperation(value = "Creates a report of your service based on the response headers")
     @ApiResponses(value = {
@@ -74,11 +83,9 @@ public class HeaderBuddyController {
         @ApiParam("The crawler")
         @RequestParam(value = "crawl", defaultValue = "false", required = false) boolean crawl) throws Exception {
 
-        List<Header> foundHeaders = new ArrayList<>();
         Set<String> visitedPages = new HashSet<>();
 
         if (crawl) {
-
             WebCrawler crawler = new WebCrawler(url);
             crawler.crawl();
             visitedPages = crawler.getVisitedPages();
@@ -86,28 +93,31 @@ public class HeaderBuddyController {
             visitedPages.add(url);
         }
 
-        List<String> methodsInParameter = MethodHandler.getAllMethodsFromMethodParam(method);
+        //Get the correct values by protocol profile.
+        Set<Evalue> correctProtocolValues = ProtocolHandler.getEvaluesByProtocol(visitedPages, profileRepository.findAll(), valueRepository.findAll());
 
-        for (String methodInParameter : methodsInParameter) {
-            List<Header> headers = MethodHandler.executeGivenMethod(methodInParameter, url);
-            foundHeaders.addAll(headers);
-        }
+        List<Header> foundHeaders = MethodHandler.executeGivenMethod(MethodHandler.getAllMethodsFromMethodParam(method), visitedPages);
 
         Set<Evalue> foundValues = ValueSerializer.convertToEvalue(foundHeaders);
         Set<Eurl> visitedUrls = UrlSerializer.convertToEurl(visitedPages);
-        HeaderAnalyzer headerAnalyzer = new HeaderAnalyzer(foundValues, valueRepository.findAll());
+        HeaderAnalyzer headerAnalyzer = new HeaderAnalyzer(foundValues, correctProtocolValues);
 
         // Perform the actual analysis
         Euser user = userRepository.findByApikey(key);
         Ereport report = headerAnalyzer.analyseHeaders(user);
+        report.setProfile(ProtocolHandler.getUsedProtocol());
         report.setUrls(visitedUrls);
 
         // Save data
         reportRepository.save(report);
+
         for (Eurl visitedUrl : visitedUrls) {
             visitedUrl.setReport(report);
             urlRepository.save(visitedUrl);
         }
+
+        // log that the report was saved
+        logger.info("report saved");
 
         return new ResponseEntity(report, HttpStatus.OK);
     }
@@ -121,6 +131,9 @@ public class HeaderBuddyController {
     public ResponseEntity requestApiKey(@ApiParam(value = "An email-address", required = true) @RequestParam(value = "email", required = true) @ValidEmail String email) throws Exception {
         // Get the api key
         ApiKey key = APIKeyGenerator.getKey(userRepository, email);
+
+        // log that a response entity is being created
+        logger.info("response entity is going to be created");
 
         return new ResponseEntity(key, HttpStatus.OK);
     }

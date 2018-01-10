@@ -1,5 +1,5 @@
 
-Lists of 127 third-party dependencies.
+Lists of 125 third-party dependencies.
      (BSD License) AntLR Parser Generator (antlr:antlr:2.7.7 - http://www.antlr.org/)
      (Public Domain) AOP alliance (aopalliance:aopalliance:1.0 - http://aopalliance.sourceforge.net)
      (Eclipse Public License - v 1.0) (GNU Lesser General Public License) Logback Classic Module (ch.qos.logback:logback-classic:1.1.11 - http://logback.qos.ch/logback-classic)
@@ -59,7 +59,6 @@ Lists of 127 third-party dependencies.
      (Apache License, Version 2.0) Maven Artifact Resolver SPI (org.apache.maven.resolver:maven-resolver-spi:1.1.0 - https://maven.apache.org/resolver/maven-resolver-spi/)
      (Apache License, Version 2.0) Maven Artifact Resolver Utilities (org.apache.maven.resolver:maven-resolver-util:1.1.0 - https://maven.apache.org/resolver/maven-resolver-util/)
      (Apache License, Version 2.0) Apache Maven Shared Utils (org.apache.maven.shared:maven-shared-utils:3.1.0 - https://maven.apache.org/shared/maven-shared-utils/)
-     (Apache License, Version 2.0) tomcat-annotations-api (org.apache.tomcat:tomcat-annotations-api:8.5.23 - http://tomcat.apache.org/)
      (Apache License, Version 2.0) tomcat-jdbc (org.apache.tomcat:tomcat-jdbc:8.5.23 - http://tomcat.apache.org/)
      (Apache License, Version 2.0) tomcat-juli (org.apache.tomcat:tomcat-juli:8.5.23 - http://tomcat.apache.org/)
      (Apache License, Version 2.0) tomcat-embed-core (org.apache.tomcat.embed:tomcat-embed-core:8.5.23 - http://tomcat.apache.org/)
@@ -85,8 +84,7 @@ Lists of 127 third-party dependencies.
      (Apache License 2.0) (LGPL 2.1) (MPL 1.1) Javassist (org.javassist:javassist:3.21.0-GA - http://www.javassist.org/)
      (Apache License, Version 2.0) Java Annotation Indexer (org.jboss:jandex:2.0.0.Final - http://www.jboss.org/jandex)
      (Apache License, version 2.0) JBoss Logging 3 (org.jboss.logging:jboss-logging:3.3.1.Final - http://www.jboss.org)
-     (The MIT License) jsoup (org.jsoup:jsoup:1.8.3 - http://jsoup.org/)
-     (The Apache Software License, Version 2.0) MapStruct Core (org.mapstruct:mapstruct:1.1.0.Final - http://mapstruct.org/mapstruct/)
+     (The MIT License) jsoup Java HTML Parser (org.jsoup:jsoup:1.11.2 - https://jsoup.org/)
      (The MIT License) Mockito (org.mockito:mockito-core:1.10.19 - http://www.mockito.org)
      (Apache 2) Objenesis (org.objenesis:objenesis:2.1 - http://objenesis.org)
      (BSD) ASM Core (org.ow2.asm:asm:5.0.3 - http://asm.objectweb.org/asm/)
@@ -119,7 +117,7 @@ Lists of 127 third-party dependencies.
      (Apache License, Version 2.0) Spring Boot Logging Starter (org.springframework.boot:spring-boot-starter-logging:1.5.8.RELEASE - http://projects.spring.io/spring-boot/)
      (Apache License, Version 2.0) Spring Boot Test Starter (org.springframework.boot:spring-boot-starter-test:1.5.8.RELEASE - http://projects.spring.io/spring-boot/)
      (Apache License, Version 2.0) Spring Boot Tomcat Starter (org.springframework.boot:spring-boot-starter-tomcat:1.5.8.RELEASE - http://projects.spring.io/spring-boot/)
-     (Apache License, Version 2.0) Spring Boot Web Starter (org.springframework.boot:spring-boot-starter-web:1.5.8.RELEASE - http://projects.spring.io/spring-boot/)
+     (Apache License, Version 2.0) Spring Boot Web Starter (org.springframework.boot:spring-boot-starter-web:1.5.9.RELEASE - http://projects.spring.io/spring-boot/)
      (Apache License, Version 2.0) Spring Boot Test (org.springframework.boot:spring-boot-test:1.5.8.RELEASE - http://projects.spring.io/spring-boot/)
      (Apache License, Version 2.0) Spring Boot Test Auto-Configure (org.springframework.boot:spring-boot-test-autoconfigure:1.5.8.RELEASE - http://projects.spring.io/spring-boot/)
      (Apache License, Version 2.0) Spring Data Core (org.springframework.data:spring-data-commons:1.13.8.RELEASE - http://www.spring.io/spring-data/spring-data-commons)

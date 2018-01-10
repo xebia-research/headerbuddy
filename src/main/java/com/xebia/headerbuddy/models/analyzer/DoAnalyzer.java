@@ -1,7 +1,6 @@
 package com.xebia.headerbuddy.models.analyzer;
 
 import com.xebia.headerbuddy.models.entities.Evalue;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +23,8 @@ public class DoAnalyzer implements Analyzer {
 
                 for (Evalue analyseValue : toAnalyze) {
 
-                    if (analyseValue.getHeader().getName().equals(doValue.getHeader().getName())) {
+                    if (analyseValue.getHeader().getName().equalsIgnoreCase(doValue.getHeader().getName())) {
+
                         //Found an do header
                         found = true;
                         break;

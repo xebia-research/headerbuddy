@@ -4,6 +4,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.HashSet;
@@ -12,6 +14,9 @@ import java.util.List;
 import java.util.Set;
 
 public class WebCrawler {
+
+    // The logger
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     //unique set
     private Set<String> pagesVisited = new HashSet<>();
@@ -69,10 +74,12 @@ public class WebCrawler {
                     }
                 } catch (Exception e) {
                     // do nothing
+                    logger.error(e.getMessage());
                 }
             }
         } catch (Exception e) {
             // Ignore
+            logger.error(e.getMessage());
         }
     }
 }
