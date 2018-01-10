@@ -47,6 +47,9 @@ a:hover {
 .green-bg {
 	background-color: #3C3;
 }
+.blue-bg {
+	background-color: #09F;
+}
 .err-msg {
 	background-color: #F00;
 	color: #FFF;

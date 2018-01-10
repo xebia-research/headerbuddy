@@ -126,6 +126,21 @@
 
 		</article>
 
+		@if (report.getNote() != null) {
+
+		<article class="single-header">
+			<header class="header-category blue-bg">
+				<h3>Notice</h3>
+			</header>
+			<div class="single-header-content">
+				<span class="header-desc">
+					@report.getNote()
+				</span>
+			</div>
+		</article>
+
+		}
+
 		<div class='headers'>
 			<h3>Found vulnerabilities</h3>
 			<hr/>
