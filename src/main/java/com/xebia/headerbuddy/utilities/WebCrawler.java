@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Set;
 
 public class WebCrawler {
-    // The logger
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //unique set
     private Set<String> pagesVisited = new HashSet<>();
