@@ -44,4 +44,4 @@ deploy:
   bucket: $bucket_name
   skip_cleanup: true
   on:
-    branch: $TRAVIS_BRANCH
+      branch: release
