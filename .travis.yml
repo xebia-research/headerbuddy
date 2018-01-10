@@ -1,42 +1,20 @@
 language: java
-#sudo: required only required when using docker or when you are using sudo commands
 sudo: false
-
 before_script:
-  - sudo /etc/init.d/mysql stop
-
+- sudo /etc/init.d/mysql stop
 cache:
   directories:
-    - $HOME/.m2
-
+  - "$HOME/.m2"
 jdk:
-  - oraclejdk8
-
+- oraclejdk8
 services:
-  - docker
-
+- docker
 notifications:
   email: false
-
-# Set up notification options
-#notifications:
-#  email:
-#    recipients:
-#      - one@example.com
-#      - other@example.com
-#
-    # change is when the repo status goes from pass to fail or vice versa
-#    on_success: change
-#    on_failure: always
-
-install: #forcing a maven install instead of the default maven wrapper install
-
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-
-#any console commands can be executed here
+install:
+- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
-  
-  # Create docker database container
+# Create docker database container
   - docker-compose up -d db
 
   # Give the mySQL database time to totally finish starting up
@@ -58,3 +36,13 @@ script:
   - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
 
   - docker ps
+
+deploy:
+  provider: gcs
+  access_key_id: "GOOGTUXUIOSLVVQIVFES"
+  secret_access_key:
+    secure: 2AH/TquW3oSMxZGYn02w6J2nNsZ/4VeVA9qegVNPCRxxi2jvCGg79A/fGU3SYTSTow4W15mQ3TeOIAbmbJ2pQhskifB/QFu8sI68HsDlGs+aXgpf9F2+oBInUPlK/WfBoaq0t8KLUcKUXanKjBeDz2Pb17hO7WBnkfra47KI+wGmDvqDiV7JIrrDzcxaIURBiKWh+sEu5cmndSzG+wGWP25hEvGhJlhs9hPv3G+Jzw0LF7dYLXKvCiVBBYlOULaDRS0qo+mQc3bDmPjuBNKV1PqB5kAvAquFiW8lmyBscW6q9nZ+7zGN5I6Ab2meNakN1fGz111eBrcbJmTOc9Z35I+xSo5+9gGkmmsoqp08SG1BuKFH13QcNK7ptW9y+q5dHBJbP/+B73ZGqpG9eGmp5sUiYbUN0v9mt8G5cdGnXalLJgjEa6ioilWbncZKwQhhN1TRq/a+4c9q4uFwfMWUT9BtC4ft7Nd6j7kPB6TYMSbPkO3T6ANSMCIkAymdFm5EpDtyEkEoCITlnYruR7NaVo9Jb7i+hlfOnRULmt+roOg07W6IfswUKMBSbTHjY4KBAq2Rb7jkWT4n9vdYdDKqQKBhPMrh66Pz/9I9M6Rtsr2tAAy3gQXv3pIXZ4xJLCiPfQ9DIhOml4lPw4LGG1hO1RFTSydU/5lGZVcoA+jFNxI=
+  bucket: $bucket_name
+  skip_cleanup: true
+  on:
+      branch: release
