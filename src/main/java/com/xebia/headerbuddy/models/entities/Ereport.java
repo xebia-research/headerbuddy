@@ -31,6 +31,9 @@ public class Ereport {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
+    @NotNull
+    private String profile;
+
     //Relations
     @NotNull
     @ManyToOne
@@ -99,5 +102,13 @@ public class Ereport {
 
     public void setUrls(final Set<Eurl> urls) {
         this.urls = urls;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 }
