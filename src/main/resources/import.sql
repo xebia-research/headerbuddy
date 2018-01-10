@@ -77,9 +77,9 @@ INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 16);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 17);
 
 # =========== Mobile profile =============
-INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 1);
-INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 2);
-INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 3);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 1);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 2);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 3);
 
 # ========================================
 # ============= Categories ===============
