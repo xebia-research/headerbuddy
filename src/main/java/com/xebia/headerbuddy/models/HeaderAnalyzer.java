@@ -38,32 +38,15 @@ public class HeaderAnalyzer {
         analyzer = new DontAnalyzer();
         foundDontValues = analyzer.analyze(foundValues, databaseDontValues);
         analyzer = new RecommendationAnalyzer();
-        foundRecValues = analyzer.analyze(detectHeaders(foundValues, databaseDoValues), databaseRecValues);
+        foundRecValues = analyzer.analyze(foundValues, databaseRecValues);
 
-        //Create one set with all values needed for report
+        // Create one set with all values needed for report
         Set<Evalue> reportValues = new LinkedHashSet<>();
         reportValues.addAll(missingDoValues);
         reportValues.addAll(foundDontValues);
         reportValues.addAll(foundRecValues);
 
         return reportValues;
-    }
-
-    private Set<Evalue> detectHeaders(Set<Evalue> toAnalyseValues, Set<Evalue> toCompareValues) {
-        Set<Evalue> foundValues = new HashSet<>();
-
-        for (Evalue analyseValue : toAnalyseValues) {
-            for (Evalue compareValue : toCompareValues) {
-
-
-                if (analyseValue.getHeader().getName().equals(compareValue.getHeader().getName())) {
-                    foundValues.add(analyseValue);
-                    break;
-                }
-            }
-        }
-
-        return foundValues;
     }
 
     private void organiseValuesByCategory(Iterable<Evalue> values) {

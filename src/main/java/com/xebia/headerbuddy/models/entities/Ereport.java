@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -26,10 +28,14 @@ public class Ereport {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     private int id;
+
     @NotNull
     @Column(columnDefinition = "DATETIME")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
+
+    @NotNull
+    private String profile;
 
     //Relations
     @ManyToOne
@@ -37,7 +43,8 @@ public class Ereport {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Euser user;
 
-    @JsonProperty("visited pages")
+    @JsonProperty("visited_pages")
+    @JacksonXmlElementWrapper(useWrapping = false)
     @OneToMany(mappedBy = "report")
     private Set<Eurl> urls;
 
@@ -100,5 +107,13 @@ public class Ereport {
 
     public void setUrls(final Set<Eurl> urls) {
         this.urls = urls;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 }

@@ -29,6 +29,7 @@ public class ValidAPIKeyValidator implements ConstraintValidator<ValidAPIKey, St
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        //check if api key is on or off
         if (!Boolean.parseBoolean(env.getProperty("key.required"))) {
             return true;
         }
