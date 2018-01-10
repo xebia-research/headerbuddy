@@ -63,6 +63,7 @@ public class HeaderBuddyUrlParamTest {
         String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlCorrect;
 
         ResponseEntity<String> response = template.getForEntity(url, String.class);
+
         Assert.assertTrue("Response code should be 200 (Correct url)", response.getStatusCode().is2xxSuccessful());
     }
 }

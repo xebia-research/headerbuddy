@@ -73,7 +73,7 @@ public class HeaderBuddyController {
             @ApiResponse(code = org.apache.http.HttpStatus.SC_BAD_REQUEST, message = "Failed on wrong input (parameter)", response = CustomErrorModel.class),
             @ApiResponse(code = org.apache.http.HttpStatus.SC_OK, message = "Success!", response = Ereport.class)
     })
-    @RequestMapping(value = "/headerbuddy/api", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/headerbuddy/api", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_HTML_VALUE})
     public ResponseEntity headerBuddy(
         @ApiParam(value = "The url to the service", required = true)
         @RequestParam(value = "url", required = true) @ValidURL String url,
