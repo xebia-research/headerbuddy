@@ -36,6 +36,10 @@ script:
   - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
 
   - docker ps
+
+  - echo $TRAVIS_BRANCH
+
+  - echo $TRAVIS_PULL_REQUEST_BRANCH
 deploy:
   provider: gcs
   access_key_id: "GOOGTUXUIOSLVVQIVFES"
