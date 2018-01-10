@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-    <property resource="application.properties" />
     <appender name="DEBUG-FILE" class="ch.qos.logback.core.FileAppender">
         <file>Logs/Debug-Log.log</file>
         <append>false</append>
