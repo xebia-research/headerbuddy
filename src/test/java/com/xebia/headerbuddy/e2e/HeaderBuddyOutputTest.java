@@ -12,9 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.util.Date;
 
 // for the annotations
@@ -28,7 +25,8 @@ public class HeaderBuddyOutputTest {
     @Autowired
     private EuserRepository userRepository;
 
-    private String testedUrl = "http://andonoz.com";
+    @Value("${test.http.url}")
+    private String testedUrl;
 
     // Get the random port spring is running on
     @Value("${local.server.port}")
