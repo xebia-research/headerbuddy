@@ -32,7 +32,9 @@ public class HeaderBuddyApiKeyTest {
 
     private String key = "abc";
     private String email = "m@m.nl";
-    private String testedUrl = "http://www.andonoz.com";
+
+    @Value("${test.http.url}")
+    private String testedUrl;
 
     // Add the user for the api key
     @Before
@@ -55,6 +57,6 @@ public class HeaderBuddyApiKeyTest {
         String url = "http://localhost:"+port+"/headerbuddy/api?key=wrong&url=" + testedUrl;
 
         ResponseEntity<String> response = template.getForEntity(url, String.class);
-        Assert.assertTrue("Response code should be 400 (Wrong api key)", response.getStatusCode().is4xxClientError());
+        Assert.assertTrue("Response code should be 400 (Wrong api key; The test only works if api key is enabled)", response.getStatusCode().is4xxClientError());
     }
 }
