@@ -9,28 +9,32 @@ public class ProtocolHandler {
 
     private static String usedProtocol;
 
-    public static Set<Evalue> getEvaluesByProtocol(Set<String> urls, Iterable<Eprofile> profiles, Iterable<Evalue> values) {
-        Set<Evalue> correctEvalues = new HashSet<Evalue>();
+    public static Set<Evalue> getEvaluesByProtocol(Set<String> urls, String profileParameter, Iterable<Eprofile> profiles, Iterable<Evalue> values) {
 
         //Trim all the urls to just the protocols that are being used.
         Set<String> protocols = convertToProtocolSet(urls);
 
         //Define what protocol needs to be used for the analayzer
-        String finalProtocol = getFinalProtocol(protocols, profiles);
+        getFinalProtocol(profileParameter, protocols, profiles);
 
-        //Add all values by correct protocol profile.
-        for (Evalue value : values) {
-            for (Eprofile profile : value.getHeader().getProfiles()) {
-                if (profile.getName().equals(finalProtocol)) {
-                    correctEvalues.add(value);
-                }
-            }
-        }
+        // Retrieve relevant values
+        Set<Evalue> relevantValues = getRelevantValuesByProfile(values);
 
-        return correctEvalues;
+        return relevantValues;
     }
 
-    private static String getFinalProtocol(Set<String> protocols, Iterable<Eprofile> profiles) {
+    private static void getFinalProtocol(String profile, Set<String> protocols, Iterable<Eprofile> profiles) {
+
+        switch (profile.toLowerCase()) {
+            case "mobile":
+                usedProtocol = "mobile";
+                break;
+            default:
+                usedProtocol = getWebProtocol(protocols, profiles);
+        }
+    }
+
+    private static String getWebProtocol(Set<String> protocols, Iterable<Eprofile> profiles) {
         Set<String> foundProtocols = new HashSet<String>();
 
         //Check if the database has knowledge over the found protocols.
@@ -55,6 +59,20 @@ public class ProtocolHandler {
         return protocol;
     }
 
+    private static Set<Evalue> getRelevantValuesByProfile(Iterable<Evalue> values) {
+        Set<Evalue> relevantValues = new HashSet<Evalue>();
+
+        //Add all values by correct protocol profile.
+        for (Evalue value : values) {
+            for (Eprofile profile : value.getHeader().getProfiles()) {
+                if (profile.getName().equals(usedProtocol)) {
+                    relevantValues.add(value);
+                }
+            }
+        }
+
+        return relevantValues;
+    }
 
     private static Set<String> convertToProtocolSet(Set<String> stringUrls) {
         Set<String> protocols = new HashSet<String>();

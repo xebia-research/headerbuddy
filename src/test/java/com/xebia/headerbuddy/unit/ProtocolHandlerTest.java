@@ -47,6 +47,7 @@ public class ProtocolHandlerTest {
     public void getEvaluesByProtocolTestWithOnlyHttp(){
         //arrange
 
+        String profile = "web";
         //Setting the profiles to the headers.
         header1.setProfiles(new HashSet<Eprofile>(){{
             add(prof1);
@@ -75,7 +76,7 @@ public class ProtocolHandlerTest {
         }};
 
         // Act
-        Set<Evalue> resultSet = ProtocolHandler.getEvaluesByProtocol(listOfUrlsWithHttpOnly, databaseProfiles, databaseValues);
+        Set<Evalue> resultSet = ProtocolHandler.getEvaluesByProtocol(listOfUrlsWithHttpOnly, profile, databaseProfiles, databaseValues);
 
         // Assert
         // Check if only http headers are added.
@@ -88,6 +89,8 @@ public class ProtocolHandlerTest {
     @Test
     public void getEvaluesByProtocolTestWithOnlyHttps(){
         //arrange
+
+        String profile = "web";
 
         //Setting the profiles to the headers.
         header1.setProfiles(new HashSet<Eprofile>(){{
@@ -117,7 +120,7 @@ public class ProtocolHandlerTest {
         }};
 
         // Act
-        Set<Evalue> resultSet = ProtocolHandler.getEvaluesByProtocol(listOfUrlsWithHttpOnly, databaseProfiles, databaseValues);
+        Set<Evalue> resultSet = ProtocolHandler.getEvaluesByProtocol(listOfUrlsWithHttpOnly, profile, databaseProfiles, databaseValues);
 
         // Assert
         // Check if http & https headers are added.
@@ -130,6 +133,8 @@ public class ProtocolHandlerTest {
     @Test
     public void getEvaluesByProtocolTestWithHttpAndHttps(){
         //arrange
+
+        String profile = "web";
 
         //Setting the profiles to the headers.
         header1.setProfiles(new HashSet<Eprofile>(){{
@@ -159,7 +164,7 @@ public class ProtocolHandlerTest {
         }};
 
         // Act
-        Set<Evalue> resultSet = ProtocolHandler.getEvaluesByProtocol(listOfUrlsWithHttpOnly, databaseProfiles, databaseValues);
+        Set<Evalue> resultSet = ProtocolHandler.getEvaluesByProtocol(listOfUrlsWithHttpOnly, profile, databaseProfiles, databaseValues);
 
         // Assert
         // Check if http & https headers are added.
@@ -172,6 +177,8 @@ public class ProtocolHandlerTest {
     @Test
     public void getEvaluesByProtocolTestWithUnknownProtocolsReturnHttpAsDefault(){
         //arrange
+
+        String profile = "web";
 
         //Setting the profiles to the headers.
         header1.setProfiles(new HashSet<Eprofile>(){{
@@ -201,7 +208,7 @@ public class ProtocolHandlerTest {
         }};
 
         // Act
-        Set<Evalue> resultSet = ProtocolHandler.getEvaluesByProtocol(listOfUrlsWithHttpOnly, databaseProfiles, databaseValues);
+        Set<Evalue> resultSet = ProtocolHandler.getEvaluesByProtocol(listOfUrlsWithHttpOnly, profile, databaseProfiles, databaseValues);
 
         // Assert
         // Check if only http headers are added.

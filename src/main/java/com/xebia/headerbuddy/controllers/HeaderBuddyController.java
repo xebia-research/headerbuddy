@@ -92,7 +92,9 @@ public class HeaderBuddyController {
             @ApiParam(value = "The methods used")
         @RequestParam(value = "method", defaultValue = "get", required = false) @ValidMethod String method,
             @ApiParam("The crawler")
-        @RequestParam(value = "crawl", defaultValue = "false", required = false) boolean crawl) throws Exception {
+        @RequestParam(value = "crawl", defaultValue = "false", required = false) boolean crawl,
+            @ApiParam(value = "Profile used for analysis")
+        @RequestParam(value = "profile", defaultValue = "web", required = false) String profile) throws Exception {
 
         Set<String> visitedPages = new HashSet<>();
 
@@ -105,7 +107,7 @@ public class HeaderBuddyController {
         }
 
         //Get the correct values by protocol profile.
-        Set<Evalue> correctProtocolValues = ProtocolHandler.getEvaluesByProtocol(visitedPages, profileRepository.findAll(), valueRepository.findAll());
+        Set<Evalue> correctProtocolValues = ProtocolHandler.getEvaluesByProtocol(visitedPages, profile, profileRepository.findAll(), valueRepository.findAll());
 
         List<Header> foundHeaders = MethodHandler.executeGivenMethod(MethodHandler.getAllMethodsFromMethodParam(method), visitedPages);
 
