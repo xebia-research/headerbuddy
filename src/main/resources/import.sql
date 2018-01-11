@@ -93,31 +93,31 @@ INSERT INTO category(name) VALUES ("recommendation");
 # ========================================
 
 # =========== Content-Security-Policy =============
-INSERT INTO value (value, description, header_id, category_id) VALUES ("default-src", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("connect-src", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("default-src", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("connect-src", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("child-src", "Defines the valid sources for web workers and nested browsing contexts loaded using elements such as <frame> and <iframe>. Don't use this because it is depricated.", 1, 3);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("font-src", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("font-src", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("frame-src", "Specifies valid sources for nested browsing contexts loading using elements such as <frame> and <iframe>.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("img-src", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("manifest-src", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("media-src", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("object-src", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("script-src", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("style-src", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("img-src", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("manifest-src", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("media-src", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("object-src", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("script-src", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("style-src", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("worker-src", "Specifies valid sources for Worker, SharedWorker, or ServiceWorker scripts.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("base-uri", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("plugin-types", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("sandbox", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("base-uri", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("plugin-types", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("sandbox", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("disown-opener", "Ensures a resource will disown its opener when navigated to. This should not be used because it is still expirimental and may not work as intended.", 1, 3);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("form-action", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("frame-ancestors", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("form-action", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("frame-ancestors", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("navigation-to", "Restricts the URLs to which a document can navigate by any means (a, form, window.location, window.open, etc.). This should not be used because it is expirimental and may not work as intended.", 1, 3);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("report-uri", "Instructs the user agent to report violated attempts to the Content Security Policy. These violation reports consist of JSON documents sent via an HTTP POST request to the specified URI. This should be used together with the report-to directive.", 1, 3);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("report-to", "Fires a SecurityPolicyViolationEvent. This should be used with the 'report-uri' directive because not all browsers support this directive. if this directive is supported it will ignore report-uri.", 1, 3);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("block-all-mixed-content", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("block-all-mixed-content", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("referrer", "Used to specify information in the referer (sic) header for links away from a page. Use the Referrer-Policy header instead. This directive is depricated.", 1, 3);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("require-sri-for", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("upgrade-insecure-requests", "This header is able to detect and migate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("require-sri-for", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("upgrade-insecure-requests", "This header is able to detect and mitigate Cross Site Scripting(XSS) attacks.", 1, 1);
 
 # =========== Referrer-Policy =============
 INSERT INTO value (value, description, header_id, category_id) VALUES ("no-referrer", "The Referer header will be omitted entirely. No referrer information is sent along with requests.", 2, 1);
@@ -127,24 +127,24 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("origin-w
 INSERT INTO value (value, description, header_id, category_id) VALUES ("same-origin", "A referrer will be sent for same-site origins, but cross-origin requests will contain no referrer information", 2, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("strict-origin", "Only set referrer link for HTTPS connections", 2, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("strict-origin-when-cross-origin", "Send a full URL when performing a same-origin request, only send the origin of the document to a-priori as-much-secure destination (HTTPS->HTTPS), and send no header to a less secure destination (HTTPS->HTTP).", 2, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("unsafe-url", "This will always set the referrer url wheter it's a trusted source or not. It's recommended to set this to 'default-src' or 'strict-origin'.", 2, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("unsafe-url", "This will always set the referrer url whether it's a trusted source or not. It's recommended to set this to 'default-src' or 'strict-origin'.", 2, 3);
 
 # =========== Server =============
-INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Shows potential vulnerable information of what software is being used on the server. It's also possible to set this header with misloading information.", 3, 2);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "Shows potential vulnerable information of what software is being used on the server. It's also possible to set this header with misleading information.", 3, 2);
 
 # =========== X-Frame-Options =============
-INSERT INTO value (value, description, header_id, category_id) VALUES ("DENY", "This header is set to define from which sources the site is allowed to load sources from, consequently avoid clickjacking attacks.", 4, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("SAMEORIGIN", "This header is set to define from which sources the site is allowed to load sources from, consequently avoid clickjacking attacks.", 4, 1);
-INSERT INTO value (value, description, header_id, category_id) VALUES ("ALLOW-FROM", "This header is set to define from which sources the site is allowed to load sources from, consequently avoid clickjacking attacks.", 4, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("DENY", "This header is set to define from which sources the site is allowed to load sources from, and consequently avoids clickjacking attacks.", 4, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("SAMEORIGIN", "This header is set to define from which sources the site is allowed to load sources from, and consequently avoids clickjacking attacks.", 4, 1);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("ALLOW-FROM", "This header is set to define from which sources the site is allowed to load sources from, and consequently avoids clickjacking attacks.", 4, 1);
 
 # =========== Strict-Transport-Security =============
 INSERT INTO value (value, description, header_id, category_id) VALUES ("max-age", "This header is set to only allow HTTPS connections (or redirects to HTTPS) and thus prevents the man-in-the-middle attacks", 5, 1);
 
 # =========== X-Powered-By ===========
-INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "This header shows potential vulnerable server information.", 6, 2);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "This header shows potential vulnerable server information. It's recommended to remove this header.", 6, 2);
 
 # =========== Last-Modified ===========
-INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "This header shows potential vulnerable server information.", 7, 2);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("*", "This header shows potential vulnerable server information. It's recommended to remove this header.", 7, 2);
 
 # =========== X-XSS-Protection ===========
 INSERT INTO value (value, description, header_id, category_id) VALUES ("0", "Disables XSS filtering, it's recommended to set this to 1 because older browser may not support the new headers.", 8, 3);
@@ -167,7 +167,7 @@ INSERT INTO value (value, description, header_id, category_id) VALUES ("max-age"
 INSERT INTO value (value, description, header_id, category_id) VALUES ("s-maxage", "Overrides max-age or the Expires header, but it only applies to shared caches (e.g., proxies) and is ignored by a private cache. Because this header is depened on how the website is being used it's adviced to double check if you really need this.", 10, 3);
 
 # =========== Set-Cookie ===========
-INSERT INTO value (value, description, header_id, category_id) VALUES ("Expires", "It's not recommended to configure the header like this. It means that any client is able to change the value of the time stamp which can keep the session alive alot longer.", 11, 3);
+INSERT INTO value (value, description, header_id, category_id) VALUES ("Expires", "It's not recommended to configure the header like this. It enables the client to change the value of the time stamp which can keep the session alive a lot longer.", 11, 3);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("Max-Age", "Number of seconds until the cookie expires. A zero or negative number will expire the cookie immediately. Older browsers (ie6, ie7, and ie8) do not support max-age. For other browsers, if both Expires and Max-Age are set, Max-Age will have precedence.", 11, 1);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("Domain", "Make sure that this domain can be publicly shown.", 11, 3);
 INSERT INTO value (value, description, header_id, category_id) VALUES ("Secure", "A secure cookie will only be sent to the server when a request is made using SSL and the HTTPS protocol. However, confidential or sensitive information should never be stored or transmitted in HTTP Cookies as the entire mechanism is insecure.", 11, 1);
