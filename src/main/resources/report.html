@@ -108,7 +108,7 @@
 
 			<div class="category">
 				<header>
-					<h3>DONT</h3>
+					<h3>DON'T</h3>
 				</header>
 				<p>
 					These are the headers that you do have but should not be implemented.
@@ -151,12 +151,16 @@
 			<article class='single-header'>
 
 				@// If the vulnerability is a recommendation give it an orange background, else red
-				@if (value.getCategory().getName().equalsIgnoreCase("recommendation")) {
+				@if (value.getCategory().getName().equalsIgnoreCase("do")) {
 					<header class="header-category orange-bg">
-				} else {
-					<header class="header-category red-bg">
-				}
 						<h3>@value.getCategory().getName()</h3>
+				} else if (value.getCategory().getName().equalsIgnoreCase("dont")) {
+					<header class="header-category red-bg">
+						<h3>don't</h3>
+				} else if (value.getCategory().getName().equalsIgnoreCase("recommendation")) {
+						<header class="header-category blue-bg">
+							<h3>@value.getCategory().getName()</h3>
+				}
 					</header>
 
 				<div class='single-header-content'>

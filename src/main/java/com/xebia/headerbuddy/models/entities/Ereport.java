@@ -1,10 +1,8 @@
 package com.xebia.headerbuddy.models.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -22,6 +20,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "report")
+@JsonRootName("report")
 public class Ereport {
 
     @Id
