@@ -28,7 +28,6 @@ public class HeaderBuddyUrlParamTest {
 
     private String urlNoExtension = "http://andonoz";
     private String urlNoProtocol = "www.andonoz.com";
-    private String urlFullyCorrect = "http://www.andonoz.com";
     private String urlCorrect = "http://www.andonoz.com";
 
     // Get the random port spring is running on
@@ -60,18 +59,11 @@ public class HeaderBuddyUrlParamTest {
     }
 
     @Test
-    public void HeaderBuddyURLFullyCorrectTest() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlFullyCorrect;
-
-        ResponseEntity<String> response = template.getForEntity(url, String.class);
-        Assert.assertTrue("Response code should be 200 (Fully correct url)", response.getStatusCode().is2xxSuccessful());
-    }
-
-    @Test
     public void HeaderBuddyURLCorrectTest() {
         String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlCorrect;
 
         ResponseEntity<String> response = template.getForEntity(url, String.class);
+
         Assert.assertTrue("Response code should be 200 (Correct url)", response.getStatusCode().is2xxSuccessful());
     }
 }

@@ -34,6 +34,10 @@ public class Ereport {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String note;
+
+    //Relations
     @NotNull
     private String profile;
 
@@ -83,6 +87,14 @@ public class Ereport {
 
     public void setDate(final Date date) {
         this.date = date;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Set<Evalue> getValues() {
