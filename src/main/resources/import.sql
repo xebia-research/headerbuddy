@@ -80,6 +80,18 @@ INSERT INTO profile_headers(profiles_id, headers_id) VALUES (2, 17);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 1);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 2);
 INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 3);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 6);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 7);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 8);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 9);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 10);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 11);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 12);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 13);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 14);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 15);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 16);
+INSERT INTO profile_headers(profiles_id, headers_id) VALUES (3, 17);
 
 # ========================================
 # ============= Categories ===============

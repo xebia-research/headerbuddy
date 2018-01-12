@@ -11,14 +11,14 @@ public class ProtocolHandler {
 
     public static Set<Evalue> getEvaluesByProtocol(Set<String> urls, String profileParameter, Iterable<Eprofile> profiles, Iterable<Evalue> values) {
 
-        //Trim all the urls to just the protocols that are being used.
+        // Trim all the urls to just the protocols that are being used.
         Set<String> protocols = convertToProtocolSet(urls);
 
-        //Define what protocol needs to be used for the analayzer
+        // Define what protocol needs to be used for the analayzer
         getFinalProtocol(profileParameter, protocols, profiles);
 
         // Retrieve relevant values
-        Set<Evalue> relevantValues = getRelevantValuesByProfile(values);
+        Set<Evalue> relevantValues = getValuesByProfile(values);
 
         return relevantValues;
     }
@@ -59,17 +59,15 @@ public class ProtocolHandler {
         return protocol;
     }
 
-    private static Set<Evalue> getRelevantValuesByProfile(Iterable<Evalue> values) {
+    private static Set<Evalue> getValuesByProfile(Iterable<Evalue> values) {
         Set<Evalue> relevantValues = new HashSet<Evalue>();
 
         //Add all values by correct protocol profile.
-        for (Evalue value : values) {
-            for (Eprofile profile : value.getHeader().getProfiles()) {
-                if (profile.getName().equals(usedProtocol)) {
-                    relevantValues.add(value);
-                }
+        values.forEach(v -> v.getHeader().getProfiles().forEach(p -> {
+            if (p.getName().equalsIgnoreCase(usedProtocol)) {
+                relevantValues.add(v);
             }
-        }
+        }));
 
         return relevantValues;
     }
