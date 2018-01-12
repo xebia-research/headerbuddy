@@ -122,6 +122,7 @@ public class HeaderBuddyController {
         }
 
         Ereport report = new Ereport(user, headerAnalyzer.analyseHeaders());
+        report.setTargetUrl(url);
         report.setProfile(ProtocolHandler.getUsedProtocol());
         report.setUrls(visitedUrls);
 

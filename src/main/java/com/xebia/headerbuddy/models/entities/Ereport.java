@@ -1,8 +1,11 @@
 package com.xebia.headerbuddy.models.entities;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -27,6 +30,10 @@ public class Ereport {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     private int id;
+
+    @NotNull
+    @JsonIgnore
+    private String targetUrl;
 
     @NotNull
     @Column(columnDefinition = "DATETIME")
@@ -78,6 +85,14 @@ public class Ereport {
 
     public void setId(final int id) {
         this.id = id;
+    }
+
+    public void setTargetUrl(String targetUrl) {
+        this.targetUrl = targetUrl;
+    }
+
+    public String getTargetUrl() {
+        return targetUrl;
     }
 
     public Date getDate() {
