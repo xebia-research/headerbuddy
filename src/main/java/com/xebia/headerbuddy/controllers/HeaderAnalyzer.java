@@ -1,9 +1,9 @@
-package com.xebia.headerbuddy.models;
+package com.xebia.headerbuddy.controllers;
 
-import com.xebia.headerbuddy.models.analyzer.Analyzer;
-import com.xebia.headerbuddy.models.analyzer.DoAnalyzer;
-import com.xebia.headerbuddy.models.analyzer.RecommendationAnalyzer;
-import com.xebia.headerbuddy.models.analyzer.DontAnalyzer;
+import com.xebia.headerbuddy.analyzer.Analyzer;
+import com.xebia.headerbuddy.analyzer.DoAnalyzer;
+import com.xebia.headerbuddy.analyzer.RecommendationAnalyzer;
+import com.xebia.headerbuddy.analyzer.DontAnalyzer;
 import com.xebia.headerbuddy.models.entities.Evalue;
 import java.util.HashSet;
 import java.util.LinkedHashSet;

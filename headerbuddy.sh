@@ -8,10 +8,11 @@ SPIDER="false"
 APIKEY=""
 PORT=8080
 IP="localhost"
+PROFILE=""
 
 # Check for flags and change the default values. All whitespace is removed.
-# u = URL, m = METHOD, o = OUTPUT, s = SPIDER k = API key p = port i = ip h = help
-while getopts "a:u:m:o:s:k:p:i:h" arg; do
+# u = URL, m = METHOD, o = OUTPUT, s = SPIDER k = API key p = port i = ip r = profile h = help
+while getopts "a:u:m:o:s:k:p:i:r:h" arg; do
 	case $arg in
 		a)
 			EMAIL=${OPTARG//[[:blank:]]/}
@@ -40,6 +41,9 @@ while getopts "a:u:m:o:s:k:p:i:h" arg; do
 		i)
 			IP=$OPTARG
 			;;
+		r)
+		    PROFILE=$OPTARG
+		    ;;
 		h)
 			echo -e "Headerbuddy. A HTTP header checker API.\n\nOptions:
 			\n-u [string]\tSets the URL. (Required)
@@ -50,6 +54,7 @@ while getopts "a:u:m:o:s:k:p:i:h" arg; do
 			\n-s [string]\tEnable domain spidering. (default = false | true)
 			\n-p [integers]\tSets custom port to API. (default = 8080)
 			\n-i [string | integers]\tSets a custom IP to the API. (default = localhost)
+			\n-r [string]\tSets the profile. (default = web | mobile)
 			"
 			exit
 		;;
@@ -82,7 +87,7 @@ then
 	fi
 
 	# cURL on the REST API
-	HEADERBUDDY=$(curl http://$IP:$PORT/headerbuddy/api?url=$URL"&"key=$APIKEY"&"output=$OUTPUT"&"method=$METHOD"&"spider=$SPIDER)
+	HEADERBUDDY=$(curl http://$IP:$PORT/headerbuddy/api?url=$URL"&"key=$APIKEY"&"output=$OUTPUT"&"method=$METHOD"&"spider=$SPIDER"&"profile=$PROFILE)
 
 	# Pretty print json or xml
 	case $OUTPUT in
