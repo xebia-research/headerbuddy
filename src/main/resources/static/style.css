@@ -53,6 +53,32 @@ a:hover {
 	background-color: #F00;
 	color: #FFF;
 }
+/* QR Code */
+@media (max-width: 1300px) {
+	.qr-code {
+		opacity: 0;
+	}	
+}
+@media (min-width: 1301px) {
+	.qr-code {
+		opacity: 1;
+	}
+}
+.qr-code {
+	position: fixed;
+	right: 0px;
+	bottom: 20px;
+	transition: 0.2s opacity;
+	z-index: -1;
+}
+.qr-code img{
+	width: 200px;
+}
+.qr-code h3 {
+	color: #6c1d5f;
+	width: 100%;
+	text-align: center;
+}
 /* HEADER */
 .title-header {
 	width: 100%;

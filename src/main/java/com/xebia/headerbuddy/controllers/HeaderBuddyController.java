@@ -97,6 +97,7 @@ public class HeaderBuddyController {
         @RequestParam(value = "crawl", defaultValue = "false", required = false) boolean crawl,
             @ApiParam(value = "Profile used for analysis")
         @RequestParam(value = "profile", defaultValue = "web", required = false) String profile) throws Exception {
+
         Set<String> visitedPages = new HashSet<>();
         if (crawl) {
             WebCrawler crawler = new WebCrawler(url);
