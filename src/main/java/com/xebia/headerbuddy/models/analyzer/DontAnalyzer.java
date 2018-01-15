@@ -14,7 +14,7 @@ public class DontAnalyzer implements Analyzer {
         for (Evalue analyseValue : toAnalyze) {
             for (Evalue dontValue : toCompare) {
 
-                if (analyseValue.getHeader().getName().equals(dontValue.getHeader().getName())) {
+                if (analyseValue.getHeader().getName().equalsIgnoreCase(dontValue.getHeader().getName())) {
                     //Found a don't header
                     foundDontValues.add(dontValue);
                     break;

@@ -1,0 +1,188 @@
+/* FONTS */
+@import url('https://fonts.googleapis.com/css?family=Inconsolata|Patua+One|Roboto');
+/* GENERAL */
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Roboto', sans-serif;
+	color: #666;
+}
+body {
+	background-image: url('../bg.png');
+	background-repeat: repeat;
+	background-color: #F0F0F0;
+}
+hr {
+	border: 0px;
+	height: 1px;
+	background-color: #CCC;
+}
+a:hover {
+	color: #999;
+}
+.content {
+	max-width: 900px;
+	margin: auto;
+}
+.title-font {
+	font-family: 'Patua One', sans-serif;
+}
+.title-accent-color {
+	color: #efc3e8;
+}
+.wide-article {
+	margin-top: 20px;
+	padding: 20px;
+	width: calc(100% - 40px);
+}
+.red-text {
+	color: #FF0000;
+}
+.red-bg {
+	background-color: #F00;
+}
+.orange-bg {
+	background-color: #F93;
+}
+.green-bg {
+	background-color: #3C3;
+}
+.blue-bg {
+	background-color: #09F;
+}
+.err-msg {
+	background-color: #F00;
+	color: #FFF;
+}
+/* QR Code */
+@media (max-width: 1300px) {
+	.qr-code {
+		opacity: 0;
+	}	
+}
+@media (min-width: 1301px) {
+	.qr-code {
+		opacity: 1;
+	}
+}
+.qr-code {
+	position: fixed;
+	right: 0px;
+	bottom: 20px;
+	transition: 0.2s opacity;
+	z-index: -1;
+}
+.qr-code img{
+	width: 200px;
+}
+.qr-code h3 {
+	color: #6c1d5f;
+	width: 100%;
+	text-align: center;
+}
+/* HEADER */
+.title-header {
+	width: 100%;
+	background-color: #6c1d5f;
+	border-bottom: 4px solid #b5309f;
+	padding: 20px 0px;
+}
+.title-header .content {
+	text-align: center;
+}
+.title-header .title {
+	color: #FFF;
+	margin-bottom: 20px;
+	font-size: 40px;
+}
+.title-header .subtitle {
+	color: #FFF;
+	word-break: break-all;
+}
+/* REPORT */
+article {
+	width: 100%;
+	background-color: #FFF;
+	box-shadow: 3px 3px 0px 0px #CCC;
+}
+/* DETAILS */
+.details table {
+	padding: 20px;
+	width: calc(100% - 40px);
+}
+.details table th {
+	text-align: left;
+}
+.details table td {
+	width: 50%;
+	word-break: break-all;
+}
+.details .tr-padding-top {
+	padding-top: 20px;
+}
+.details .profile {
+	width: 100%;
+	padding: 10px;
+	background-color: #E0E0E0;
+	text-align: center;
+	word-break: break-all;
+}
+.details .profile h3 {
+	text-transform: uppercase;
+}
+/* FOUND URLS */
+.urls table {
+	margin-top: 10px;
+	border-spacing: 10px;
+}
+.urls table .value {
+	font-family: 'Inconsolata', serif;
+	word-break: break-all;
+}
+/* LEGEND */
+.legend hr {
+	margin-bottom: 10px;
+}
+.legend .category {
+	padding: 10px;
+}
+.legend .category header {
+	width: calc(100% - 10px);
+	background-color: #E0E0E0;
+	padding: 5px;
+}
+.legend .category p {
+	width: calc(100% - 30px);
+	padding: 10px 15px;
+	word-break: break-all;
+}
+/* FOUND HEADERS */
+.headers {
+	padding: 20px;
+}
+.single-header {
+	margin: 20px 0px;
+}
+.header-category {
+	width: calc(100% - 20px);
+	padding: 10px;
+}
+.single-header .header-category h3 {
+	color: #FFF;
+	text-transform: uppercase;
+}
+.single-header-content {
+	padding: 20px;
+}
+.code-text {
+	display: block;
+	width: calc(100% - 20px);
+	padding: 10px;
+	margin-bottom: 15px;
+	background-color: #E0E0E0;
+	font-family: 'Inconsolata', serif;
+	word-break: break-all;
+}
+.single-header-content .header-desc {
+	word-break: break-all;
+}

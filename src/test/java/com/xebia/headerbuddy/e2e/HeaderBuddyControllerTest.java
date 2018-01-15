@@ -26,7 +26,8 @@ public class HeaderBuddyControllerTest {
     @Autowired
     private EuserRepository userRepository;
 
-    private String testedUrl = "http://andonoz.com";
+    @Value("${test.http.url}")
+    private String testedUrl;
 
     // Get the random port spring is running on
     @Value("${local.server.port}")
@@ -42,12 +43,10 @@ public class HeaderBuddyControllerTest {
 
 
     @Test
-    public void HeaderBuddyControllerTest() {
+    public void shouldReturnResponseCode200() {
         String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedUrl;
 
         ResponseEntity<String> response = template.getForEntity(url, String.class);
         Assert.assertTrue("Response code should be 200", response.getStatusCode().is2xxSuccessful());
-        Assert.assertTrue("Content type should be json", response.getHeaders().getContentType().toString().equals("application/json;charset=UTF-8"));
     }
-
 }

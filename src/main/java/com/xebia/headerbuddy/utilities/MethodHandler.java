@@ -52,19 +52,28 @@ public final class MethodHandler {
     }
 
     /*
-     * @param {requestMethod} name of a class in the requestmethods package;
-     * @param {url} the url from the report
+     * @param {requestMethods} names of a class in the requestmethods package;
+     * @param {urls} the urls from the report
      * @return {List<header>} it returns the outcome from the doRequest method which is a list of headers
      * Makes an instance of the class names and executes the doRequest method
      */
+    public static List<Header> executeGivenMethod(List<String> requestMethods, Set<String> urls) throws Exception {
+        List<Header> foundHeaders = new ArrayList<>();
 
-    public static List<Header> executeGivenMethod(String requestMethod, String url) throws Exception {
+        for (String requestMethod : requestMethods) {
 
-        // Setup a new instance of the requested class
-        Class classInst = Class.forName("com.xebia.headerbuddy.models.requestmethods." + requestMethod);
+            // Setup a new instance of the requested class
+            Class classInst = Class.forName("com.xebia.headerbuddy.models.requestmethods." + requestMethod);
 
-        // Create new instance of found class
-        RequestBehaviour instance = (RequestBehaviour) classInst.getConstructor(String.class).newInstance(url);
-        return instance.doRequest();
+            // Execute request for each url
+            for (String url : urls) {
+
+                // Create new instance of found class
+                RequestBehaviour instance = (RequestBehaviour) classInst.getConstructor(String.class).newInstance(url);
+                foundHeaders.addAll(instance.doRequest());
+            }
+        }
+
+        return foundHeaders;
     }
 }

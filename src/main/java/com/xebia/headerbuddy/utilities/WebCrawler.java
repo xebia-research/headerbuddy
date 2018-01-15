@@ -4,6 +4,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.HashSet;
@@ -12,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 public class WebCrawler {
-
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //unique set
     private Set<String> pagesVisited = new HashSet<>();
     //bunch of url's
@@ -24,7 +26,8 @@ public class WebCrawler {
         this.pagesToVisit.add(startUrl);
         this.startUrl = startUrl;
     }
-    private String getUrl() throws Exception {
+
+    protected String getUrl() throws Exception {
         String url;
 
         // if true it continues till it finds an url that's not visited yet
@@ -48,9 +51,13 @@ public class WebCrawler {
         return this.pagesVisited;
     }
 
-    public void crawl() {
+    public void crawl(int limit) {
         try {
             while (!this.pagesToVisit.isEmpty()) {
+                if (pagesVisited.size() >= limit) {
+                    return;
+                }
+
                 String url = getUrl();
                 try {
                     Document doc = Jsoup.connect(url).get();
@@ -69,10 +76,12 @@ public class WebCrawler {
                     }
                 } catch (Exception e) {
                     // do nothing
+                    logger.error("url: " + url + " Error: " +  e.getMessage());
                 }
             }
         } catch (Exception e) {
             // Ignore
+            logger.error(e.getMessage());
         }
     }
 }

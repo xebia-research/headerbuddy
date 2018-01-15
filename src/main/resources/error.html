@@ -1,0 +1,29 @@
+@args() {
+	String errmsg
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HeaderBuddy</title>
+	<link rel='stylesheet' href='../style.css' />
+</head>
+<body>
+	<header class='title-header'>
+		<div class='content'>
+			<h1 class='title title-font'>Header<span class='title-accent-color title-font'>Buddy</span></h1>
+		</div>
+	</header>
+	
+	<div class='report-content content'>
+		<article class='wide-article urls'>
+			<h3>Error</h3>
+			<hr />
+			<table>
+				<tr>
+					<td>@errmsg</td>
+				</tr>
+			</table>
+		</article>
+	</div>
+</body>
+</html>

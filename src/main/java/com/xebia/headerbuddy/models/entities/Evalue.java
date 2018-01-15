@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -23,6 +23,7 @@ public class Evalue {
     private Integer id;
     @NotNull
     private String value;
+    @Lob
     private String description;
 
     //Relations
@@ -38,10 +39,6 @@ public class Evalue {
     @ManyToOne
     @JoinColumn(name = "header_id")
     private Eheader header;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "value")
-    private Set<Eurl> urls;
 
     //Constructors
     public Evalue() {
@@ -117,14 +114,6 @@ public class Evalue {
 
     public void setHeader(final Eheader header) {
         this.header = header;
-    }
-
-    public Set<Eurl> getUrls() {
-        return urls;
-    }
-
-    public void setUrls(final Set<Eurl> urls) {
-        this.urls = urls;
     }
 
 }

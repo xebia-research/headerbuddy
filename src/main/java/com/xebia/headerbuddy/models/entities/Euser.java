@@ -38,11 +38,11 @@ public class Euser {
     }
 
     public Euser(final String email) {
-        this("", email);
+        this.email = email;
     }
 
-    public Euser(final String aikey, final String email) {
-        this.apikey = aikey;
+    public Euser(final String apikey, final String email) {
+        this.apikey = apikey;
         this.email = email;
     }
 
