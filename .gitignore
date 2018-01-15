@@ -114,3 +114,4 @@ buildNumber.properties
 .idea/.name
 /.idea/inspectionProfiles/
 .idea/*
+globalReports/dependency-check-report.html
