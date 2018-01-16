@@ -34,7 +34,7 @@ e" -p 8080:8080 headerbuddy
 ```
 Note: Give the database container enough time (approximately 15 seconds) to start up before running the application container.
 
-Note: If the port is unavailable, use `docker-compose run -p` and after the -p add a custom port number. example: `-p 1234:8080`. **important:** keep the port number on the right the same as configured in the application.properties file. The application now runs on localhost:1234
+Note: If the port is unavailable, use `docker-compose run -p` and after the -p add a custom port number. Example: `-p 1234:8080`. The application now runs on "localhost:1234". **Important:** Keep the port number on the right of the ":" the same as configured in the application.properties file. 
 ## Running the tests
 ```
 mvn verify
