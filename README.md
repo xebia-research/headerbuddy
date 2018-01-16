@@ -23,16 +23,18 @@ Note: Make sure you are in the project directory.
 ```
 docker-compose up -d db
 ```
-### 4. Run the HeaderBuddy application container
+### 4. Run the HeaderBuddy application container (API key required)
 ```
 docker-compose up -d headerbuddy
 ```
-Note: Give the database container enough time (approximately 15 seconds) to start up before running the application container.
-### (Optional) Run the HeaderBuddy application container without API key
+### 4. Run the HeaderBuddy application container (API key not required)
 ```
 docker-compose run -d --entrypoint "java -jar headerbuddy-[version].jar --key.required = fals
 e" -p 8080:8080 headerbuddy
 ```
+Note: Give the database container enough time (approximately 15 seconds) to start up before running the application container.
+
+Note: If the port is unavailable, use `docker-compose run -p` and after the -p add a custom port number. example: `-p 1234:8080`. **important:** keep the port number on the right the same as configured in the application.properties file. The application now runs on localhost:1234
 ## Running the tests
 ```
 mvn verify
