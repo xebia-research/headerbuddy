@@ -25,6 +25,7 @@ import com.xebia.headerbuddy.annotations.ValidAPIKey;
 import com.xebia.headerbuddy.annotations.ValidEmail;
 import com.xebia.headerbuddy.annotations.ValidMethod;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
+import org.apache.commons.io.IOUtils;
 import org.rythmengine.Rythm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,6 +48,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -150,16 +155,23 @@ public class HeaderBuddyController {
         headers.add("Access-Control-Allow-Origin", "*");
 
         if (output.equalsIgnoreCase("html")) {
+            // Making the conf so rythm can use it in the html file
             Map<String, Object> conf = new HashMap<String, Object>();
             conf.put("report", report);
             conf.put("url", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + env.getProperty("server.port"));
 
             // Get html file from resources
-            ClassLoader cl = getClass().getClassLoader();
-            File htmlReport = new File(cl.getResource("report.html").getFile());
+            Resource re = new ClassPathResource("report.html");
+            InputStream t = re.getInputStream();
+
+            File tempFile = File.createTempFile("pre", "suf");
+            tempFile.deleteOnExit();
+            FileOutputStream out = new FileOutputStream(tempFile);
+            IOUtils.copy(t, out);
+            out.close();
 
             // Return rendered file
-            return new ResponseEntity(Rythm.render(htmlReport, conf), headers, HttpStatus.OK);
+            return new ResponseEntity(Rythm.render(tempFile, conf), headers, HttpStatus.OK);
         }
 
         return new ResponseEntity(report, headers, HttpStatus.OK);

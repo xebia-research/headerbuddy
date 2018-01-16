@@ -29,7 +29,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         // HTML file resources
         registry.addResourceHandler("style.css").addResourceLocations("classpath:/static/");
         registry.addResourceHandler("bg.png").addResourceLocations("classpath:/static/");
-        registry.addResourceHandler("qr.png").addResourceLocations("classpath:/static/");
 
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
