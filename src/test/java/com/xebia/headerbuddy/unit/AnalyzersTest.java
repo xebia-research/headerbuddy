@@ -1,9 +1,9 @@
 package com.xebia.headerbuddy.unit;
 
-import com.xebia.headerbuddy.models.analyzer.Analyzer;
-import com.xebia.headerbuddy.models.analyzer.DoAnalyzer;
-import com.xebia.headerbuddy.models.analyzer.DontAnalyzer;
-import com.xebia.headerbuddy.models.analyzer.RecommendationAnalyzer;
+import com.xebia.headerbuddy.analyzer.Analyzer;
+import com.xebia.headerbuddy.analyzer.DoAnalyzer;
+import com.xebia.headerbuddy.analyzer.DontAnalyzer;
+import com.xebia.headerbuddy.analyzer.RecommendationAnalyzer;
 import com.xebia.headerbuddy.models.entities.Ecategory;
 import com.xebia.headerbuddy.models.entities.Eheader;
 import com.xebia.headerbuddy.models.entities.Evalue;

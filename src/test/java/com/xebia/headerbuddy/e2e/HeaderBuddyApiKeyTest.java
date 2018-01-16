@@ -48,7 +48,7 @@ public class HeaderBuddyApiKeyTest {
     public void HeaderBuddyCorrectApiKeyTest() {
         String url = "http://localhost:"+port+"/headerbuddy/api?key="+ key +"&url=" + testedUrl;
 
-        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        ResponseEntity<String> response = template.postForEntity(url, "", String.class);
         Assert.assertTrue("Response code should be 200 (Correct api key)", response.getStatusCode().is2xxSuccessful());
     }
 
@@ -56,7 +56,7 @@ public class HeaderBuddyApiKeyTest {
     public void HeaderBuddyWrongApiKeyTest() {
         String url = "http://localhost:"+port+"/headerbuddy/api?key=wrong&url=" + testedUrl;
 
-        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        ResponseEntity<String> response = template.postForEntity(url, "", String.class);
         Assert.assertTrue("Response code should be 400 (Wrong api key; The test only works if api key is enabled)", response.getStatusCode().is4xxClientError());
     }
 }

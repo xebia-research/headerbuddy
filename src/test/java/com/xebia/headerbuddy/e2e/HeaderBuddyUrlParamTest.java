@@ -46,7 +46,7 @@ public class HeaderBuddyUrlParamTest {
     public void HeaderBuddyURLNoExtensionTest() {
         String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlNoExtension;
 
-        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        ResponseEntity<String> response = template.postForEntity(url, "", String.class);
         Assert.assertTrue("Response code should be 400 (No extension)", response.getStatusCode().is4xxClientError());
     }
 
@@ -54,7 +54,7 @@ public class HeaderBuddyUrlParamTest {
     public void HeaderBuddyURLNoProtocolTest() {
         String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlNoProtocol;
 
-        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        ResponseEntity<String> response = template.postForEntity(url, "", String.class);
         Assert.assertTrue("Response code should be 400 (No protocol)", response.getStatusCode().is4xxClientError());
     }
 
@@ -62,7 +62,7 @@ public class HeaderBuddyUrlParamTest {
     public void HeaderBuddyURLCorrectTest() {
         String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlCorrect;
 
-        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        ResponseEntity<String> response = template.postForEntity(url, "", String.class);
 
         Assert.assertTrue("Response code should be 200 (Correct url)", response.getStatusCode().is2xxSuccessful());
     }

@@ -7,7 +7,7 @@ public class ApiKey {
         this.key = apiKey;
     }
 
-    public String getApiKey() {
+    public String getKey() {
         return key;
     }
 }

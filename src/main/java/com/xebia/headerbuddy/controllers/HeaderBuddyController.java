@@ -6,7 +6,6 @@ import com.xebia.headerbuddy.models.ApiKey;
 import com.xebia.headerbuddy.models.CertificateDetails;
 import com.xebia.headerbuddy.models.CustomErrorModel;
 import com.xebia.headerbuddy.models.Header;
-import com.xebia.headerbuddy.models.HeaderAnalyzer;
 import com.xebia.headerbuddy.models.entities.Ereport;
 import com.xebia.headerbuddy.models.entities.Eurl;
 import com.xebia.headerbuddy.models.entities.Euser;
@@ -26,6 +25,7 @@ import com.xebia.headerbuddy.annotations.ValidAPIKey;
 import com.xebia.headerbuddy.annotations.ValidEmail;
 import com.xebia.headerbuddy.annotations.ValidMethod;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
+import org.apache.commons.io.IOUtils;
 import org.rythmengine.Rythm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +35,9 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -45,11 +48,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
 
 @RestController
 @Validated
@@ -81,7 +88,7 @@ public class HeaderBuddyController {
             @ApiResponse(code = org.apache.http.HttpStatus.SC_BAD_REQUEST, message = "Failed on wrong input (parameter)", response = CustomErrorModel.class),
             @ApiResponse(code = org.apache.http.HttpStatus.SC_OK, message = "Success!", response = Ereport.class)
     })
-    @RequestMapping(value = "/headerbuddy/api", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_HTML_VALUE})
+    @RequestMapping(value = "/headerbuddy/api", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_HTML_VALUE})
     public ResponseEntity headerBuddy(
             @ApiParam(value = "The url to the service", required = true)
         @RequestParam(value = "url", required = true) @ValidURL String url,
@@ -97,7 +104,6 @@ public class HeaderBuddyController {
         @RequestParam(value = "profile", defaultValue = "web", required = false) String profile) throws Exception {
 
         Set<String> visitedPages = new HashSet<>();
-
         if (crawl) {
             WebCrawler crawler = new WebCrawler(url);
             crawler.crawl(Integer.parseInt(env.getProperty("webcrawler.limit")));
@@ -145,16 +151,30 @@ public class HeaderBuddyController {
         // log that the report was saved
         logger.info("report saved");
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "*");
+
         if (output.equalsIgnoreCase("html")) {
+            // Making the conf so rythm can use it in the html file
+            Map<String, Object> conf = new HashMap<String, Object>();
+            conf.put("report", report);
+            conf.put("url", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + env.getProperty("server.port"));
+
             // Get html file from resources
-            ClassLoader cl = getClass().getClassLoader();
-            File htmlReport = new File(cl.getResource("report.html").getFile());
+            Resource re = new ClassPathResource("report.html");
+            InputStream t = re.getInputStream();
+
+            File tempFile = File.createTempFile("pre", "suf");
+            tempFile.deleteOnExit();
+            FileOutputStream out = new FileOutputStream(tempFile);
+            IOUtils.copy(t, out);
+            out.close();
 
             // Return rendered file
-            return new ResponseEntity(Rythm.render(htmlReport, report), HttpStatus.OK);
+            return new ResponseEntity(Rythm.render(tempFile, conf), headers, HttpStatus.OK);
         }
 
-        return new ResponseEntity(report, HttpStatus.OK);
+        return new ResponseEntity(report, headers, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Creates an API key for the usage of the API")
@@ -162,7 +182,7 @@ public class HeaderBuddyController {
             @ApiResponse(code = org.apache.http.HttpStatus.SC_BAD_REQUEST, message = "Failed on wrong input (parameter)", response = CustomErrorModel.class),
             @ApiResponse(code = org.apache.http.HttpStatus.SC_OK, message = "Success!", response = ApiKey.class)
     })
-    @RequestMapping(value = "/headerbuddy/key", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @RequestMapping(value = "/headerbuddy/key", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity requestApiKey(@ApiParam(value = "An email-address", required = true) @RequestParam(value = "email", required = true) @ValidEmail String email) throws Exception {
         // Get the api key
         ApiKey key = APIKeyGenerator.getKey(userRepository, email);
