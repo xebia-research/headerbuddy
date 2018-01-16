@@ -23,6 +23,7 @@ Note: Make sure you are in the project directory.
 ```
 docker-compose up -d db
 ```
+Note: If port 3306 is unavailable use the following command instead: `docker-compose run -d -p [custom port]:3306 db`. Change custom port to a port number.
 ### 4. Run the HeaderBuddy application container (API key required)
 ```
 docker-compose up -d headerbuddy
