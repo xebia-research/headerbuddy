@@ -1,4 +1,4 @@
-package com.xebia.headerbuddy.models.analyzer;
+package com.xebia.headerbuddy.analyzer;
 
 import com.xebia.headerbuddy.models.entities.Evalue;
 import java.util.Set;

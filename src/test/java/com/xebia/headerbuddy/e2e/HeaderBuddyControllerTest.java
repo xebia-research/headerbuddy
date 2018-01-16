@@ -27,7 +27,9 @@ public class HeaderBuddyControllerTest {
     private EuserRepository userRepository;
 
     @Value("${test.http.url}")
-    private String testedUrl;
+    private String testedHttpUrl;
+    @Value("${test.https.url}")
+    private String testedHttpsUrl;
 
     // Get the random port spring is running on
     @Value("${local.server.port}")
@@ -44,9 +46,23 @@ public class HeaderBuddyControllerTest {
 
     @Test
     public void shouldReturnResponseCode200() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedUrl;
+        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedHttpUrl;
 
-        ResponseEntity<String> response = template.getForEntity(url, String.class);
+        ResponseEntity<String> response = template.postForEntity(url, "", String.class);
+        Assert.assertTrue("Response code should be 200", response.getStatusCode().is2xxSuccessful());
+    }
+    @Test
+    public void httpTestWithCrawlAndAllMethods() {
+        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&crawl=true&method=all&url="+testedHttpUrl;
+
+        ResponseEntity<String> response = template.postForEntity(url, "", String.class);
+        Assert.assertTrue("Response code should be 200", response.getStatusCode().is2xxSuccessful());
+    }
+    @Test
+    public void httpsTestWithCrawl() {
+        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&crawl=true&url="+testedHttpsUrl;
+
+        ResponseEntity<String> response = template.postForEntity(url, "", String.class);
         Assert.assertTrue("Response code should be 200", response.getStatusCode().is2xxSuccessful());
     }
 }
