@@ -27,17 +27,17 @@ docker-compose up -d db
 ```
 docker-compose up -d headerbuddy
 ```
+Note: Give the database container enough time (approximately 15 seconds) to start up before running the application container.
 ### (Optional) Run the HeaderBuddy application container without API key
 ```
 docker-compose run -d --entrypoint "java -jar headerbuddy-[version].jar --key.required = fals
 e" -p 8080:8080 headerbuddy
 ```
-Note: give the database container enough time to start up before running the application container.
 ## Running the tests
 ```
 mvn verify
 ```
-Note: Make sure the database container is running.
+Note: Make sure the database container is running and the application container is ***not*** running.
 
 ## License
 Xebia HeaderBuddy is open-sourced licensed under the [MIT license](http://opensource.org/licenses/MIT).
