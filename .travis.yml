@@ -35,6 +35,7 @@ script:
   #run the container and test the app
   - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
 
+  # show what containers are running
   - docker ps
 
 deploy:
@@ -45,4 +46,4 @@ deploy:
   bucket: $bucket_name
   skip_cleanup: true
   on:
-      branch: release
+      branch: master
