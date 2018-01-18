@@ -18,8 +18,31 @@ public class ValidMethodValidator implements ConstraintValidator<ValidMethod, St
         // Left blank
     }
 
+    /*
+    * String value: Is a big string with the requested methods from the parameter the are divided by a ,
+     */
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+
+        List<String> supportedMethods = getAllSupportedMethods();
+
+        String[] methodsToPerform = value.split(",");
+
+        for (String method : methodsToPerform) {
+            //all is a method we support it means all the requests
+            if (method.equals("all")) {
+                break;
+            }
+            // If array contains a method not supported return false
+            if (!supportedMethods.contains(StringUtils.toLowerCase(method))) {
+                return false;
+            }
+        }
+        // If no unsupported methods are found return true;
+        return true;
+    }
+
+    private List<String> getAllSupportedMethods() {
         // Use reflection to see which classes inherit from RequestBehaviour
         // to find out which request methods are supported
         Reflections reflections = new Reflections("com.xebia.headerbuddy.models");
@@ -39,20 +62,6 @@ public class ValidMethodValidator implements ConstraintValidator<ValidMethod, St
             methods.add(StringUtils.toLowerCase(name));
         }
 
-        // Put all values in array
-        String[] methodsToPerform = value.split(",");
-
-        for (String method : methodsToPerform) {
-            //all is a method we support it means all the requests
-            if (method.equals("all")) {
-                break;
-            }
-            // If array contains a method not supported return false
-            if (!methods.contains(StringUtils.toLowerCase(method))) {
-                return false;
-            }
-        }
-        // If no unsupported methods are found return true;
-        return true;
+        return methods;
     }
 }

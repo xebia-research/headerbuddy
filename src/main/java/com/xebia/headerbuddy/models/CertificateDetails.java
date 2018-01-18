@@ -18,14 +18,14 @@ public class CertificateDetails {
     }
 
     public void setCertificate(final Certificate certificate) {
-        this.type = certificate.getType();
-        this.hashCode = certificate.hashCode();
-        this.publicKeyAlgorithm = certificate.getPublicKey().getAlgorithm();
-        this.publicKeyFormat = certificate.getPublicKey().getFormat();
+        type = certificate.getType();
+        hashCode = certificate.hashCode();
+        publicKeyAlgorithm = certificate.getPublicKey().getAlgorithm();
+        publicKeyFormat = certificate.getPublicKey().getFormat();
 
         X509Certificate t = (X509Certificate) certificate;
-        this.issuer = t.getIssuerX500Principal().getName();
-        this.expireDate = t.getNotAfter();
+        issuer = t.getIssuerX500Principal().getName();
+        expireDate = t.getNotAfter();
     }
 
     public String getType() {

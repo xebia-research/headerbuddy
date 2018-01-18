@@ -30,10 +30,6 @@ public class HeaderBuddyUrlParamTest {
     private String urlNoProtocol = "www.andonoz.com";
     private String urlCorrect = "http://www.andonoz.com";
 
-    // Get the random port spring is running on
-    @Value("${local.server.port}")
-    private int port;
-
     // Add the user for the api key
     @Before
     public void init(){
@@ -44,7 +40,7 @@ public class HeaderBuddyUrlParamTest {
 
     @Test
     public void HeaderBuddyURLNoExtensionTest() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlNoExtension;
+        String url = "/headerbuddy/api?output=xml&key=abc&url="+urlNoExtension;
 
         ResponseEntity<String> response = template.postForEntity(url, "", String.class);
         Assert.assertTrue("Response code should be 400 (No extension)", response.getStatusCode().is4xxClientError());
@@ -52,7 +48,7 @@ public class HeaderBuddyUrlParamTest {
 
     @Test
     public void HeaderBuddyURLNoProtocolTest() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlNoProtocol;
+        String url = "/headerbuddy/api?output=xml&key=abc&url="+urlNoProtocol;
 
         ResponseEntity<String> response = template.postForEntity(url, "", String.class);
         Assert.assertTrue("Response code should be 400 (No protocol)", response.getStatusCode().is4xxClientError());
@@ -60,7 +56,7 @@ public class HeaderBuddyUrlParamTest {
 
     @Test
     public void HeaderBuddyURLCorrectTest() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?output=xml&key=abc&url="+urlCorrect;
+        String url = "/headerbuddy/api?output=xml&key=abc&url="+urlCorrect;
 
         ResponseEntity<String> response = template.postForEntity(url, "", String.class);
 

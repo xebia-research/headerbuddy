@@ -16,10 +16,6 @@ public class HeaderAnalyzer {
     private Set<Evalue> databaseDontValues; //Database don't headers.
     private Set<Evalue> databaseRecValues; //Database recommended headers.
 
-    private Set<Evalue> missingDoValues;
-    private Set<Evalue> foundDontValues;
-    private Set<Evalue> foundRecValues;
-
     public HeaderAnalyzer(final Set<Evalue> foundValues, final Iterable<Evalue> databaseHeaderValues) {
         databaseDoValues = new HashSet<>();
         databaseDontValues = new HashSet<>();
@@ -32,6 +28,10 @@ public class HeaderAnalyzer {
 
     //This method does the analyses
     public Set<Evalue> analyseHeaders() {
+
+        Set<Evalue> missingDoValues;
+        Set<Evalue> foundDontValues;
+        Set<Evalue> foundRecValues;
 
         Analyzer analyzer = new DoAnalyzer();
         missingDoValues = analyzer.analyze(foundValues, databaseDoValues);

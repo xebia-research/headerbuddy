@@ -18,6 +18,7 @@ import javax.validation.ConstraintViolationException;
 public class ExceptionHandlingController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     // Universal Exception handler
     @ExceptionHandler(Exception.class)
     @ResponseBody

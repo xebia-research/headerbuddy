@@ -1,5 +1,6 @@
 package com.xebia.headerbuddy;
 
+import com.xebia.headerbuddy.controllers.HeaderBuddyController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
@@ -20,7 +21,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.xebia.headerbuddy.controllers"))
+                .apis(RequestHandlerSelectors.basePackage(HeaderBuddyController.class.getPackage().getName()))
                 .paths(PathSelectors.any())
                 .build()
                 .useDefaultResponseMessages(false)
