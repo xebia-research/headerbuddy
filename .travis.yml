@@ -21,7 +21,7 @@ script:
   - sleep 15
 
   # Create the application container
-  - docker-compose up headerbuddy
+  - docker-compose up -d headerbuddy
 
   # Give the application time to finish starting up
   - sleep 15
@@ -29,7 +29,6 @@ script:
   #pull the owasp zap container
   - docker pull owasp/zap2docker-stable
 
-  - docker ps
   #run the container and test the app
   - docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
 
