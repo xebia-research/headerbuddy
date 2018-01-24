@@ -1,7 +1,7 @@
 package com.xebia.headerbuddy.unit;
 
+import com.xebia.headerbuddy.models.HttpRequestMethod;
 import com.xebia.headerbuddy.models.RequestBehaviour;
-import com.xebia.headerbuddy.models.requestmethods.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,64 +9,64 @@ public class RequestMethodsTest {
 
     @Test
     public void connectRequestShouldSetRightRequestMethod() {
-        RequestBehaviour rb = new ConnectRequest("http://Andonoz.com");
+        RequestBehaviour rb = new RequestBehaviour("http://Andonoz.com", HttpRequestMethod.CONNECT);
 
-        Assert.assertEquals("CONNECT", rb.getMethodName());
+        Assert.assertEquals("POST", rb.getMethod());
     }
 
     @Test
     public void deleteRequestShouldSetRightRequestMethod() {
-        RequestBehaviour rb = new DeleteRequest("http://Andonoz.com");
+        RequestBehaviour rb = new RequestBehaviour("http://Andonoz.com", HttpRequestMethod.DELETE);
 
-        Assert.assertEquals("DELETE", rb.getMethodName());
+        Assert.assertEquals("DELETE", rb.getMethod());
     }
 
     @Test
     public void getRequestShouldSetRightRequestMethod() {
-        RequestBehaviour rb = new GetRequest("http://Andonoz.com");
+        RequestBehaviour rb = new RequestBehaviour("http://Andonoz.com", HttpRequestMethod.GET);
 
-        Assert.assertEquals("GET", rb.getMethodName());
+        Assert.assertEquals("GET", rb.getMethod());
     }
 
     @Test
     public void headRequestShouldSetRightRequestMethod() {
-        RequestBehaviour rb = new HeadRequest("http://Andonoz.com");
+        RequestBehaviour rb = new RequestBehaviour("http://Andonoz.com", HttpRequestMethod.HEAD);
 
-        Assert.assertEquals("HEAD", rb.getMethodName());
+        Assert.assertEquals("HEAD", rb.getMethod());
     }
 
     @Test
     public void optionsRequestShouldSetRightRequestMethod() {
-        RequestBehaviour rb = new OptionsRequest("http://Andonoz.com");
+        RequestBehaviour rb = new RequestBehaviour("http://Andonoz.com", HttpRequestMethod.OPTIONS);
 
-        Assert.assertEquals("OPTIONS", rb.getMethodName());
+        Assert.assertEquals("OPTIONS", rb.getMethod());
     }
 
     @Test
     public void patchRequestShouldSetRightRequestMethod() {
-        RequestBehaviour rb = new PatchRequest("http://Andonoz.com");
+        RequestBehaviour rb = new RequestBehaviour("http://Andonoz.com", HttpRequestMethod.PATCH);
 
-        Assert.assertEquals("PATCH", rb.getMethodName());
+        Assert.assertEquals("POST", rb.getMethod());
     }
 
     @Test
     public void postRequestShouldSetRightRequestMethod() {
-        RequestBehaviour rb = new PostRequest("http://Andonoz.com");
+        RequestBehaviour rb = new RequestBehaviour("http://Andonoz.com", HttpRequestMethod.POST);
 
-        Assert.assertEquals("POST", rb.getMethodName());
+        Assert.assertEquals("POST", rb.getMethod());
     }
 
     @Test
     public void putRequestShouldSetRightRequestMethod() {
-        RequestBehaviour rb = new PutRequest("http://Andonoz.com");
+        RequestBehaviour rb = new RequestBehaviour("http://Andonoz.com", HttpRequestMethod.PUT);
 
-        Assert.assertEquals("PUT", rb.getMethodName());
+        Assert.assertEquals("PUT", rb.getMethod());
     }
 
     @Test
     public void traceRequestShouldSetRightRequestMethod() {
-        RequestBehaviour rb = new TraceRequest("http://Andonoz.com");
+        RequestBehaviour rb = new RequestBehaviour("http://Andonoz.com", HttpRequestMethod.TRACE);
 
-        Assert.assertEquals("TRACE", rb.getMethodName());
+        Assert.assertEquals("TRACE", rb.getMethod());
     }
 }

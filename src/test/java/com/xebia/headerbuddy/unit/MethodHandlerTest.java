@@ -1,5 +1,6 @@
 package com.xebia.headerbuddy.unit;
 
+import com.xebia.headerbuddy.models.HttpRequestMethod;
 import com.xebia.headerbuddy.utilities.MethodHandler;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,24 +14,24 @@ public class MethodHandlerTest {
     static final String allMethods = "all";
     static final String allMethodsWithExtra = "all,get,post";
 
-    static final List<String> oneMethodOutput = new ArrayList<String>() {{
-        add("GetRequest");
+    static final List<HttpRequestMethod> oneMethodOutput = new ArrayList<HttpRequestMethod>() {{
+        add(HttpRequestMethod.GET);
     }};
-    static final List<String> multipleMethodsOutput = new ArrayList<String>() {{
-        add("GetRequest");
-        add("PostRequest");
-        add("TraceRequest");
+    static final List<HttpRequestMethod> multipleMethodsOutput = new ArrayList<HttpRequestMethod>() {{
+        add(HttpRequestMethod.GET);
+        add(HttpRequestMethod.POST);
+        add(HttpRequestMethod.TRACE);
     }};
-    static final List<String> allMethodsOutput = new ArrayList<String>() {{
-        add("PutRequest");
-        add("HeadRequest");
-        add("PostRequest");
-        add("PatchRequest");
-        add("ConnectRequest");
-        add("GetRequest");
-        add("TraceRequest");
-        add("DeleteRequest");
-        add("OptionsRequest");
+    static final List<HttpRequestMethod> allMethodsOutput = new ArrayList<HttpRequestMethod>() {{
+        add(HttpRequestMethod.PUT);
+        add(HttpRequestMethod.HEAD);
+        add(HttpRequestMethod.POST);
+        add(HttpRequestMethod.PATCH);
+        add(HttpRequestMethod.CONNECT);
+        add(HttpRequestMethod.GET);
+        add(HttpRequestMethod.TRACE);
+        add(HttpRequestMethod.DELETE);
+        add(HttpRequestMethod.OPTIONS);
     }};
 
     /*
@@ -40,14 +41,17 @@ public class MethodHandlerTest {
      */
     @Test
     public void shouldGiveCorrectClassNames() {
-        List<String> oneRequest = MethodHandler.getAllMethodsFromMethodParam(oneMethod);
-        List<String> multipleRequests = MethodHandler.getAllMethodsFromMethodParam(multipleMethods);
-        List<String> allRequests = MethodHandler.getAllMethodsFromMethodParam(allMethods);
-        List<String> allRequestsWithExtra = MethodHandler.getAllMethodsFromMethodParam(allMethodsWithExtra);
+        List<HttpRequestMethod> oneRequest = MethodHandler.getAllMethodsFromMethodParam(oneMethod);
+        List<HttpRequestMethod> multipleRequests = MethodHandler.getAllMethodsFromMethodParam(multipleMethods);
+        List<HttpRequestMethod> allRequests = MethodHandler.getAllMethodsFromMethodParam(allMethods);
+        List<HttpRequestMethod> allRequestsWithExtra = MethodHandler.getAllMethodsFromMethodParam(allMethodsWithExtra);
 
         Assert.assertEquals(oneMethodOutput, oneRequest);
         Assert.assertEquals(multipleMethodsOutput, multipleRequests);
-        for (String method : allMethodsOutput) {
+        Assert.assertEquals(allRequests.size(), HttpRequestMethod.values().length);
+        Assert.assertEquals(allRequestsWithExtra.size(), HttpRequestMethod.values().length);
+
+        for(HttpRequestMethod method : allMethodsOutput) {
             Assert.assertTrue(allRequests.contains(method));
             Assert.assertTrue(allRequestsWithExtra.contains(method));
         }

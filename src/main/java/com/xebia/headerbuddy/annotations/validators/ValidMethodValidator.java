@@ -1,15 +1,15 @@
 package com.xebia.headerbuddy.annotations.validators;
 
 import com.xebia.headerbuddy.annotations.ValidMethod;
-import com.xebia.headerbuddy.models.RequestBehaviour;
+import com.xebia.headerbuddy.models.HttpRequestMethod;
+import org.apache.commons.lang3.EnumUtils;
 import org.eclipse.jgit.util.StringUtils;
-import org.reflections.Reflections;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 public class ValidMethodValidator implements ConstraintValidator<ValidMethod, String> {
 
@@ -23,45 +23,20 @@ public class ValidMethodValidator implements ConstraintValidator<ValidMethod, St
      */
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        List<String> requestedMethods = new ArrayList<>();
+        Collections.addAll(requestedMethods, StringUtils.toLowerCase(value).split(","));
 
-        List<String> supportedMethods = getAllSupportedMethods();
+        if (requestedMethods.contains("all")) {
+            return true;
+        }
 
-        String[] methodsToPerform = value.split(",");
-
-        for (String method : methodsToPerform) {
-            //all is a method we support it means all the requests
-            if (method.equals("all")) {
-                break;
-            }
-            // If array contains a method not supported return false
-            if (!supportedMethods.contains(StringUtils.toLowerCase(method))) {
+        for (String method : requestedMethods) {
+            if (!EnumUtils.isValidEnum(HttpRequestMethod.class, method.toUpperCase())) {
                 return false;
             }
         }
+
         // If no unsupported methods are found return true;
         return true;
-    }
-
-    private List<String> getAllSupportedMethods() {
-        // Use reflection to see which classes inherit from RequestBehaviour
-        // to find out which request methods are supported
-        Reflections reflections = new Reflections("com.xebia.headerbuddy.models");
-        Set<Class<? extends RequestBehaviour>> methodClasses = reflections.getSubTypesOf(RequestBehaviour.class);
-
-        // Create list for method names
-        List<String> methods = new ArrayList<>();
-
-        for (Class<? extends RequestBehaviour> method : methodClasses) {
-            // Get the name of the class
-            String name = method.getSimpleName();
-
-            // Remove 'Request' from the name
-            name = name.substring(0, name.length() - 7);
-
-            // Add the name to the list
-            methods.add(StringUtils.toLowerCase(name));
-        }
-
-        return methods;
     }
 }

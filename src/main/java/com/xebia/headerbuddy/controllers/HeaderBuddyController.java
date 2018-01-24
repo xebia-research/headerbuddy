@@ -6,6 +6,8 @@ import com.xebia.headerbuddy.models.ApiKey;
 import com.xebia.headerbuddy.models.CertificateDetails;
 import com.xebia.headerbuddy.models.CustomErrorModel;
 import com.xebia.headerbuddy.models.Header;
+import com.xebia.headerbuddy.models.HttpRequestMethod;
+import com.xebia.headerbuddy.models.RequestBehaviour;
 import com.xebia.headerbuddy.models.entities.Ereport;
 import com.xebia.headerbuddy.models.entities.Eurl;
 import com.xebia.headerbuddy.models.entities.Euser;
@@ -14,7 +16,6 @@ import com.xebia.headerbuddy.models.entities.repositories.EprofileRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EreportRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EurlRepository;
 import com.xebia.headerbuddy.models.entities.repositories.EvalueRepository;
-import com.xebia.headerbuddy.models.requestmethods.GetRequest;
 import com.xebia.headerbuddy.utilities.ProtocolHandler;
 import com.xebia.headerbuddy.utilities.WebCrawler;
 import com.xebia.headerbuddy.utilities.MethodHandler;
@@ -143,7 +144,7 @@ public class HeaderBuddyController {
         }
 
         //check certificate
-        Optional<CertificateDetails> certificate = new GetRequest(url).getCertificateDetails();
+        Optional<CertificateDetails> certificate = new RequestBehaviour(url, HttpRequestMethod.GET).getCertificateDetails();
         if (certificate.isPresent()) {
             report.setNote("Certificate end date: " + certificate.get().getExpireDate());
         }
