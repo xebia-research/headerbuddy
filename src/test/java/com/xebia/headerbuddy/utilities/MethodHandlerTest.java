@@ -1,7 +1,6 @@
-package com.xebia.headerbuddy.unit;
+package com.xebia.headerbuddy.utilities;
 
 import com.xebia.headerbuddy.models.HttpRequestMethod;
-import com.xebia.headerbuddy.utilities.MethodHandler;
 import org.junit.Assert;
 import org.junit.Test;
 

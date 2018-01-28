@@ -1,4 +1,4 @@
-package com.xebia.headerbuddy.e2e;
+package com.xebia.headerbuddy.controllers;
 
 import com.xebia.headerbuddy.models.entities.Euser;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;

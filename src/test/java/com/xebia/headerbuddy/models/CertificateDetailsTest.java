@@ -1,8 +1,5 @@
-package com.xebia.headerbuddy.unit;
+package com.xebia.headerbuddy.models;
 
-import com.xebia.headerbuddy.models.CertificateDetails;
-import com.xebia.headerbuddy.models.HttpRequestMethod;
-import com.xebia.headerbuddy.models.RequestBehaviour;
 import org.junit.Assert;
 import org.junit.Test;
 

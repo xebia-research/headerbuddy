@@ -1,7 +1,6 @@
-package com.xebia.headerbuddy.unit;
+package com.xebia.headerbuddy.utilities;
 
 import com.xebia.headerbuddy.models.Header;
-import com.xebia.headerbuddy.utilities.HeaderSerializer;
 import org.junit.Assert;
 import org.junit.Test;
 
