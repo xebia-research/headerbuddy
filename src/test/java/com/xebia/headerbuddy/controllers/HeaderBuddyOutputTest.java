@@ -1,4 +1,4 @@
-package com.xebia.headerbuddy.e2e;
+package com.xebia.headerbuddy.controllers;
 
 import com.xebia.headerbuddy.models.entities.Euser;
 import com.xebia.headerbuddy.models.entities.repositories.EuserRepository;
@@ -28,10 +28,6 @@ public class HeaderBuddyOutputTest {
     @Value("${test.http.url}")
     private String testedUrl;
 
-    // Get the random port spring is running on
-    @Value("${local.server.port}")
-    private int port;
-
     // Add the user for the api key
     @Before
     public void init(){
@@ -42,7 +38,7 @@ public class HeaderBuddyOutputTest {
 
     @Test
     public void undefinedOutputShouldReturnJson() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedUrl;
+        String url = "/headerbuddy/api?key=abc&url="+testedUrl;
 
         ResponseEntity<String> response = template.postForEntity(url,"", String.class);
         Assert.assertTrue("Content type should be json", response.getHeaders().getContentType().toString().contains("application/json"));
@@ -50,7 +46,7 @@ public class HeaderBuddyOutputTest {
 
     @Test
     public void jsonOutputShouldReturnJson() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedUrl;
+        String url = "/headerbuddy/api?key=abc&url="+testedUrl;
 
         ResponseEntity<String> response = template.postForEntity(url, "", String.class);
         Assert.assertTrue("Content type should be json", response.getHeaders().getContentType().toString().contains("application/json"));
@@ -58,7 +54,7 @@ public class HeaderBuddyOutputTest {
 
     @Test
     public void xmlOutputShouldReturnXml() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedUrl+"&output=xml";
+        String url = "/headerbuddy/api?key=abc&url="+testedUrl+"&output=xml";
 
         ResponseEntity<String> response = template.postForEntity(url, "", String.class);
         Assert.assertTrue("Content type should be xml", response.getHeaders().getContentType().toString().contains("application/xml"));
@@ -66,7 +62,7 @@ public class HeaderBuddyOutputTest {
 
     @Test
     public void htmlOutputShouldReturnHtml() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedUrl+"&output=html";
+        String url = "/headerbuddy/api?key=abc&url="+testedUrl+"&output=html";
 
         ResponseEntity<String> response = template.postForEntity(url, "", String.class);
         Assert.assertTrue("Content type should be xml", response.getHeaders().getContentType().toString().contains("text/html"));
@@ -74,7 +70,7 @@ public class HeaderBuddyOutputTest {
 
     @Test
     public void wrongOutputShouldReturnError() {
-        String url = "http://localhost:"+port+"/headerbuddy/api?key=abc&url="+testedUrl+"&output=wrong";
+        String url = "/headerbuddy/api?key=abc&url="+testedUrl+"&output=wrong";
 
         ResponseEntity<String> response = template.postForEntity(url, "", String.class);
         Assert.assertTrue("Response code should be 400 (wrong output)", response.getStatusCode().is4xxClientError());

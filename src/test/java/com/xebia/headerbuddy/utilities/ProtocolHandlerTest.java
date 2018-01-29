@@ -1,10 +1,9 @@
-package com.xebia.headerbuddy.unit;
+package com.xebia.headerbuddy.utilities;
 
 import com.xebia.headerbuddy.models.entities.Ecategory;
 import com.xebia.headerbuddy.models.entities.Eheader;
 import com.xebia.headerbuddy.models.entities.Eprofile;
 import com.xebia.headerbuddy.models.entities.Evalue;
-import com.xebia.headerbuddy.utilities.ProtocolHandler;
 import org.junit.Assert;
 import org.junit.Test;
 

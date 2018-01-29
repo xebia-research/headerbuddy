@@ -1,6 +1,5 @@
-package com.xebia.headerbuddy.integration;
+package com.xebia.headerbuddy.utilities;
 
-import com.xebia.headerbuddy.utilities.WebCrawler;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

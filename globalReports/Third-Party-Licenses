@@ -1,5 +1,5 @@
 
-Lists of 130 third-party dependencies.
+Lists of 131 third-party dependencies.
      (BSD License) AntLR Parser Generator (antlr:antlr:2.7.7 - http://www.antlr.org/)
      (Public Domain) AOP alliance (aopalliance:aopalliance:1.0 - http://aopalliance.sourceforge.net)
      (Eclipse Public License - v 1.0) (GNU Lesser General Public License) Logback Classic Module (ch.qos.logback:logback-classic:1.1.11 - http://logback.qos.ch/logback-classic)
@@ -15,6 +15,7 @@ Lists of 130 third-party dependencies.
      (The Apache Software License, Version 2.0) Guava: Google Core Libraries for Java (com.google.guava:guava:20.0 - https://github.com/google/guava/guava)
      (The Apache Software License, Version 2.0) Google Guice - Core Library (com.google.inject:guice:4.0 - https://github.com/google/guice/guice)
      (Apache 2) JavaEWAH (com.googlecode.javaewah:JavaEWAH:1.1.6 - https://github.com/lemire/javaewah)
+     (MPL 2.0 or EPL 1.0) H2 Database Engine (com.h2database:h2:1.4.196 - http://www.h2database.com)
      (The Apache Software License, Version 2.0) Json Path (com.jayway.jsonpath:json-path:2.2.0 - https://github.com/jayway/JsonPath)
      (Revised BSD) JSch (com.jcraft:jsch:0.1.54 - http://www.jcraft.com/jsch/)
      (GNU Lesser General Public License (LGPL), Version 3) Stevesoft Pat Regex (com.stevesoft.pat:pat:1.5.3 - http://www.javaregex.com/)

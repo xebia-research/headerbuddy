@@ -1,8 +1,7 @@
-package com.xebia.headerbuddy.unit;
+package com.xebia.headerbuddy.utilities;
 
 import org.junit.Assert;
 import org.junit.Test;
-import com.xebia.headerbuddy.utilities.APIKeyGenerator;
 
 import java.util.regex.Pattern;
 

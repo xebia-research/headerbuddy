@@ -12,7 +12,7 @@ services:
 notifications:
   email: false
 install:
-- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+- mvn install
 script:
 # Create docker database container
   - docker-compose up -d db
@@ -25,9 +25,6 @@ script:
 
   # Give the application time to finish starting up
   - sleep 15
-
-  # Run all tests
-  - mvn -Dspring.datasource.url=jdbc:mysql://localhost:3306/headerbuddy verify
 
   #pull the owasp zap container
   - docker pull owasp/zap2docker-stable

@@ -5,7 +5,7 @@
 
     <groupId>com.xebia</groupId>
     <artifactId>headerbuddy</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>3.0.0</version>
     <packaging>jar</packaging>
 
     <name>headerbuddy</name>
@@ -48,6 +48,11 @@
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

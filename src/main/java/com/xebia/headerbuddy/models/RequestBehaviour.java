@@ -13,36 +13,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public abstract class RequestBehaviour {
+public class RequestBehaviour {
     // The logger
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private String url;
-    private String methodName;
+    private HttpRequestMethod method;
 
-    public RequestBehaviour(final String url, final String methodName) {
+    public RequestBehaviour(final String url, final HttpRequestMethod method) {
         this.url = url;
-        this.methodName = methodName;
+        this.method = method;
     }
 
     public List<Header> doRequest() throws Exception {
         URL target = new URL(this.url);
-
         HttpURLConnection connection = (HttpURLConnection) target.openConnection();
-        switch (this.methodName) {
-            case "PATCH":
-                connection.setRequestProperty("X-HTTP-Method-Override", "PATCH");
-                connection.setRequestMethod("POST");
-                break;
-            case "CONNECT":
-                connection.setRequestProperty("X-HTTP-Method-Override", "CONNECT");
-                connection.setRequestMethod("POST");
-                break;
-            default:
-                connection.setRequestMethod(this.methodName);
-                break;
-        }
-
+        connection.setRequestMethod(this.method.requestMethod());
         Map<String, List<String>> headerFields = connection.getHeaderFields();
 
         List<Header> headers = HeaderSerializer.serialize(headerFields, this.url);
@@ -55,10 +41,8 @@ public abstract class RequestBehaviour {
 
         try {
             URL target = new URL(this.url);
-
             HttpsURLConnection connection = (HttpsURLConnection) target.openConnection();
             connection.connect();
-
             details = Optional.ofNullable(new CertificateDetails(connection.getServerCertificates()));
         } catch (MalformedURLException malEx) {
             //if it does'nt work the list is empty
@@ -83,12 +67,7 @@ public abstract class RequestBehaviour {
         this.url = url;
     }
 
-    public String getMethodName() {
-        return methodName;
+    public String getMethod() {
+        return method.requestMethod();
     }
-
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
 }
